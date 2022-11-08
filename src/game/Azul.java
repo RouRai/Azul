@@ -5,6 +5,7 @@ import game.StartScreen;
 import javax.swing.*;
 
 public class Azul extends JFrame{
+    
 
     public Azul(String name){
         super(name);
@@ -12,5 +13,10 @@ public class Azul extends JFrame{
         setSize(Constants.WIDTH, Constants.HEIGHT);
         add(new StartScreen());
         setVisible(true);
+    }
+    
+    private void setUp()
+    {
+        
     }
 }
