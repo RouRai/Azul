@@ -1,20 +1,23 @@
 package tiles;
 
 import game.Constants;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TileObject implements Comparable<TileObject> {
+public class TileObject implements Comparable<TileObject>, ActionListener{
     private int groupInt;
-    private BufferedImage icon;
+    private ImageIcon icon;
     private String type;
+    private JButton tileButton;
 
-    public TileObject(int gInt, String name, String type) throws IOException {
+    public TileObject(int gInt, String name, String t) throws IOException {
         groupInt = gInt;
-        formIcon("AzulTileBlack");
-        this.type = type;
+        formIcon(name);
+        type = t;
+        tileButton = new JButton(icon);
     }
 
     public int getGroupInt(){
@@ -33,11 +36,26 @@ public class TileObject implements Comparable<TileObject> {
     }
 
     // Use this to make Icons, input the name of the file excluding the .jpg or whatever
-    public void formIcon (String name) throws IOException { icon = ImageIO.read(getClass().getResource(Constants.IMG_DIRECTORY + name + ".jpg")); }
+    public void formIcon (String name) throws IOException { 
+        // Figure out way to declare icons
+        icon = new ImageIcon(name);
+    }
 
-    public BufferedImage getIcon() {
+    public ImageIcon getIcon() {
         return icon;
     }
 
-    public String getType() {return type;}
+    public String getType() {
+        return type;
+    }
+
+    public JButton getButton() {
+        return tileButton;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
 }
