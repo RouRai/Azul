@@ -1,8 +1,10 @@
 package tiles;
 
-import game.Constants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import game.Constants;
+
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

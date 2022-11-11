@@ -117,16 +117,18 @@ public class Player {
         gameBoard = inp;
     }
     public void addTilesToPyramid(int tile, int num, int row) { // not finished
-        for (int i = getFirstEmpty(); i < num; i++) {
+        for (int i = getFirstEmpty(); i < pyramidThing[row].length; i++) {
             num--;
-            if (i < pyramidThing.length) {
-                pyramidThing[row][i] = tile;
-            } else {
+            pyramidThing[row][i] = tile;
+            if (num  == 0) {
                 break;
             }
         }
         if (num > 0) {
-            //killRoundak(
+            //add to penalty 
+            for (int i = 0; i < num; i++) {
+                addToPenalty(tile);
+            }
         }
         if (isRowFilled(pyramidThing, row)) {
             clearRow(pyramidThing, row);
@@ -169,6 +171,16 @@ public class Player {
             if (mat[r][i] == 0) {
                 return i;
             }
+        }
+        return -1;
+    }
+    public void addToPenalty(int tile) {
+        if (getFirstEmpty(penaltyBoard, 0) != -1) {
+            penaltyBoard[0][getFirstEmpty(penaltyBoard, 0)] = tile;
+        } else if (getFirstEmpty(penaltyBoard, 1) != -1) {
+            penaltyBoard[1][getFirstEmpty(penaltyBoard, 1)] = tile;
+        } else if (getFirstEmpty(penaltyBoard, 2) != -1) {
+            penaltyBoard[2][getFirstEmpty(penaltyBoard, 2)] = tile;
         }
     }
 }

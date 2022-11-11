@@ -1,3 +1,4 @@
+package game;
 public class GameLogic {
     private final int xAdd;
     private final int yAdd;
@@ -14,13 +15,13 @@ public class GameLogic {
         if (points == 0) { // just straight up return if score is 0
             return ZSP;
         }
-        int x = ZSP.x;
-        int y = ZSP.y;
+        int x = ZSP.getX();
+        int y = ZSP.getY();
         y += yAdd;
         for (int i = 0; i < points - penalty; i++) {
             x += xAdd; // adds x coordinates
             if (x > xLim) { // if x out of bounds
-                x = ZSP.x; // reset x
+                ZSP.setX(x); // reset x
                 y += yAdd; //add y, go down a little
             }
         }
