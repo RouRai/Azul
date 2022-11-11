@@ -10,7 +10,7 @@ public class BlackTile extends TileObject {
     private BufferedImage icon;
 
     public BlackTile() throws IOException {
-        super(Constants.BLACK_TILE_ID, "AzulTileBlack", Constants.BLACK_TILE_NAME);
+        super(Constants.BLACK_TILE_ID, "AzulTileBlack", Constants.BLACK_TILE);
     }
 
 }
