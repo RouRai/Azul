@@ -1,16 +1,15 @@
-public class Box<Object> {
+public class Box<T> {
 
     Node head;
-    private Node current;
+    Node tail;
 
-    public Box<Object> () {
-        current = head;
+    public Box () {
+        head = null;
+        
     }
 
     public void add (Object o) {
         Node n = new Node(o);
-        current.next = n;
-        current = current.next;
     }
 
     public Object remove (Object o) {
