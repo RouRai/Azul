@@ -17,7 +17,7 @@ public class Player {
         gameBoard = new int[5][5];
         penaltyBoard = new int[][]{{0, 0}, {0, 0, 0}, {0, 0}};
         pyramidThing = new int[][]{{0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-        filledBoard = new int[][]{{1, 2, 3, 4, 5}, {5, 1, 2, 3, 4}, {4, 5, 1, 2, 3}, {3, 4, 5, 1, 2}, {2, 3, 4, 5, 1}};
+        filledBoard = new int[][]{{3, 6, 4, 2, 5}, {5, 3, 6, 4, 2}, {2, 5, 3, 6, 4}, {4, 2, 5, 3, 6}, {6, 4, 2, 5, 3}};
     }
     public void changePoints(int chg) {
         points += chg;
