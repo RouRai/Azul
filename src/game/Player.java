@@ -1,4 +1,4 @@
-
+package game;
 
 import java.util.*;
 public class Player {
@@ -117,7 +117,7 @@ public class Player {
         gameBoard = inp;
     }
     public void addTilesToPyramid(int tile, int num, int row) { // not finished
-        for (int i = getFirstEmpty(); i < pyramidThing[row].length; i++) {
+        for (int i = getFirstEmpty(filledBoard, row); i < pyramidThing[row].length; i++) {
             num--;
             pyramidThing[row][i] = tile;
             if (num  == 0) {
@@ -182,5 +182,30 @@ public class Player {
         } else if (getFirstEmpty(penaltyBoard, 2) != -1) {
             penaltyBoard[2][getFirstEmpty(penaltyBoard, 2)] = tile;
         }
+    }
+    public String toString() {
+        String ret = "";
+        for (int i = 0; i < penaltyBoard.length; i++) {
+            for (int j = 0; j < penaltyBoard[i].length; j++) {
+                ret += penaltyBoard[i][j] + " ";
+            }
+            ret += "\n";
+        }
+        ret += "\n\n";
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                ret += gameBoard[i][j] + " ";
+            }
+            ret += "\n";
+        }
+        ret += "\n\n";
+        for (int i = 0; i < pyramidThing.length; i++) {
+            for (int j = 0; j < pyramidThing[i].length; j++) {
+                ret += pyramidThing[i][j] + " ";
+            }
+            ret += "\n";
+        }
+        return ret;
+       
     }
 }

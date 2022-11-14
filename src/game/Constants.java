@@ -1,5 +1,5 @@
-package game;
 
+package game;
 import java.awt.*;
 
 public class Constants {
