@@ -10,12 +10,16 @@ public class Box<T> {
 
     public void add (Object o) {
         Node n = new Node(o);
+        tail.next = n;
+        tail = tail.next;
     }
 
     public Object remove (Object o) {
         for (Node n = head; n.next != null; n = n.next) {
             if (n.item.equals(o)) {
-                return n.item;
+                Object obj = n.item;
+                n.previous.next = n.next;
+                return obj;
             }
         }
         return null;
@@ -24,6 +28,7 @@ public class Box<T> {
     private class Node {
         Object item;
         Node next;
+        Node previous;
 
         public Node (Object o) {
             item = o;
