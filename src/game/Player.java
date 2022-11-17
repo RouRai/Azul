@@ -1,5 +1,4 @@
 package game;
-
 import java.util.*;
 public class Player {
     private int points;
@@ -117,7 +116,7 @@ public class Player {
         gameBoard = inp;
     }
     public void addTilesToPyramid(int tile, int num, int row) { // not finished
-        for (int i = getFirstEmpty(filledBoard, row); i < pyramidThing[row].length; i++) {
+        for (int i = getFirstEmpty(pyramidThing, row); i < pyramidThing[row].length; i++) {
             num--;
             pyramidThing[row][i] = tile;
             if (num  == 0) {
