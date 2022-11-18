@@ -1,17 +1,13 @@
 package game;
-
-import game.StartScreen;
-
 import javax.swing.*;
-
+import java.awt.*;
 public class Azul extends JFrame{
-    
-
     public Azul(String name){
         super(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Constants.WIDTH, Constants.HEIGHT);
-        add(new StartScreen());
+        add(new GamePanel());
+        add(new StartScreenPanel());
         setVisible(true);
     }
     
@@ -19,4 +15,5 @@ public class Azul extends JFrame{
     {
         
     }
+    
 }
