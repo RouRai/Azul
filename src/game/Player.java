@@ -1,4 +1,3 @@
-package game;
 import java.util.*;
 public class Player {
     private int points;
@@ -51,16 +50,12 @@ public class Player {
             points++;
         }
 //        System.out.println(points);
-        return points;
+        return points - getPenalty();
     } // need to add special occasions
     public void addBonusPoints() {
         for (int i = 0; i < gameBoard.length; i++) {
             
         }
-    }
-
-    public int getPoints() {
-        return points;
     }
     public void switchFirst() {
         isFirst = !isFirst;
