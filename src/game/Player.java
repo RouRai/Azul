@@ -1,3 +1,4 @@
+package game;
 import java.util.*;
 public class Player {
     private int points;
@@ -20,7 +21,7 @@ public class Player {
     public void changePoints(int chg) {
         points += chg;
     }
-    public int getTotalPoints(int i, int j) {
+    public void getTotalPoints(int i, int j) {
         int points = 1;
         for (int iu = i - 1; iu >= 0; iu--) { // up
             if (gameBoard[iu][j] == 0) {
@@ -50,11 +51,21 @@ public class Player {
             points++;
         }
 //        System.out.println(points);
-        return points - getPenalty();
+        
     } // need to add special occasions
+    public int getActualPoints() {
+        return points - getPenalty();
+    }
     public void addBonusPoints() {
         for (int i = 0; i < gameBoard.length; i++) {
-            
+            points += isRowFilled(gameBoard, i) ? 2 : 0;
+        }
+        for (int i = 0; i < gameBoard[i].length; i++) {
+            points += isColFilled(gameBoard, i) ? 7 : 0;
+        }
+        boolean[] temp = colorsFilled();
+        for (boolean a: temp) {
+            points += a ? 10 : 0;
         }
     }
     public void switchFirst() {
@@ -200,6 +211,28 @@ public class Player {
             ret += "\n";
         }
         return ret;
-       
+    }
+    public boolean[] colorsFilled() {
+        int[] colorCnt = new int[5];
+        for (int i = 0; i < filledBoard.length; i++) {
+            for (int j = 0; j < filledBoard[i].length; j++) {
+                if (filledBoard[i][j] == 3) {
+                    colorCnt[0]++;
+                }
+                if (filledBoard[i][j] == 6) {
+                    colorCnt[1]++;
+                }
+                if (filledBoard[i][j] == 4) {
+                    colorCnt[2]++;
+                }
+                if (filledBoard[i][j] == 2) {
+                    colorCnt[3]++;
+                }
+                if (filledBoard[i][j] == 5) {
+                    colorCnt[4]++;
+                }
+            }
+        }
+        return new boolean[]{colorCnt[0] == 5, colorCnt[1] == 5, colorCnt[2] == 5, colorCnt[3] == 5, colorCnt[4] == 5};
     }
 }

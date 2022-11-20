@@ -1,3 +1,4 @@
+package game;
 public class PointCalculator {
     private final int xAddP;
     private final int yAddP;
@@ -7,24 +8,26 @@ public class PointCalculator {
     private final int yAddT;
     private final int xLimT;
     private final int yLimT;
-    public GameLogic() {
+    public PointCalculator() {
         xAddP = 0; // change later
         yAddP = 0; // change later
         xLimP = 0;
+        yLimP = 0;
         xAddT = 0; // change later
         yAddT = 0; // change later
         xLimT = 0;
+        yLimT = 0;
     }
     public Coordinates getScoreBlockPos(Coordinates ZSP, Player player) {
-        if (player.getTotalPoints() == 0) { // just straight up return if score is 0
+        if (player.getActualPoints() == 0) { // just straight up return if score is 0
             return ZSP;
         }
         int x = ZSP.getX();
         int y = ZSP.getY();
         int xTemp = x;
         int yTemp = y;
-        y += yAdd;
-        for (int i = 0; i < player.getTotalPoints() % 100; i++) {
+        y += yAddP;
+        for (int i = 0; i < player.getActualPoints() % 100; i++) {
             xTemp += xAddP; // adds x coordinates
             if (x > xLimP) { // if x out of bounds
                 ZSP.setX(x); // reset x
@@ -36,8 +39,8 @@ public class PointCalculator {
     }
     public Coordinates[][] getTilePos(Player player, Coordinates start) {
         int[][] playerBoard = player.getGameBoard();
-        int x = ZSP.getX();
-        int y = ZSP.getY();
+        int x = start.getX();
+        int y = start.getY();
         int xTemp = x;
         int yTemp = y;
         Coordinates[][] ret = new Coordinates[playerBoard.length][playerBoard[0].length];
@@ -46,7 +49,7 @@ public class PointCalculator {
                 Coordinates temp = null;
                 xTemp += xAddT; // adds x coordinates
                 if (x > xLimT) { // if x out of bounds
-                    ZSP.setX(x); // reset x
+                    start.setX(x); // reset x
                     yTemp += yAddT; //add y, go down a little
                 }
                 if (playerBoard[i][j] == 0) {
