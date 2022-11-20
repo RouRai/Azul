@@ -1,5 +1,4 @@
-
-package panel;
+package panels;
 import java.io.*;
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +14,13 @@ public class GamePanel extends JPanel
     {
     	try
     	{
-    		background = ImageIO.read(GamePanel.class.getResource("/images/Background.jpg"));
+    		background = ImageIO.read(GamePanel.class.getResource("/images/GameBoard.jpg"));
     		
     	}
     	catch(Exception E)
     	{
     		System.out.println(-1);
+    		return;
     	}
     }
     public void paintComponent(Graphics g)
