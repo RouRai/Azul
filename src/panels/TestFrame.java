@@ -11,7 +11,7 @@ public class TestFrame extends JFrame{
         super(str);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Constants.WIDTH, Constants.HEIGHT);
-        add(new RulebookPanel());
+        add(new StartScreenPanel());
         setVisible(true);
     }
 

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.event.*;
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -63,7 +62,6 @@ public class RulebookPanel extends JPanel implements ActionListener{
         String str = e.getActionCommand();
         if(str.equals("next")){
             i++;
-            System.out.println("next");
         } else if(str.equals("back")){
             i--;
         }
