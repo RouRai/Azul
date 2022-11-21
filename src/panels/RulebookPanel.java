@@ -82,7 +82,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     // Sets images
     public void setIm() {
         try {
-            bg = ImageIO.read(RulebookPanel.class.getResource("/images/Background.jpg"));// Background
+            bg = Constants.getImage("Background");
             setSingleIm("Rulebook1"); 
             setSingleIm("Rulebook2"); 
             setSingleIm("Rulebook3"); 
