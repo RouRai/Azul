@@ -50,7 +50,6 @@ public class RulebookPanel extends JPanel implements ActionListener{
         String str = e.getActionCommand();
         if(str.equals("next")){
             i++;
-            System.out.println("next");
         } else if(str.equals("back")){
             i--;
         }
