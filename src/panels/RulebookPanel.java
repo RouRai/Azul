@@ -1,4 +1,5 @@
 package panels;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -6,14 +7,22 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import datastructures.Stack;
+import game.Constants;
+
 public class RulebookPanel extends JPanel implements ActionListener{
+
     //instanstiates variables
     private ArrayList<BufferedImage> rules;
-    private BufferedImage p1, p2, p3, p4, p5, p6, bg;
+    private BufferedImage bg;
     private JButton forwardButton;
     private JButton backwardButton;
     private JButton returnButton;
+    private Stack<BufferedImage> previousPages; // Used for previous pages
+    private Stack<BufferedImage> nextPages; // Used for next pages
     private int i;
+
     //declares variables
     public RulebookPanel(){
         rules = new ArrayList<>();
@@ -24,6 +33,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
         setIm();
         setButtons();
     }
+
     //sets Buttons up and their actions
     public void setButtons() {
         super.add(backwardButton);
@@ -36,6 +46,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
         returnButton.setActionCommand("return");
         returnButton.addActionListener(this);
     }
+
     //draws the images/buttons
     public void paintComponent(Graphics g){
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
@@ -46,6 +57,8 @@ public class RulebookPanel extends JPanel implements ActionListener{
         g.drawImage(rules.get(i), (int)(getWidth() / 2.6), getHeight() / 6, getWidth() /4, getWidth() / 4, null);
         
     }
+
+
     public void actionPerformed(ActionEvent e){
         String str = e.getActionCommand();
         if(str.equals("next")){
@@ -56,7 +69,8 @@ public class RulebookPanel extends JPanel implements ActionListener{
         }
         repaint();
     }
-    //verifies that whenever a player wants to go to the next image 
+
+    // Verifies that whenever a player wants to go to the next image 
     public void checkBounds(){
         if(i < 0){
             i = 5;
@@ -64,25 +78,28 @@ public class RulebookPanel extends JPanel implements ActionListener{
             i = 0;
         }
     }
-    //sets images
-    public void setIm(){
+
+    // Sets images
+    public void setIm() {
         try {
-            bg = ImageIO.read(RulebookPanel.class.getResource("/images/Background.jpg"));
-            p1 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook1.jpg.png"));
-            p2 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook2.jpg.png"));
-            p3 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook3.jpg.png"));
-            p4 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook4.jpg.png"));
-            p5 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook5.jpg.png"));
-            p6 = ImageIO.read(RulebookPanel.class.getResource("/images/Rulebook6.jpg.png"));
-            rules.add(p1);
-            rules.add(p2);
-            rules.add(p3);
-            rules.add(p4);
-            rules.add(p5);
-            rules.add(p6);
-            
+            bg = ImageIO.read(RulebookPanel.class.getResource("/images/Background.jpg"));// Background
+            setSingleIm("Rulebook1"); 
+            setSingleIm("Rulebook2"); 
+            setSingleIm("Rulebook3"); 
+            setSingleIm("Rulebook4"); 
+            setSingleIm("Rulebook5"); 
+            setSingleIm("Rulebook6"); 
         } catch (Exception e) {
-            return;
+            e.printStackTrace();
+        }
+    }
+
+    // Used for adding Rulebook pages, simply input basic name of file.
+    private void setSingleIm(String name) {
+        try{
+            rules.add(Constants.getImage(name));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

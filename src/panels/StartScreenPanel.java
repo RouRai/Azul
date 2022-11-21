@@ -1,13 +1,33 @@
 package panels;
 
 import javax.swing.*;
-import java.awt.*;
+
+import game.Constants;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 
 public class StartScreenPanel extends JPanel{
 
-    
+    private BufferedImage background;
+    private BufferedImage logo;
+
     public StartScreenPanel() {
-        
+        background = Constants.getImage("Background");
+        logo = Constants.getImage("AzulLogo");
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paint(g);
+
+        // Draw background
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+
+        // Draw logo
+        int startWidth = getWidth() / 2-getWidth() / 8;
+        int startHeight = getHeight() / 8;
+        int endWidth = getWidth() / 2 + getWidth() / 8;
+        int endHeight = getHeight() / 8 + getHeight() / 16;
+        g.drawImage(logo, startWidth, startHeight, endWidth, endHeight, this);
     }
     
 }
