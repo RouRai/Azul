@@ -7,7 +7,7 @@ public class StartScreenPanel extends JPanel{
 
     
     public StartScreenPanel() {
-
+        
     }
     
 }
