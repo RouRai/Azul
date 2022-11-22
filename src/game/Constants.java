@@ -12,6 +12,9 @@ public class Constants {
     public static final int HEIGHT = (int) screenSize.getHeight();
 
     // Panel Constants
+    public static final String PANEL_CONT = "panelCont";
+    public static final String RULE_PANEL = "rulePanel";
+    public static final String START_PANEL = "startPanel";
 
     // Tile Integer Constants
     public static final int BLACK_TILE_ID = 2;

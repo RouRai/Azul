@@ -2,11 +2,9 @@ package panels;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import datastructures.Stack;
 import game.Constants;
 
@@ -30,7 +28,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     }
 
     //sets Buttons up and their actions
-    public void setButtons() {
+    private void setButtons() {
         super.add(backwardButton);
         backwardButton.setActionCommand("back");
         backwardButton.addActionListener(this);
@@ -41,14 +39,15 @@ public class RulebookPanel extends JPanel implements ActionListener{
         returnButton.setActionCommand("return");
         returnButton.addActionListener(this);
     }
+
     //draws the images/buttons
     public void paintComponent(Graphics g){
+        super.paintComponent(g);
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
         returnButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         backwardButton.setBounds(getWidth() / 10, (int)(getHeight() / 1.125), getWidth() / 10, getHeight() / 20);
         forwardButton.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.125), getWidth() / 10, getHeight() / 20);
         g.drawImage(currentPage, (int)(getWidth() / 3.45), getHeight() / 12, (int)(getWidth() / 2.5), (int)(getWidth() / 2.5), null);
-        
     }
 
 
@@ -70,7 +69,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     }
 
     // Sets images
-    public void setIm() {
+    private void setIm() {
         try {
             bg = Constants.getImage("Background");
             setSingleIm("Rulebook6"); 
