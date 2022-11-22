@@ -15,6 +15,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     //instanstiates variables
     private ArrayList<BufferedImage> rules;
     private BufferedImage bg;
+    private BufferedImage currentPage;
     private JButton forwardButton;
     private JButton backwardButton;
     private JButton returnButton;
@@ -24,6 +25,9 @@ public class RulebookPanel extends JPanel implements ActionListener{
 
     //declares variables
     public RulebookPanel(){
+        previousPages = new Stack<>();
+        nextPages = new Stack<>();
+        currentPage = Constants.getImage("Rulebook1");
         rules = new ArrayList<>();
         i = 0;
         forwardButton = new JButton("Next");
@@ -53,7 +57,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
         returnButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.35), getWidth() / 8, getHeight() / 15);
         backwardButton.setBounds(getWidth() / 10, (int)(getHeight() / 1.3), getWidth() / 10, getHeight() / 20);
         forwardButton.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.3), getWidth() / 10, getHeight() / 20);
-        g.drawImage(rules.get(i), (int)(getWidth() / 2.6), getHeight() / 6, getWidth() /4, getWidth() / 4, null);
+        g.drawImage(currentPage, (int)(getWidth() / 2.6), getHeight() / 6, getWidth() /4, getWidth() / 4, null);
         
     }
 
@@ -61,9 +65,13 @@ public class RulebookPanel extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         String str = e.getActionCommand();
         if(str.equals("next")){
-            i++;
+            //i++;
+            previousPages.push(currentPage);
+            currentPage = nextPages.pop();
         } else if(str.equals("back")){
-            i--;
+            //i--;
+            nextPages.push(currentPage);
+            currentPage = previousPages.pop();
         }
         repaint();
     }
@@ -80,13 +88,12 @@ public class RulebookPanel extends JPanel implements ActionListener{
     // Sets images
     public void setIm() {
         try {
-            bg = Constants.getImage("Background");
-            setSingleIm("Rulebook1"); 
-            setSingleIm("Rulebook2"); 
-            setSingleIm("Rulebook3"); 
-            setSingleIm("Rulebook4"); 
-            setSingleIm("Rulebook5"); 
+            bg = Constants.getImage("DarkBrickBackground");
             setSingleIm("Rulebook6"); 
+            setSingleIm("Rulebook5"); 
+            setSingleIm("Rulebook4"); 
+            setSingleIm("Rulebook3"); 
+            setSingleIm("Rulebook2"); 
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,7 +102,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     // Used for adding Rulebook pages, simply input basic name of file.
     private void setSingleIm(String name) {
         try{
-            rules.add(Constants.getImage(name));
+            nextPages.push(Constants.getImage(name));
         } catch (Exception e) {
             e.printStackTrace();
         }

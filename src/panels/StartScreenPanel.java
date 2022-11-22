@@ -12,7 +12,7 @@ public class StartScreenPanel extends JPanel{
     private BufferedImage logo;
 
     public StartScreenPanel() {
-        background = Constants.getImage("Background");
+        background = Constants.getImage("AzulStartScreenBackground");
         logo = Constants.getImage("AzulLogo");
     }
 
@@ -23,11 +23,11 @@ public class StartScreenPanel extends JPanel{
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
         // Draw logo
-        int startWidth = getWidth() / 2-getWidth() / 8;
-        int startHeight = getHeight() / 8;
-        int endWidth = getWidth() / 2 + getWidth() / 8;
-        int endHeight = getHeight() / 8 + getHeight() / 16;
-        g.drawImage(logo, startWidth, startHeight, endWidth, endHeight, null);
+        //int startWidth = getWidth() / 2-getWidth() / 8;
+        //int startHeight = getHeight() / 8;
+        //int endWidth = getWidth() / 2 + getWidth() / 8;
+        //int endHeight = getHeight() / 8 + getHeight() / 16;
+        //g.drawImage(logo, startWidth, startHeight, endWidth, endHeight, null);
     }
     
 }   
