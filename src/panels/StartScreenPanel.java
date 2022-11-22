@@ -9,6 +9,7 @@ import java.awt.Graphics;
 public class StartScreenPanel extends JPanel{
 
     private BufferedImage background;
+    
     public StartScreenPanel() {
         background = Constants.getImage("AzulStartScreenBackground");
     }
