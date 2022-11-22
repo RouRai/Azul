@@ -12,24 +12,16 @@ import game.Constants;
 
 public class RulebookPanel extends JPanel implements ActionListener{
 
-    //instanstiates variables
-    private ArrayList<BufferedImage> rules;
-    private BufferedImage bg;
-    private BufferedImage currentPage;
-    private JButton forwardButton;
-    private JButton backwardButton;
-    private JButton returnButton;
-    private Stack<BufferedImage> previousPages; // Used for previous pages
-    private Stack<BufferedImage> nextPages; // Used for next pages
-    private int i;
+    // Declare variables
+    private BufferedImage bg, currentPage;
+    private JButton forwardButton, backwardButton, returnButton;
+    private Stack<BufferedImage> previousPages, nextPages; // Used for previous pages and next pages
 
     //declares variables
     public RulebookPanel(){
         previousPages = new Stack<>();
         nextPages = new Stack<>();
         currentPage = Constants.getImage("Rulebook1");
-        rules = new ArrayList<>();
-        i = 0;
         forwardButton = new JButton("Next");
         backwardButton = new JButton("Previous");
         returnButton = new JButton("Return");
@@ -53,7 +45,6 @@ public class RulebookPanel extends JPanel implements ActionListener{
     //draws the images/buttons
     public void paintComponent(Graphics g){
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
-        checkBounds();
         returnButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.35), getWidth() / 8, getHeight() / 15);
         backwardButton.setBounds(getWidth() / 10, (int)(getHeight() / 1.3), getWidth() / 10, getHeight() / 20);
         forwardButton.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.3), getWidth() / 10, getHeight() / 20);
@@ -66,28 +57,17 @@ public class RulebookPanel extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         String str = e.getActionCommand();
         if(str.equals("next")){
-            //previousPages.push(currentPage);
             if(!nextPages.isEmpty()){
                 previousPages.push(currentPage);
                 currentPage = nextPages.pop();
             }
         } else if(str.equals("back")){
-            //nextPages.push(currentPage);
             if(!previousPages.isEmpty()){
                 nextPages.push(currentPage);
                 currentPage = previousPages.pop();
             }
         }
         repaint();
-    }
-
-    // Verifies that whenever a player wants to go to the next image 
-    public void checkBounds(){
-        if(i < 0){
-            i = 5;
-        } else if(i > 5){
-            i = 0;
-        }
     }
 
     // Sets images

@@ -19,12 +19,6 @@ public class StartScreenPanel extends JPanel{
         // Draw background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
-        // Draw logo
-        //int startWidth = getWidth() / 2-getWidth() / 8;
-        //int startHeight = getHeight() / 8;
-        //int endWidth = getWidth() / 2 + getWidth() / 8;
-        //int endHeight = getHeight() / 8 + getHeight() / 16;
-        //g.drawImage(logo, startWidth, startHeight, endWidth, endHeight, null);
     }
     
 }   
