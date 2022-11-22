@@ -1,6 +1,10 @@
 package game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class Constants {
     // Screen dimensions
@@ -9,6 +13,11 @@ public class Constants {
     public static final int HEIGHT = (int) screenSize.getHeight();
 
     // Panel Constants
+    public static final JPanel PANEL_CONT = new JPanel();
+    
+    public static final String RULE_PANEL = "rulePanel";
+    public static final String START_PANEL = "startPanel";
+    public static final String GAME_PANEL = "gamePanel";
 
     // Tile Integer Constants
     public static final int BLACK_TILE_ID = 2;
@@ -29,4 +38,14 @@ public class Constants {
     // Strings
     public static final String IMG_DIRECTORY = "/images/";
 
+
+    // Gets Image from image folder
+    public static BufferedImage getImage(String name) {
+        try{
+            return ImageIO.read(Constants.class.getResource(Constants.IMG_DIRECTORY + name + ".jpg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

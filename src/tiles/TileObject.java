@@ -1,13 +1,10 @@
 package tiles;
 
-import game.Constants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TileObject implements Comparable<TileObject>, ActionListener{
+public class TileObject implements Comparable<TileObject>{
     private int groupInt;
     private ImageIcon icon;
     private String type;
@@ -53,9 +50,4 @@ public class TileObject implements Comparable<TileObject>, ActionListener{
         return tileButton;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
 }
