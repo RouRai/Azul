@@ -29,17 +29,23 @@ public class StartScreenPanel extends JPanel implements ActionListener{
 
     }
 
+    // Sets up the various buttons
     private void setUpButtons() {
+        // Instantiates them
         ruleButton = new JButton("Rules");
         gameButton = new JButton("Start");
 
+        // Adds action listeners to them so they can record actions
         ruleButton.addActionListener(this);
         gameButton.addActionListener(this);
 
+        // Adds buttons to the panels
         add(ruleButton, BorderLayout.LINE_END);
         add(gameButton, BorderLayout.LINE_END);
     }
 
+
+    // When something happens to button, it does one of the following actions depending on the source
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(gameButton)){
@@ -47,7 +53,6 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         } else if (e.getSource().equals(ruleButton)) {
             cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
         }
-        
     }
 
     

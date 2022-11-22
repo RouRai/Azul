@@ -20,13 +20,17 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     private void setUpButtons() {
+        // Instantiates JButtons
         returnStart = new JButton("Return to Start Screen");
 
+        // Adds JButtons to the panels
         add(returnStart, BorderLayout.LINE_END);
 
+        // Adds action listeners to the JButtons
         returnStart.addActionListener(this);
     }
 
+    // Runs this method when something happens to one of the JButtons
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(returnStart)){
