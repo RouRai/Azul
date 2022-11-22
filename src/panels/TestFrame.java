@@ -2,8 +2,6 @@ package panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import game.Constants;
@@ -12,7 +10,6 @@ public class TestFrame extends JFrame{
 
     private CardLayout cl;
     private HashMap<String,JPanel> panels;
-    private JButton ruleButton;
 
     public TestFrame(String str){
         super(str);
@@ -42,6 +39,5 @@ public class TestFrame extends JFrame{
         cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 
     }
-
 
 }
