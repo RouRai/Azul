@@ -9,10 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
-public class StartScreenPanel extends JPanel{
+public class StartScreenPanel extends JPanel implements ActionListener{
 
     private BufferedImage background;
-    private JButton ruleButton;
+    private JButton ruleButton, gameButton;
     private CardLayout cl;
 
     public StartScreenPanel(CardLayout cl) {
@@ -31,15 +31,24 @@ public class StartScreenPanel extends JPanel{
 
     private void setUpButtons() {
         ruleButton = new JButton("Rules");
+        gameButton = new JButton("Start");
 
-        ruleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
-            }
-        });
+        ruleButton.addActionListener(this);
+        gameButton.addActionListener(this);
 
         add(ruleButton, BorderLayout.LINE_END);
+        add(gameButton, BorderLayout.LINE_END);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(gameButton)){
+            cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
+        } else if (e.getSource().equals(ruleButton)) {
+            cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
+        }
+        
+    }
+
     
 }   
