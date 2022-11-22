@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import datastructures.Stack;
+import java.awt.*;
 import game.Constants;
 
 public class RulebookPanel extends JPanel implements ActionListener{
@@ -14,11 +15,13 @@ public class RulebookPanel extends JPanel implements ActionListener{
     private BufferedImage bg, currentPage;
     private JButton forwardButton, backwardButton, returnButton;
     private Stack<BufferedImage> previousPages, nextPages; // Used for previous pages and next pages
+    private CardLayout cl;
 
     //declares variables
-    public RulebookPanel(){
+    public RulebookPanel(CardLayout cl){
         previousPages = new Stack<>();
         nextPages = new Stack<>();
+        this.cl = cl;
         currentPage = Constants.getImage("Rulebook1");
         forwardButton = new JButton("Next");
         backwardButton = new JButton("Previous");
@@ -64,6 +67,8 @@ public class RulebookPanel extends JPanel implements ActionListener{
                 nextPages.push(currentPage);
                 currentPage = previousPages.pop();
             }
+        } else if(str.equals("return")){
+            cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
         }
         repaint();
     }

@@ -19,7 +19,7 @@ public class TestFrame extends JFrame{
         cl = new CardLayout();
         panels = new HashMap<>();
         setUpPanels();
-        add(panels.get(Constants.PANEL_CONT));
+        add(Constants.PANEL_CONT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Constants.WIDTH, Constants.HEIGHT);
         setVisible(true);
@@ -29,22 +29,21 @@ public class TestFrame extends JFrame{
         setUpButtons();
 
         // Add panels to HashMap
-        panels.put(Constants.PANEL_CONT, new JPanel());
-        panels.put(Constants.RULE_PANEL, new RulebookPanel());
+        panels.put(Constants.RULE_PANEL, new RulebookPanel(cl));
         panels.put(Constants.START_PANEL, new StartScreenPanel());
 
         // Set up layout 
-        panels.get(Constants.PANEL_CONT).setLayout(cl);
+        Constants.PANEL_CONT.setLayout(cl);
 
         // Set up buttons in the panels
         panels.get(Constants.START_PANEL).add(ruleButton, BorderLayout.LINE_END);
 
         // Add panels to panelCont
-        panels.get(Constants.PANEL_CONT).add(panels.get(Constants.START_PANEL), Constants.START_PANEL);
-        panels.get(Constants.PANEL_CONT).add(panels.get(Constants.RULE_PANEL), Constants.RULE_PANEL);
+        Constants.PANEL_CONT.add(panels.get(Constants.START_PANEL), Constants.START_PANEL);
+        Constants.PANEL_CONT.add(panels.get(Constants.RULE_PANEL), Constants.RULE_PANEL);
 
         // Show startScreen at beginning
-        cl.show(panels.get(Constants.PANEL_CONT), Constants.START_PANEL);
+        cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 
     }
 
@@ -54,7 +53,7 @@ public class TestFrame extends JFrame{
         ruleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cl.show(panels.get(Constants.PANEL_CONT), Constants.RULE_PANEL);
+                cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
             }
         });
     }

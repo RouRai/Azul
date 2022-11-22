@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class Constants {
     // Screen dimensions
@@ -12,7 +13,7 @@ public class Constants {
     public static final int HEIGHT = (int) screenSize.getHeight();
 
     // Panel Constants
-    public static final String PANEL_CONT = "panelCont";
+    public static final JPanel PANEL_CONT = new JPanel();
     public static final String RULE_PANEL = "rulePanel";
     public static final String START_PANEL = "startPanel";
 
