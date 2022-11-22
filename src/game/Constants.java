@@ -14,6 +14,7 @@ public class Constants {
 
     // Panel Constants
     public static final JPanel PANEL_CONT = new JPanel();
+    
     public static final String RULE_PANEL = "rulePanel";
     public static final String START_PANEL = "startPanel";
 

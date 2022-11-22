@@ -48,7 +48,7 @@ public class TestFrame extends JFrame{
     }
 
     private void setUpButtons() {
-        ruleButton = new JButton("Instructions");
+        ruleButton = new JButton("Rules");
 
         ruleButton.addActionListener(new ActionListener() {
             @Override
