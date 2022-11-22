@@ -2,8 +2,7 @@ package datastructures;
 
 public class Node<T> {
     
-    private Node<T> next;
-    private Node<T> previous;
+    private Node<T> next, previous;
     private T item;
 
 

@@ -4,8 +4,7 @@ import java.util.Iterator;
 
 public class Box<T> implements Iterable<T>{
     
-    private Node<T> first;
-    private Node<T> current;
+    private Node<T> first, current;
 
     public Box() {
         first = null;
@@ -74,6 +73,7 @@ public class Box<T> implements Iterable<T>{
         return new BoxIterator<T>(this);
     }
 
+    // Returns whether or not the box is empty
     public boolean isEmpty() {
         return first == null;
     }
