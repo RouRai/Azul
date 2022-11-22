@@ -9,11 +9,8 @@ import java.awt.Graphics;
 public class StartScreenPanel extends JPanel{
 
     private BufferedImage background;
-    private BufferedImage logo;
-
     public StartScreenPanel() {
         background = Constants.getImage("AzulStartScreenBackground");
-        logo = Constants.getImage("AzulLogo");
     }
 
     public void paintComponent(Graphics g) {

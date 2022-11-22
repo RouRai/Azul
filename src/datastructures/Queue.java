@@ -27,4 +27,8 @@ public class Queue<T> {
     public T peek() {
         return head.getItem();
     }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
 }

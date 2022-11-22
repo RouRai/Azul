@@ -74,5 +74,7 @@ public class Box<T> implements Iterable<T>{
         return new BoxIterator<T>(this);
     }
 
-
+    public boolean isEmpty() {
+        return first == null;
+    }
 }

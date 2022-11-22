@@ -62,16 +62,21 @@ public class RulebookPanel extends JPanel implements ActionListener{
     }
 
 
+    // Flips the pages after recording button clicks
     public void actionPerformed(ActionEvent e){
         String str = e.getActionCommand();
         if(str.equals("next")){
-            //i++;
-            previousPages.push(currentPage);
-            currentPage = nextPages.pop();
+            //previousPages.push(currentPage);
+            if(!nextPages.isEmpty()){
+                previousPages.push(currentPage);
+                currentPage = nextPages.pop();
+            }
         } else if(str.equals("back")){
-            //i--;
-            nextPages.push(currentPage);
-            currentPage = previousPages.pop();
+            //nextPages.push(currentPage);
+            if(!previousPages.isEmpty()){
+                nextPages.push(currentPage);
+                currentPage = previousPages.pop();
+            }
         }
         repaint();
     }
@@ -88,7 +93,7 @@ public class RulebookPanel extends JPanel implements ActionListener{
     // Sets images
     public void setIm() {
         try {
-            bg = Constants.getImage("DarkBrickBackground");
+            bg = Constants.getImage("Background");
             setSingleIm("Rulebook6"); 
             setSingleIm("Rulebook5"); 
             setSingleIm("Rulebook4"); 
