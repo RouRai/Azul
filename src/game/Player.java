@@ -1,14 +1,11 @@
 package game;
-import java.util.*;
+
 public class Player {
-    private int points;
+    
+    private int points, penalty;
     private boolean isFirst;
-    private int penalty;
-    private int[][] gameBoard;
-    private int [][] penaltyBoard;
-    //privat eint
-    private int[][] pyramidThing;
-    private int[][] filledBoard;
+    private int[][] gameBoard, penaltyBoard, pyramidThing, filledBoard;
+
     public Player() {
         points = 0;
         isFirst = false;
@@ -18,10 +15,14 @@ public class Player {
         pyramidThing = new int[][]{{0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0, 0}};
         filledBoard = new int[][]{{3, 6, 4, 2, 5}, {5, 3, 6, 4, 2}, {2, 5, 3, 6, 4}, {4, 2, 5, 3, 6}, {6, 4, 2, 5, 3}};
     }
+
+    // Changes amount of points the player has
     public void changePoints(int chg) {
         points += chg;
-    }
-    public void getTotalPoints(int i, int j) {
+    } 
+
+    // Returns total points
+    public int getTotalPoints(int i, int j) {
         int points = 1;
         for (int iu = i - 1; iu >= 0; iu--) { // up
             if (gameBoard[iu][j] == 0) {
@@ -29,28 +30,29 @@ public class Player {
             }
             points++;
         }
-//        System.out.println(points);
+
         for (int id = i + 1; id < gameBoard.length; id++) { // down
             if (gameBoard[id][j] == 0) {
                 continue;
             }
             points++;
         }
-//        System.out.println(points);
+
         for (int ju = j - 1; ju >= 0; ju--) { // left
             if (gameBoard[i][ju] == 0) {
                 continue;
             }
             points++;
         }
-//        System.out.println(points);
+
         for (int jd = j + 1; jd < gameBoard[i].length; jd++) { // right
             if (gameBoard[i][j] == 0) {
                 continue;
             }
             points++;
         }
-//        System.out.println(points);
+
+        return points;
         
     } // need to add special occasions
     public int getActualPoints() {
