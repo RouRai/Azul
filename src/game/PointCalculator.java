@@ -5,12 +5,12 @@ public class PointCalculator {
     private final int xAddP, yAddP, xLimP, xAddT, yAddT, xLimT;
 
     public PointCalculator() {
-        xAddP = 0; // change later
-        yAddP = 0; // change later
-        xLimP = 0;
-        xAddT = 0; // change later
-        yAddT = 0; // change later
-        xLimT = 0;
+        xAddP = 0; // change later what to add to score block per increment
+        yAddP = 0; // change later what to addd when y vla changes
+        xLimP = 0; // absoulte righterst it cna go
+        xAddT = 0; // change later what to add for each tile pos
+        yAddT = 0; // change later what do add when tile changes y 
+        xLimT = 0; // absolute righetsr it can aogfawsf
     }
 
     public Coordinates getScoreBlockPos(Coordinates ZSP, Player player) {
