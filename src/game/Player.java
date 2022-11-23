@@ -13,11 +13,7 @@ public class Player {
         gameBoard = new int[5][5];
         penaltyBoard = new int[][]{{0, 0}, {0, 0, 0}, {0, 0}};
         pyramidThing = new int[][]{{0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-<<<<<<< HEAD
         filledBoard = new int[][]{{Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID}, {Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID}, {Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID}, {Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID}, {Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID}};
-=======
-        filledBoard = new int[][]{{Constants.BLUE_TILE_ID, 6, 4, 2, 5}, {5, 3, 6, 4, 2}, {2, 5, 3, 6, 4}, {4, 2, 5, 3, 6}, {6, 4, 2, 5, 3}};
->>>>>>> 514c9aac249b47fee623fe165f9f38ef65ce3821
     }
 
     // Changes amount of points the player has
