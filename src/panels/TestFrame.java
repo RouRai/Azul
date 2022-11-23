@@ -27,7 +27,7 @@ public class TestFrame extends JFrame{
         // Add panels to HashMap
         panels.put(Constants.RULE_PANEL, new RulebookPanel(cl));
         panels.put(Constants.START_PANEL, new StartScreenPanel(cl));
-        panels.put(Constants.GAME_PANEL, new GamePanel(cl));
+        panels.put(Constants.GAME_PANEL, new MainPanel(cl));
 
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);

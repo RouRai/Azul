@@ -1,7 +1,9 @@
 package game;
+
 public class Coordinates{
-    private int x;
-    private int y;
+
+    private int x, y;
+
     public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
@@ -22,6 +24,7 @@ public class Coordinates{
     public void setY(int y) {
         this.y = y;
     }
+
     public boolean equals(Coordinates obj) {
         return obj.getX() == x && obj.getY() == y;
     }

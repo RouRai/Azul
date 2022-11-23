@@ -1,13 +1,9 @@
 package game;
+
 public class PointCalculator {
-    private final int xAddP;
-    private final int yAddP;
-    private final int xLimP;
-    private final int yLimP;
-    private final int xAddT;
-    private final int yAddT;
-    private final int xLimT;
-    private final int yLimT;
+
+    private final int xAddP, yAddP, xLimP, yLimP, xAddT, yAddT, xLimT, yLimT;
+
     public PointCalculator() {
         xAddP = 0; // change later
         yAddP = 0; // change later
@@ -18,6 +14,7 @@ public class PointCalculator {
         xLimT = 0;
         yLimT = 0;
     }
+
     public Coordinates getScoreBlockPos(Coordinates ZSP, Player player) {
         if (player.getActualPoints() == 0) { // just straight up return if score is 0
             return ZSP;
@@ -34,9 +31,9 @@ public class PointCalculator {
                 yTemp += yAddP; //add y, go down a little
             }
         }
-        Coordinates ret = new Coordinates(xTemp, yTemp);
-        return ret;
+        return new Coordinates(xTemp, yTemp);
     }
+
     public Coordinates[][] getTilePos(Player player, Coordinates start) {
         int[][] playerBoard = player.getGameBoard();
         int x = start.getX();
@@ -59,12 +56,5 @@ public class PointCalculator {
             }
         }
         return ret;
-    }
-    public void childSacrifice() {
-        for (int i = Integer.MIN_VALUE; i < Integer.MAX_VALUE; i++) {
-            this.childSacrifice();
-            System.out.println("-1 child");
-            
-        }
     }
 }
