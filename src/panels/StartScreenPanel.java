@@ -23,10 +23,10 @@ public class StartScreenPanel extends JPanel implements ActionListener{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         // Draw background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-
+        gameButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.2), getWidth() / 8 , getHeight() / 14);
+        ruleButton.setBounds((int)(getWidth() / 1.2), getHeight() / 2, getWidth() / 10, getHeight() / 20);
     }
 
     // Sets up the various buttons
@@ -34,14 +34,13 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         // Instantiates them
         ruleButton = new JButton("Rules");
         gameButton = new JButton("Start");
-
+        super.add(ruleButton);
+        super.add(gameButton);
         // Adds action listeners to them so they can record actions
         ruleButton.addActionListener(this);
         gameButton.addActionListener(this);
 
         // Adds buttons to the panels
-        add(ruleButton, BorderLayout.LINE_END);
-        add(gameButton, BorderLayout.LINE_END);
     }
 
 
@@ -55,5 +54,4 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         }
     }
 
-    
 }   
