@@ -2,17 +2,15 @@ package game;
 
 public class PointCalculator {
 
-    private final int xAddP, yAddP, xLimP, yLimP, xAddT, yAddT, xLimT, yLimT;
+    private final int xAddP, yAddP, xLimP, xAddT, yAddT, xLimT;
 
     public PointCalculator() {
         xAddP = 0; // change later
         yAddP = 0; // change later
         xLimP = 0;
-        yLimP = 0;
         xAddT = 0; // change later
         yAddT = 0; // change later
         xLimT = 0;
-        yLimT = 0;
     }
 
     public Coordinates getScoreBlockPos(Coordinates ZSP, Player player) {
