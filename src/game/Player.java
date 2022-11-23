@@ -13,7 +13,7 @@ public class Player {
         gameBoard = new int[5][5];
         penaltyBoard = new int[][]{{0, 0}, {0, 0, 0}, {0, 0}};
         pyramidThing = new int[][]{{0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-        filledBoard = new int[][]{{3, 6, 4, 2, 5}, {5, 3, 6, 4, 2}, {2, 5, 3, 6, 4}, {4, 2, 5, 3, 6}, {6, 4, 2, 5, 3}};
+        filledBoard = new int[][]{{Constants.BLUE_TILE_ID, 6, 4, 2, 5}, {5, 3, 6, 4, 2}, {2, 5, 3, 6, 4}, {4, 2, 5, 3, 6}, {6, 4, 2, 5, 3}};
     }
 
     // Changes amount of points the player has
