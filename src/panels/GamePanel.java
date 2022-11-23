@@ -61,18 +61,23 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     private void setBoardCoordinates() {
-        // Sets up start and end coordinates for the Player 1 Board (top left)
+        boardImage = (BufferedImage) boardImage.getScaledInstance(getWidth()/3, getHeight()/2-getHeight()/32, java.awt.Image.SCALE_FAST);
+
+        // Sets up start and end coordinates for the Player 1 Board (top left) and scales it by 1/3 of width of screen
         boardOne = new CoordinatePair(new Coordinates(0, 0), new Coordinates(boardImage.getWidth(), boardImage.getHeight()));
         
-        // Sets up start and end coordinates for the Player 2 Board (top right)
+        
+        // Sets up start and end coordinates for the Player 2 Board (top right) and scales it by 1/3 of width of screen
         boardTwo = new CoordinatePair(new Coordinates(getWidth()-boardImage.getWidth(), 0), new Coordinates(getWidth(), boardImage.getHeight()));
+        
 
-        // Sets up start and end coordinates for the Player 3 Board (bottom right)
+        // Sets up start and end coordinates for the Player 3 Board (bottom right) and scales it by 1/3 of width of screen
         boardThree = new CoordinatePair(new Coordinates(getWidth()-boardImage.getWidth(), getHeight()-boardImage.getHeight()), new Coordinates(getWidth(), getHeight()));
 
-        // Sets up start and end coordinates for the Player 4 Board (bottom left)
-        boardFour = new CoordinatePair(new Coordinates(0, getHeight()-boardImage.getHeight()), new Coordinates(boardImage.getWidth(), getHeight()));
-    }
 
+        // Sets up start and end coordinates for the Player 4 Board (bottom left) and scales it by 1/3 of width of screen
+        boardFour = new CoordinatePair(new Coordinates(0, getHeight()-boardImage.getHeight()), new Coordinates(boardImage.getWidth(), getHeight()));
+        
+    }
 
 }
