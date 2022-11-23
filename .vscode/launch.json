@@ -9,6 +9,13 @@
             "name": "Launch TestRunner",
             "request": "launch",
             "mainClass": "game.TestRunner",
+            "projectName": "Azul_5c24bc5"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestRunner",
+            "request": "launch",
+            "mainClass": "game.TestRunner",
             "projectName": "Azul_12f30698"
         },
         {
