@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements ActionListener{
 
     private void setBoardCoordinates() {
         boardOne = new Coordinates(0, 0);
-        boardTwo = new Coordinates(, ABORT)
+        //boardTwo = new Coordinates(, ABORT);
     }
 
 
