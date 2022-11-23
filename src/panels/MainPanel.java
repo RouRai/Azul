@@ -2,21 +2,28 @@ package panels;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import game.Constants;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
-public class GamePanel extends JPanel implements ActionListener{
+import game.Constants;
+
+public class MainPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
     private JButton returnStart;
+    private BufferedImage background;
 
-    public GamePanel(CardLayout cl) {
+    public MainPanel(CardLayout cl) {
         this.cl = cl;
+        background = Constants.getImage("Background");
         setUpButtons();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
     }
 
     private void setUpButtons() {
