@@ -36,7 +36,6 @@ public class MainPanel extends JPanel implements ActionListener{
         super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-        g.drawLine(getWidth(), ERROR, ALLBITS, ABORT);
     }
 
     private void setUpButtons() {
