@@ -28,6 +28,7 @@ public class Constants {
     public static final int RED_TILE_ID = 4;
     public static final int WHITE_TILE_ID = 5;
     public static final int YELLOW_TILE_ID = 6;
+    
     // Tile String Constants
     public static final String BLACK_TILE = "blackTile";
     public static final String BLUE_TILE = "blueTile";

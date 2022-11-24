@@ -27,7 +27,8 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         // Draw background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(filt, 0, 0, getWidth(), getHeight(), null);
-        gameButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.2), getWidth() / 8 , getHeight() / 14);
+        //gameButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.2), getWidth() / 8 , getHeight() / 14);
+        gameButton.setBounds((int)(getWidth() / 2)-getWidth()/12, (int)(getHeight() / 1.2), getWidth()/6 , getHeight() / 14);
         ruleButton.setBounds((int)(getWidth() / 1.2), getHeight() / 2, getWidth() / 10, getHeight() / 20);
         instructionsButton.setBounds((int)(getWidth() / 13), getHeight() / 2, getWidth() / 10, getHeight() / 20);
     }
