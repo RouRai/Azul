@@ -14,20 +14,27 @@ public class MainPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
     private JButton returnStart;
+    private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private JButton Logs;
-    private BufferedImage background;
-    private BufferedImage gameBoard;
 
     public MainPanel(CardLayout cl) {
         this.cl = cl;
         background = Constants.getImage("Background");
-        gameBoard = Constants.getImage("AzulBoard");
         setUpButtons();
+        background = Constants.getImage("Background");
+        gameBoard = Constants.getImage("AzulBoard");
+        factory = Constants.getImage("Factory");
+        blackT = Constants.getImage("AzulTileBlack");
+        blueT = Constants.getImage("AzulTileBlue");
+        oneT = Constants.getImage("AzulTileOne");
+        redT = Constants.getImage("AzulTileRed");
+        yellowT = Constants.getImage("AzulTileYellow");
+        whiteT = Constants.getImage("AzulTileWhite");
 
     }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.setColor(Color.WHITE);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3.5), null);
         Logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);

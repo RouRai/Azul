@@ -15,6 +15,7 @@ public class InstructionsPanel extends JPanel implements ActionListener{
     private Stack<BufferedImage> previousPages, nextPages; 
     public InstructionsPanel(CardLayout c){
         cl = c;
+        setIm();
         previousPages = new Stack<>();
         nextPages = new Stack<>();
         setButtons();
