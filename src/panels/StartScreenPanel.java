@@ -50,7 +50,7 @@ public class StartScreenPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(gameButton)){
-            cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
+            cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
         } else if (e.getSource().equals(ruleButton)) {
             cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
         } else if (e.getSource().equals(instructionsButton)){
