@@ -68,45 +68,44 @@ public class Player1Panel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(continueButton)){
-            if!(choseTile){
+            if(!choseTile){
                 cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
-            } else{
-                if(!placeTile){
-                    if(!endTurn){
-                        if(!scoreR1){
-                            if(!scoreR2){
-                                if(!scoreR3){
-                                    if(!scoreR4){
-                                        if(!scoreR5){
-                                            if(!nextS){
-
-                                            } else{
-                                                
-                                            }
-                                        } else{
-
-                                        }
-                                    } else{
-
-                                    }
-                                } else {
-
-                                }
-                            } else{
-
-                            }
-                        } else{
-
-                        }
-                    } else{
-
-                    }
-                } else {
-
-                }
-            } 
+                choseTile =!choseTile;
+                return;
+            }
+            if(!placeTile){
+                placeTile = !placeTile;
+                return;
+            }
+            if(!endTurn){
+                endTurn = !endTurn;
+                return;
+            }
+            if(!scoreR1){
+                scoreR1 = !scoreR1;
+                return;
+            }
+            if(!scoreR2){
+                scoreR2 = !scoreR2;
+                return;
+            }
+            if(!scoreR3){
+                scoreR3 = !scoreR3;
+                return;
+            }
+            if(!scoreR4){
+                scoreR4 = !scoreR4;
+                return;
+            }
+            if(!scoreR5){
+                scoreR5 = !scoreR5;
+                return;
+            }
+            if(!nextS){
+                nextS = !nextS;
+                return;
+            }
         }
-        
     }
 
 
