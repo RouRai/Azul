@@ -18,7 +18,10 @@ public class Constants {
     public static final String RULE_PANEL = "rulePanel";
     public static final String START_PANEL = "startPanel";
     public static final String GAME_PANEL = "gamePanel";
-    public static final String MAIN_PANEL = "mainPanel";
+    public static final String P1_PANEL = "p1Panel";
+    public static final String P2_PANEL = "p2Panel";
+    public static final String P3_PANEL = "p3Panel";
+    public static final String P4_PANEL = "p4Panel";
     public static final String INSTRUCTIONS_PANEL = "instructionsPanel";
     // Tile Integer Constants
     public static final int BLACK_TILE_ID = 2;

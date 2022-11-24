@@ -18,7 +18,7 @@ public class StartScreenPanel extends JPanel implements ActionListener{
     public StartScreenPanel(CardLayout cl) {
         this.cl = cl;
         background = Constants.getImage("AzulStartScreenBackground");
-        filt = Constants.getImage("grey-filter");
+        filt = Constants.getImage("GreyFilter");
         setUpButtons();
     }
 
@@ -26,7 +26,7 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         super.paintComponent(g);
         // Draw background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-        //g.drawImage(filt, 100, 100, getWidth(), getHeight(), null);
+        g.drawImage(filt, 0, 0, getWidth(), getHeight(), null);
         gameButton.setBounds((int)(getWidth() / 2.3), (int)(getHeight() / 1.2), getWidth() / 8 , getHeight() / 14);
         ruleButton.setBounds((int)(getWidth() / 1.2), getHeight() / 2, getWidth() / 10, getHeight() / 20);
         instructionsButton.setBounds((int)(getWidth() / 13), getHeight() / 2, getWidth() / 10, getHeight() / 20);
@@ -53,7 +53,7 @@ public class StartScreenPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(gameButton)){
-            cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
+            cl.show(Constants.PANEL_CONT, Constants.P1_PANEL);
         } else if (e.getSource().equals(ruleButton)) {
             cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
         } else if (e.getSource().equals(instructionsButton)){
