@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import game.Constants;
-import game.CoordinatePair;
 import game.Coordinates;
 
 import java.awt.*;
@@ -16,14 +15,15 @@ public class GamePanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
     private JButton returnStart;
-    private CoordinatePair boardOne, boardTwo, boardThree, boardFour;
-    private BufferedImage background, boardImage;
+    private BufferedImage background, factory, logo;
+    private int factoryWidth, factoryHeight;
+    private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
-        boardImage = Constants.getImage("AzulBoard");
         background = Constants.getImage("Background");
-        setBoardCoordinates();
+        factory = Constants.getImage("Factory");
+        logo = Constants.getImage("AzulLogo");
         setUpButtons();
     }
 
@@ -32,12 +32,29 @@ public class GamePanel extends JPanel implements ActionListener{
 
         // Paints background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+
+        // Draws the logo at the center at the top
+        g.drawImage(logo, getWidth()/2-getWidth()/10, 0, getWidth()/5, getHeight()/5, this);
         
-        // Paints all the boards at their respective locations
-        g.drawImage(boardImage, boardOne.getStartCoordinates().getX(), boardOne.getStartCoordinates().getY(), boardOne.getEndCoordinates().getX(),boardOne.getEndCoordinates().getY(), null);
-        g.drawImage(boardImage, boardTwo.getStartCoordinates().getX(), boardTwo.getStartCoordinates().getY(), boardTwo.getEndCoordinates().getX(),boardTwo.getEndCoordinates().getY(), null);
-        g.drawImage(boardImage, boardThree.getStartCoordinates().getX(), boardThree.getStartCoordinates().getY(), boardThree.getEndCoordinates().getX(),boardThree.getEndCoordinates().getY(), null);
-        g.drawImage(boardImage, boardFour.getStartCoordinates().getX(), boardFour.getStartCoordinates().getY(), boardFour.getEndCoordinates().getX(),boardFour.getEndCoordinates().getY(), null);
+        // Paints all the factories (excluding factory floor) at their respective locations
+        factoryWidth = (int)(getWidth()/7.5);
+        factoryHeight = getHeight()/5;
+
+        setCoordinates();
+        
+        // 1       9
+        // 2       8           Which line each factory is drawn
+        // 3 4 5 6 7
+        g.drawImage(factory, factoryOne.getX(), factoryOne.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryTwo.getX(), factoryTwo.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryThree.getX(), factoryThree.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryFour.getX(), factoryFour.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryFive.getX(), factoryFive.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factorySix.getX(), factorySix.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factorySeven.getX(), factorySeven.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryEight.getX(), factoryEight.getY(), factoryWidth, factoryHeight, this);
+        g.drawImage(factory, factoryNine.getX(), factoryNine.getY(), factoryWidth, factoryHeight, this);
+        
     } 
 
     private void setUpButtons() {
@@ -60,32 +77,16 @@ public class GamePanel extends JPanel implements ActionListener{
         
     }
 
-    private void setBoardCoordinates() {
-        boardImage = scaleBufferedImage(boardImage, Constants.WIDTH/3, Constants.HEIGHT/2-Constants.HEIGHT/4);
-
-        // Sets up start and end coordinates for the Player 1 Board (top left) and scales it by 1/3 of width of screen
-        boardOne = new CoordinatePair(new Coordinates(0, 0), new Coordinates(boardImage.getWidth(), boardImage.getHeight()));
-        
-        
-        // Sets up start and end coordinates for the Player 2 Board (top right) and scales it by 1/3 of width of screen
-        boardTwo = new CoordinatePair(new Coordinates(getWidth()-boardImage.getWidth(), 0), new Coordinates(getWidth(), boardImage.getHeight()));
-        
-
-        // Sets up start and end coordinates for the Player 3 Board (bottom right) and scales it by 1/3 of width of screen
-        boardThree = new CoordinatePair(new Coordinates(getWidth()-boardImage.getWidth(), getHeight()-boardImage.getHeight()), new Coordinates(getWidth(), getHeight()));
-
-
-        // Sets up start and end coordinates for the Player 4 Board (bottom left) and scales it by 1/3 of width of screen
-        boardFour = new CoordinatePair(new Coordinates(0, getHeight()-boardImage.getHeight()), new Coordinates(boardImage.getWidth(), getHeight()));
-        
-    }
-
-    private BufferedImage scaleBufferedImage(BufferedImage img, int width, int height) {
-        BufferedImage bufferedImageResult = new BufferedImage(width, height, img.getType());
-        Graphics2D g2d = bufferedImageResult.createGraphics();
-        g2d.drawImage(img, 0, 0, width, height, null);
-        g2d.dispose();
-        return bufferedImageResult;
+    private void setCoordinates() {
+        factoryOne = new Coordinates(0, 0);
+        factoryTwo = new Coordinates(0, getHeight()/2-factoryHeight/2);
+        factoryThree = new Coordinates(0, getHeight()-factoryHeight);
+        factoryFour = new Coordinates(getWidth()/4-factoryWidth/2, getHeight()-factoryHeight);
+        factoryFive = new Coordinates(getWidth()/2-factoryWidth/2, getHeight()-factoryHeight);
+        factorySix = new Coordinates((3 * getWidth()/4) - factoryWidth/2, getHeight()-factoryHeight);
+        factorySeven = new Coordinates(getWidth()-factoryWidth, getHeight()-factoryHeight);
+        factoryEight = new Coordinates(getWidth()-factoryWidth, getHeight()/2-factoryHeight/2);
+        factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
     }
 
 }

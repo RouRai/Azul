@@ -15,7 +15,7 @@ public class Player4Panel extends JPanel implements ActionListener{
     private CardLayout cl;
     private JButton returnStart;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT, greyTint;
-    private JButton Logs;
+    private JButton logs;
 
     public Player4Panel(CardLayout cl) {
         this.cl = cl;
@@ -39,19 +39,19 @@ public class Player4Panel extends JPanel implements ActionListener{
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         g.drawImage(greyTint, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
-        Logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+        logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
     }
 
     private void setUpButtons() {
         // Instantiates JButtons
         returnStart = new JButton("Return to Start Screen");
-        Logs = new JButton("Logs");
+        logs = new JButton("logs");
         // Adds JButtons to the panels
         add(returnStart, BorderLayout.LINE_END);
-        super.add(Logs);
+        super.add(logs);
         // Adds action listeners to the JButtons
         returnStart.addActionListener(this);
-        Logs.addActionListener(this);
+        logs.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons
