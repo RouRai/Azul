@@ -101,6 +101,10 @@ public class Player1Panel extends JPanel implements ActionListener{
                 scoreR5 = !scoreR5;
                 return;
             }
+            if(!scoreP){
+                scoreP = !scoreP;
+                return;
+            }
             if(!nextS){
                 nextS = !nextS;
                 return;
