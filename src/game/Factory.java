@@ -11,4 +11,17 @@ public class Factory {
         tiles = t;
     }
 
+    public Box<TileObject> getTiles() {
+        return tiles;
+    }
+
+    public String toString() {
+        String s = "[";
+
+        for(TileObject tile : tiles){
+            s += tile.getType() + ", ";
+        } 
+
+        return s.substring(0, s.length()-2) + "]";
+    }
 }

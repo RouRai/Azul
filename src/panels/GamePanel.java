@@ -2,14 +2,15 @@ package panels;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import game.Constants;
-import game.Coordinates;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+
+import game.Constants;
+import game.Coordinates;
+import game.Factory;
 
 public class GamePanel extends JPanel implements ActionListener{
 
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener{
     private JButton returnStart;
     private BufferedImage background, factory, logo;
     private int factoryWidth, factoryHeight;
+    private HashMap<String, Factory> factoryMap;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
 
     public GamePanel(CardLayout cl) {
@@ -87,6 +89,10 @@ public class GamePanel extends JPanel implements ActionListener{
         factorySeven = new Coordinates(getWidth()-factoryWidth, getHeight()-factoryHeight);
         factoryEight = new Coordinates(getWidth()-factoryWidth, getHeight()/2-factoryHeight/2);
         factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
+    }
+
+    private void setFactoryMap() {
+
     }
 
 }

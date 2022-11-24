@@ -1,10 +1,15 @@
-package panels;
+package game;
 
 import javax.swing.*;
+
+import panels.GamePanel;
+import panels.InstructionsPanel;
+import panels.RulebookPanel;
+import panels.StartScreenPanel;
+import panels.WinnerPanel;
+
 import java.awt.*;
 import java.util.HashMap;
-
-import game.Constants;
 
 public class TestFrame extends JFrame{
 
