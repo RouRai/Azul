@@ -13,6 +13,7 @@ public class TestFrame extends JFrame{
 
     public TestFrame(String str){
         super(str);
+        pack();
         cl = new CardLayout();
         panels = new HashMap<>();
         setUpPanels();

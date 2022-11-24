@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     private void setBoardCoordinates() {
-        boardImage = (BufferedImage) boardImage.getScaledInstance(getWidth()/3, getHeight()/2-getHeight()/32, java.awt.Image.SCALE_FAST);
+        boardImage = scaleBufferedImage(boardImage, Constants.WIDTH/3, Constants.HEIGHT/2-Constants.HEIGHT/4);
 
         // Sets up start and end coordinates for the Player 1 Board (top left) and scales it by 1/3 of width of screen
         boardOne = new CoordinatePair(new Coordinates(0, 0), new Coordinates(boardImage.getWidth(), boardImage.getHeight()));
@@ -78,6 +78,14 @@ public class GamePanel extends JPanel implements ActionListener{
         // Sets up start and end coordinates for the Player 4 Board (bottom left) and scales it by 1/3 of width of screen
         boardFour = new CoordinatePair(new Coordinates(0, getHeight()-boardImage.getHeight()), new Coordinates(boardImage.getWidth(), getHeight()));
         
+    }
+
+    private BufferedImage scaleBufferedImage(BufferedImage img, int width, int height) {
+        BufferedImage bufferedImageResult = new BufferedImage(width, height, img.getType());
+        Graphics2D g2d = bufferedImageResult.createGraphics();
+        g2d.drawImage(img, 0, 0, width, height, null);
+        g2d.dispose();
+        return bufferedImageResult;
     }
 
 }
