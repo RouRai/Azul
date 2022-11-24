@@ -1,12 +1,14 @@
 package game;
 
-public class Player {
+public class Player implements Comparable<Player>{
     
     private int points, penalty;
     private boolean isFirst;
     private int[][] gameBoard, penaltyBoard, pyramidThing, filledBoard;
+    private String name;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
         points = 0;
         isFirst = false;
         penalty = 0;
@@ -14,6 +16,10 @@ public class Player {
         penaltyBoard = new int[][]{{0, 0}, {0, 0, 0}, {0, 0}};
         pyramidThing = new int[][]{{0}, {0, 0}, {0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0, 0}};
         filledBoard = new int[][]{{Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID}, {Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID}, {Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID}, {Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID, Constants.YELLOW_TILE_ID}, {Constants.YELLOW_TILE_ID, Constants.RED_TILE_ID, Constants.BLACK_TILE_ID, Constants.WHITE_TILE_ID, Constants.BLUE_TILE_ID}};
+    }
+
+    public String getName() {
+        return name;
     }
 
     // Changes amount of points the player has
@@ -55,9 +61,11 @@ public class Player {
         return points;
         
     } // need to add special occasions
+
     public int getActualPoints() {
         return points - getPenalty();
     }
+
     public void addBonusPoints() {
         for (int i = 0; i < gameBoard.length; i++) {
             points += isRowFilled(gameBoard, i) ? 2 : 0; // row bonus
@@ -70,12 +78,15 @@ public class Player {
             points += a ? 10 : 0; // bonus for each color filled
         }
     }
+
     public void switchFirst() {
         isFirst = !isFirst;
     }
+
     public boolean getFirst() {
         return isFirst;
     }
+
     public int getPenalty() {
         int ret = 0;
         for (int i = 0; i < penaltyBoard.length; i++) {
@@ -85,6 +96,7 @@ public class Player {
         }
         return ret;
     }
+
     public void resetPenalty() {
         for (int i = 0; i < penaltyBoard.length; i++) {
             for (int j = 0; j < penaltyBoard[j].length; j++) {
@@ -92,6 +104,7 @@ public class Player {
             }
         }
     }
+
     public void addPenalty() {
         if (getPenalty() == 14) {
             return;
@@ -106,10 +119,12 @@ public class Player {
         }
 
     }
+
     public void addTile(int r, int tile) {
         int c = getRowTileIdx(tile, r);
         gameBoard[r][c] = tile;   // if you cannot understand this, I am forever disappointed in you
     }
+
     public void resetBoard() {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
@@ -117,12 +132,15 @@ public class Player {
             }
         }
     }
+
     public int[][] getGameBoard() {
         return gameBoard;               //no
     }
+
     public void setGameBoard(int[][] inp) {
         gameBoard = inp;                    // no
     }
+
     public void addTilesToPyramid(int tile, int num, int row) { // not finished
         for (int i = getFirstEmpty(pyramidThing, row); i < pyramidThing[row].length; i++) { // finds first empty in that row, proceeds to add the tiles
             num--;
@@ -143,6 +161,7 @@ public class Player {
         }
 
     }
+
     public static boolean isRowFilled(int[][] mat, int row) {
         for (int i = 0; i < mat[row].length; i++) {
             if (mat[row][i] == 0) {
@@ -151,6 +170,7 @@ public class Player {
         }
         return true;
     }
+
     public static boolean isColFilled(int[][] mat, int row) { // self explainitory name
         for (int i = 0; i < mat.length; i++) {
             if (mat[row][i] == 0) {
@@ -159,11 +179,13 @@ public class Player {
         }
         return true;
     }
+
     public static void clearRow(int[][] mat, int row) {// self explainitory name
         for (int i = 0; i < mat[row].length; i++) {
             mat[row][i] = 0;
         }
     }
+
     public int getRowTileIdx(int tile, int row) { // get the tile location on the filled board for that specific row
         int ret = 0;
         for (int i = 0; i < filledBoard[row].length; i++) {
@@ -173,6 +195,7 @@ public class Player {
         }
         return ret;
     }
+
     public int getFirstEmpty(int[][] mat, int r) { // get first empty index in a row
         for (int i = 0; i < mat[r].length; i++) {
             if (mat[r][i] == 0) {
@@ -181,6 +204,7 @@ public class Player {
         }
         return -1;
     }
+
     public void addToPenalty(int tile) {
         if (getFirstEmpty(penaltyBoard, 0) != -1) { // if first is not full, add it. Otherwise, go to second row
             penaltyBoard[0][getFirstEmpty(penaltyBoard, 0)] = tile;
@@ -190,6 +214,7 @@ public class Player {
             penaltyBoard[2][getFirstEmpty(penaltyBoard, 2)] = tile;
         }
     }
+    
     public String toString() { // do I really have to explain this?
         String ret = "";
         for (int i = 0; i < penaltyBoard.length; i++) {
@@ -237,4 +262,16 @@ public class Player {
         }
         return new boolean[]{colorCnt[0] == 5, colorCnt[1] == 5, colorCnt[2] == 5, colorCnt[3] == 5, colorCnt[4] == 5};
     }
+
+    @Override
+    public int compareTo(Player o) {
+        if(getActualPoints() > o.getActualPoints()) {
+            return 1;
+        } else if (getActualPoints() < o.getActualPoints()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    
 }
