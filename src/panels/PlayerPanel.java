@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 
 import game.Constants;
+import datastructures.Box;
 
 public class Player1Panel extends JPanel implements ActionListener{
 
@@ -48,7 +49,7 @@ public class Player1Panel extends JPanel implements ActionListener{
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         g.drawImage(factory, (int)(getWidth() / 1.2), (int)(getHeight() / 30), getHeight() / 8, getHeight() / 8, null);
-
+        continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         Logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
     }
 
@@ -57,9 +58,10 @@ public class Player1Panel extends JPanel implements ActionListener{
         continueButton = new JButton("Continue");
         Logs = new JButton("Logs");
         // Adds JButtons to the panels
-        add(continueButton, BorderLayout.LINE_END);
+        super.add(continueButton);
         super.add(Logs);
         // Adds action listeners to the JButtons
+
         continueButton.addActionListener(this);
         Logs.addActionListener(this);
     }
@@ -81,33 +83,35 @@ public class Player1Panel extends JPanel implements ActionListener{
                 endTurn = !endTurn;
                 return;
             }
-            if(!scoreR1){
-                scoreR1 = !scoreR1;
-                return;
-            }
-            if(!scoreR2){
-                scoreR2 = !scoreR2;
-                return;
-            }
-            if(!scoreR3){
-                scoreR3 = !scoreR3;
-                return;
-            }
-            if(!scoreR4){
-                scoreR4 = !scoreR4;
-                return;
-            }
-            if(!scoreR5){
-                scoreR5 = !scoreR5;
-                return;
-            }
-            if(!scoreP){
-                scoreP = !scoreP;
-                return;
-            }
-            if(!nextS){
-                nextS = !nextS;
-                return;
+            if(true){ //Needs to be changed
+                if(!scoreR1){
+                    scoreR1 = !scoreR1;
+                    return;
+                }
+                if(!scoreR2){
+                    scoreR2 = !scoreR2;
+                    return;
+                }
+                if(!scoreR3){
+                    scoreR3 = !scoreR3;
+                    return;
+                }
+                if(!scoreR4){
+                    scoreR4 = !scoreR4;
+                    return;
+                }
+                if(!scoreR5){
+                    scoreR5 = !scoreR5;
+                    return;
+                }
+                if(!scoreP){
+                    scoreP = !scoreP;
+                    return;
+                }
+                if(!nextS){
+                    nextS = !nextS;
+                    return;
+                }
             }
         }
     }
