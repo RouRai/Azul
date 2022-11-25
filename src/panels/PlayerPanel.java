@@ -6,9 +6,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+<<<<<<< HEAD
 import java.io.BufferedInputStream;
 import game.*;
 import datastructures.Box;
+=======
+
+import game.Constants;
+>>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
@@ -22,6 +27,22 @@ public class PlayerPanel extends JPanel implements ActionListener{
         p = new Player("Player 1");
         background = Constants.getImage("Background");
         setUpButtons();
+        setUpImages();
+    }
+
+    private void setUpButtons() {
+        // Instantiates JButtons
+        continueButton = new JButton("Continue");
+        logs = new JButton("Logs");
+        // Adds JButtons to the panels
+        add(continueButton, BorderLayout.LINE_END);
+        super.add(logs);
+        // Adds action listeners to the JButtons
+        continueButton.addActionListener(this);
+        logs.addActionListener(this);
+    }
+
+    private void setUpImages() {
         background = Constants.getImage("Background");
         gameBoard = Constants.getImage("AzulBoard");
         factory = Constants.getImage("Factory");
@@ -31,6 +52,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
         redT = Constants.getImage("AzulTileRed");
         yellowT = Constants.getImage("AzulTileYellow");
         whiteT = Constants.getImage("AzulTileWhite");
+<<<<<<< HEAD
+=======
+
+>>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -39,6 +64,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         g.drawImage(factory, (int)(getWidth() / 1.2), (int)(getHeight() / 30), getHeight() / 8, getHeight() / 8, null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+<<<<<<< HEAD
         Logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
     }
 
@@ -53,6 +79,9 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
         continueButton.addActionListener(this);
         Logs.addActionListener(this);
+=======
+        logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+>>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
     }
 
     // Runs this method when something happens to one of the JButtons

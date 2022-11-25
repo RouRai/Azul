@@ -12,7 +12,7 @@ import java.awt.*;
 public class StartScreenPanel extends JPanel implements ActionListener{
 
     private BufferedImage background, filt;
-    private JButton ruleButton, gameButton, instructionsButton, endButton;
+    private JButton ruleButton, gameButton, instructionsButton;
     private CardLayout cl;
 
     public StartScreenPanel(CardLayout cl) {
@@ -41,19 +41,16 @@ public class StartScreenPanel extends JPanel implements ActionListener{
         ruleButton = new JButton("Rules");
         gameButton = new JButton("Start");
         instructionsButton = new JButton("Instructions");
-        endButton = new JButton("End");
 
         // Adds buttons to panel
         add(ruleButton);
         add(gameButton);
         add(instructionsButton);
-        add(endButton);
 
         // Adds action listeners to them so they can record actions
         ruleButton.addActionListener(this);
         gameButton.addActionListener(this);
         instructionsButton.addActionListener(this);
-        endButton.addActionListener(this);
     }
 
 
@@ -66,8 +63,6 @@ public class StartScreenPanel extends JPanel implements ActionListener{
             cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
         } else if (e.getSource().equals(instructionsButton)){
             cl.show(Constants.PANEL_CONT, Constants.INSTRUCTIONS_PANEL);
-        } else if (e.getSource().equals(endButton)) {
-            cl.show(Constants.PANEL_CONT, Constants.END_PANEL);
         }
     }
 
