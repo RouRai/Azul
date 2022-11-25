@@ -1,5 +1,6 @@
 package panels;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.*;
@@ -24,8 +25,10 @@ public class GamePanel extends JPanel implements ActionListener{
     private HashMap<Byte, Factory> factoryMap;
     private HashMap<JButton, Factory> buttonFactory;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
+    private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive;
     private JButton factory1Button, factory2Button, factory3Button, factory4Button, factory5Button, factory6Button, factory7Button, factory8Button, factory9Button;
     private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
+    private ImageIcon factoryIcon;
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
@@ -53,27 +56,15 @@ public class GamePanel extends JPanel implements ActionListener{
         setCoordinates();
         
         // 1       9
-        // 2       8           Which line each factory is drawn on
+        // 2       8           Which factory is drawn at which location
         // 3 4 5 6 7
-        g.drawImage(factory, factoryOne.getX(), factoryOne.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryTwo.getX(), factoryTwo.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryThree.getX(), factoryThree.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryFour.getX(), factoryFour.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryFive.getX(), factoryFive.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factorySix.getX(), factorySix.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factorySeven.getX(), factorySeven.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryEight.getX(), factoryEight.getY(), factoryWidth, factoryHeight, this);
-        g.drawImage(factory, factoryNine.getX(), factoryNine.getY(), factoryWidth, factoryHeight, this);
+        drawFactories(g);
 
         // Paints the factory floor
         tileWidth = getWidth()/16;
         tileHeight = getHeight()/10;
 
-        g.drawImage(blueTile, getWidth()/2-tileWidth/2, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
-        g.drawImage(redTile, getWidth()/4-tileWidth/2, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
-        g.drawImage(yellowTile, getWidth()/3, getHeight()/2-tileHeight/2, tileWidth, tileHeight, returnStart);
-        g.drawImage(blackTile, 2*getWidth()/3, getHeight()/2-tileHeight/2, tileWidth, tileHeight, returnStart);
-        g.drawImage(whiteTile, getWidth()/2 + tileWidth, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
+        drawFactoryFloor(g);
         
     } 
 
@@ -86,6 +77,8 @@ public class GamePanel extends JPanel implements ActionListener{
         whiteTile = Constants.getImage("AzulTileWhite");
         blueTile = Constants.getImage("AzulTileBlue");
         yellowTile = Constants.getImage("AzulTileYellow");
+
+        factoryIcon = new ImageIcon(Constants.IMG_DIRECTORY + "Factory.jpg");
     }
 
     private void setUpButtons() {
@@ -105,10 +98,10 @@ public class GamePanel extends JPanel implements ActionListener{
         if(e.getSource().equals(returnStart)){
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
         }
-        
     }
 
     private void setCoordinates() {
+        // Sets up factory coordinates
         factoryOne = new Coordinates(0, 0);
         factoryTwo = new Coordinates(0, getHeight()/2-factoryHeight/2);
         factoryThree = new Coordinates(0, getHeight()-factoryHeight);
@@ -118,37 +111,34 @@ public class GamePanel extends JPanel implements ActionListener{
         factorySeven = new Coordinates(getWidth()-factoryWidth, getHeight()-factoryHeight);
         factoryEight = new Coordinates(getWidth()-factoryWidth, getHeight()/2-factoryHeight/2);
         factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
+
+        // Sets up tile coordinates
+        tileOne = new Coordinates(getWidth()/2-tileWidth/2, getHeight()/2-tileHeight/2);
+        tileTwo = new Coordinates(getWidth()/4-tileWidth/2, getHeight()/2-tileHeight/2);
+        tileThree = new Coordinates(getWidth()/3, getHeight()/2-tileHeight/2);
+        tileFour = new Coordinates(2 * getWidth()/3, getHeight()/2-tileHeight/2);
+        tileFive = new Coordinates(getWidth()/2 + tileWidth, getHeight()/2-tileHeight/2);
     }
+
     private void setFactoryButtons() {
-        factory1Button = new JButton("Button1");
-        factory2Button = new JButton("Button2");
-        factory3Button = new JButton("Button3");
-        factory4Button = new JButton("Button4");
-        factory5Button = new JButton("Button5");
-        factory6Button = new JButton("Button6");
-        factory7Button = new JButton("Button7");
-        factory8Button = new JButton("Button8");
-        factory9Button = new JButton("Button9");
-        factory1 = new Factory();
-        factory2 = new Factory();
-        factory3 = new Factory();
-        factory4 = new Factory();
-        factory5 = new Factory();
-        factory6 = new Factory();
-        factory7 = new Factory();
-        factory8 = new Factory();
-        factory9 = new Factory();
-        buttonFactory = new HashMap<>();
-        buttonFactory.put(factory1Button, factory1);
-        buttonFactory.put(factory2Button, factory2);
-        buttonFactory.put(factory3Button, factory3);
-        buttonFactory.put(factory4Button, factory4);
-        buttonFactory.put(factory5Button, factory5);
-        buttonFactory.put(factory6Button, factory6);
-        buttonFactory.put(factory7Button, factory7);
-        buttonFactory.put(factory8Button, factory8);
-        buttonFactory.put(factory9Button, factory9);
+        setUpFactory(factory1Button, factory1);
+        setUpFactory(factory2Button, factory2);
+        setUpFactory(factory3Button, factory3);
+        setUpFactory(factory4Button, factory4);
+        setUpFactory(factory5Button, factory5);
+        setUpFactory(factory6Button, factory6);
+        setUpFactory(factory7Button, factory7);
+        setUpFactory(factory8Button, factory8);
+        setUpFactory(factory9Button, factory9);
     }
+
+    private void setUpFactory(JButton button, Factory factory){
+        button = new JButton(factoryIcon);
+        button.addActionListener(this);
+        factory = new Factory();
+        buttonFactory.put(button, factory);
+    }
+
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
 
@@ -183,6 +173,34 @@ public class GamePanel extends JPanel implements ActionListener{
             byte remain = (byte) (i % 9);
             factoryMap.get(remain).addTile(possibleTiles.get(i));
         }
+    }
+
+    private void drawFactories(Graphics g) {
+        drawFactory(g, factoryOne);
+        drawFactory(g, factoryTwo);
+        drawFactory(g, factoryThree);
+        drawFactory(g, factoryFour);
+        drawFactory(g, factoryFive);
+        drawFactory(g, factorySix);
+        drawFactory(g, factorySeven);
+        drawFactory(g, factoryEight);
+        drawFactory(g, factoryNine);
+    }
+
+    private void drawFactory(Graphics g, Coordinates coordinates) {
+        g.drawImage(factory, coordinates.getX(), coordinates.getY(), factoryWidth, factoryHeight, null);
+    }
+
+    private void drawFactoryFloor(Graphics g) {
+        drawSingleFactoryFloor(g, tileOne, blueTile);
+        drawSingleFactoryFloor(g, tileTwo, redTile);
+        drawSingleFactoryFloor(g, tileThree, yellowTile);
+        drawSingleFactoryFloor(g, tileFour, blackTile);
+        drawSingleFactoryFloor(g, tileFive, whiteTile);
+    }
+
+    private void drawSingleFactoryFloor(Graphics g, Coordinates coordinates, BufferedImage img) {
+        g.drawImage(img, coordinates.getX(), coordinates.getY(), tileWidth, tileHeight, null);
     }
 
 }

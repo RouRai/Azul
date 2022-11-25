@@ -41,7 +41,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.setColor(Color.WHITE);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
-        g.drawImage(factory, (int)(getWidth() / 1.2), (int)(getHeight() / 30), getHeight() / 8, getHeight() / 8, null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
     }

@@ -11,11 +11,13 @@ public class TileObject implements Comparable<TileObject>{
     private int groupInt;
     private String type;
     private JButton tileButton;
+    private ImageIcon icon;
 
     public TileObject(int gInt, String name) {
         groupInt = gInt;
         type = name;
-        tileButton = new JButton(formIcon(name));
+        icon = formIcon(name);
+        tileButton = new JButton(icon);
     }
 
     public int getGroupInt(){
@@ -34,8 +36,7 @@ public class TileObject implements Comparable<TileObject>{
     }
 
     // Use this to make Icons, input the name of the file excluding the .jpg or whatever
-    public ImageIcon formIcon (String name) { 
-        // Figure out way to declare icons
+    private ImageIcon formIcon (String name) { 
         try{
             return new ImageIcon(Constants.IMG_DIRECTORY + name + ".jpg");
         } catch (Exception e) {
@@ -50,6 +51,10 @@ public class TileObject implements Comparable<TileObject>{
 
     public JButton getButton() {
         return tileButton;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 
 }
