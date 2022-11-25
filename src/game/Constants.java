@@ -15,10 +15,7 @@ public class Constants {
     public static final String RULE_PANEL = "rulePanel";
     public static final String START_PANEL = "startPanel";
     public static final String GAME_PANEL = "gamePanel";
-    public static final String P1_PANEL = "p1Panel";
-    public static final String P2_PANEL = "p2Panel";
-    public static final String P3_PANEL = "p3Panel";
-    public static final String P4_PANEL = "p4Panel";
+    public static final String PLAYER_PANEL = "playerPanel";
     public static final String INSTRUCTIONS_PANEL = "instructionsPanel";
     public static final String END_PANEL = "endPanel";
 
@@ -31,24 +28,24 @@ public class Constants {
     public static final int YELLOW_TILE_ID = 6;
 
     // Factory Constants
-    public static final String FACTORY_ONE = "factoryOne";
-    public static final String FACTORY_TWO = "factoryTwo";
-    public static final String FACTORY_THREE = "factoryThree";
-    public static final String FACTORY_FOUR = "factoryFour";
-    public static final String FACTORY_FIVE = "factoryFive";
-    public static final String FACTORY_SIX = "factorySix";
-    public static final String FACTORY_SEVEN = "factorySeven";
-    public static final String FACTORY_EIGHT = "factoryEight";
-    public static final String FACTORY_NINE = "factoryNine";
-    public static final String FACTORY_FLOOR = "factoryFloor";
+    public static final byte FACTORY_ONE = 0;
+    public static final byte FACTORY_TWO = 1;
+    public static final byte FACTORY_THREE = 2;
+    public static final byte FACTORY_FOUR = 3;
+    public static final byte FACTORY_FIVE = 4;
+    public static final byte FACTORY_SIX = 5;
+    public static final byte FACTORY_SEVEN = 6;
+    public static final byte FACTORY_EIGHT = 7;
+    public static final byte FACTORY_NINE = 8;
+    public static final byte FACTORY_FLOOR = 9;
 
     // Tile String Constants
-    public static final String BLACK_TILE = "blackTile";
-    public static final String BLUE_TILE = "blueTile";
-    public static final String RED_TILE = "redTile";
-    public static final String WHITE_TILE = "whiteTile";
-    public static final String YELLOW_TILE = "yellowTile";
-    public static final String ONE_TILE = "oneTile";
+    public static final String BLACK_TILE = "AzulTileBlack";
+    public static final String BLUE_TILE = "AzulTileBlue";
+    public static final String RED_TILE = "AzulTileRed";
+    public static final String WHITE_TILE = "AzulTileWhite";
+    public static final String YELLOW_TILE = "AzulTileYellow";
+    public static final String ONE_TILE = "AzulTileOne";
     // Strings
     public static final String IMG_DIRECTORY = "/images/";
 

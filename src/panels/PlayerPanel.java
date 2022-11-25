@@ -11,27 +11,42 @@ import java.io.BufferedInputStream;
 import game.Constants;
 import datastructures.Box;
 
-public class Player1Panel extends JPanel implements ActionListener{
+public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
-    private JButton continueButton, Logs;
+    private JButton continueButton, logs;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
 
-    public Player1Panel(CardLayout cl) {
+    public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         background = Constants.getImage("Background");
         setUpButtons();
-        choseTile = false;
-        placeTile = false;
-        endTurn = false;
-        scoreR1 = false;
-        scoreR2 = false;
-        scoreR3 = false;
-        scoreR4 = false;
-        scoreR5 = false;
-        scoreP = false;
-        nextS = false;
+        setUpImages();
+    }
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.WHITE);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
+        g.drawImage(factory, (int)(getWidth() / 1.2), (int)(getHeight() / 30), getHeight() / 8, getHeight() / 8, null);
+
+        logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+    }
+
+    private void setUpButtons() {
+        // Instantiates JButtons
+        continueButton = new JButton("Continue");
+        logs = new JButton("Logs");
+        // Adds JButtons to the panels
+        add(continueButton, BorderLayout.LINE_END);
+        super.add(logs);
+        // Adds action listeners to the JButtons
+        continueButton.addActionListener(this);
+        logs.addActionListener(this);
+    }
+
+    private void setUpImages() {
         background = Constants.getImage("Background");
         gameBoard = Constants.getImage("AzulBoard");
         factory = Constants.getImage("Factory");
@@ -41,6 +56,7 @@ public class Player1Panel extends JPanel implements ActionListener{
         redT = Constants.getImage("AzulTileRed");
         yellowT = Constants.getImage("AzulTileYellow");
         whiteT = Constants.getImage("AzulTileWhite");
+<<<<<<< HEAD
 
     }
     public void paintComponent(Graphics g) {
@@ -64,6 +80,8 @@ public class Player1Panel extends JPanel implements ActionListener{
 
         continueButton.addActionListener(this);
         Logs.addActionListener(this);
+=======
+>>>>>>> 3300774681479bb3caaac547dc11218eca7f81e1
     }
 
     // Runs this method when something happens to one of the JButtons

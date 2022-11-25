@@ -2,15 +2,21 @@ package panels;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import datastructures.Box;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import game.Constants;
 import game.Coordinates;
 import game.Factory;
+import tiles.TileObject;
 
 public class GamePanel extends JPanel implements ActionListener{
 
@@ -18,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener{
     private JButton returnStart;
     private BufferedImage background, factory, logo;
     private int factoryWidth, factoryHeight;
-    private HashMap<String, Factory> factoryMap;
+    private HashMap<Byte, Factory> factoryMap;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
 
     public GamePanel(CardLayout cl) {
@@ -26,6 +32,7 @@ public class GamePanel extends JPanel implements ActionListener{
         background = Constants.getImage("Background");
         factory = Constants.getImage("Factory");
         logo = Constants.getImage("AzulLogo");
+        setFactoryMap();
         setUpButtons();
     }
 
@@ -45,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener{
         setCoordinates();
         
         // 1       9
-        // 2       8           Which line each factory is drawn
+        // 2       8           Which line each factory is drawn on
         // 3 4 5 6 7
         g.drawImage(factory, factoryOne.getX(), factoryOne.getY(), factoryWidth, factoryHeight, this);
         g.drawImage(factory, factoryTwo.getX(), factoryTwo.getY(), factoryWidth, factoryHeight, this);
@@ -92,7 +99,39 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     private void setFactoryMap() {
+        factoryMap = new HashMap<>();
 
+        // Adds each of the factories to the map
+        factoryMap.put(Constants.FACTORY_ONE, new Factory());
+        factoryMap.put(Constants.FACTORY_TWO, new Factory());
+        factoryMap.put(Constants.FACTORY_THREE, new Factory());
+        factoryMap.put(Constants.FACTORY_FOUR, new Factory());
+        factoryMap.put(Constants.FACTORY_FIVE, new Factory());
+        factoryMap.put(Constants.FACTORY_SIX, new Factory());
+        factoryMap.put(Constants.FACTORY_SEVEN, new Factory());
+        factoryMap.put(Constants.FACTORY_EIGHT, new Factory());
+        factoryMap.put(Constants.FACTORY_NINE, new Factory());
+
+        setFactoryTiles();
+    }
+
+    private void setFactoryTiles() {
+        ArrayList<TileObject> possibleTiles = new ArrayList<>();
+        
+        for(byte i = 0; i < 20; i++) {
+            possibleTiles.add(new TileObject(Constants.BLACK_TILE_ID, Constants.BLACK_TILE));
+            possibleTiles.add(new TileObject(Constants.BLUE_TILE_ID, Constants.BLUE_TILE));
+            possibleTiles.add(new TileObject(Constants.RED_TILE_ID, Constants.RED_TILE));
+            possibleTiles.add(new TileObject(Constants.YELLOW_TILE_ID, Constants.YELLOW_TILE));
+            possibleTiles.add(new TileObject(Constants.WHITE_TILE_ID, Constants.WHITE_TILE));
+        }
+
+        Collections.shuffle(possibleTiles);
+
+        for(byte i = 0; i < 36; i++) {
+            byte remain = (byte) (i % 9);
+            factoryMap.get(remain).addTile(possibleTiles.get(i));
+        }
     }
 
 }
