@@ -2,19 +2,20 @@ package tiles;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import game.Constants;
+
 import java.io.IOException;
 
 public class TileObject implements Comparable<TileObject>{
     private int groupInt;
-    private ImageIcon icon;
     private String type;
     private JButton tileButton;
 
-    public TileObject(int gInt, String name, String t) throws IOException {
+    public TileObject(int gInt, String name) {
         groupInt = gInt;
-        formIcon(name);
-        type = t;
-        tileButton = new JButton(icon);
+        type = name;
+        tileButton = new JButton(formIcon(name));
     }
 
     public int getGroupInt(){
@@ -33,9 +34,14 @@ public class TileObject implements Comparable<TileObject>{
     }
 
     // Use this to make Icons, input the name of the file excluding the .jpg or whatever
-    public void formIcon (String name) throws IOException { 
+    public ImageIcon formIcon (String name) { 
         // Figure out way to declare icons
-        icon = new ImageIcon(name);
+        try{
+            return new ImageIcon(Constants.IMG_DIRECTORY + name + ".jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public ImageIcon getIcon() {

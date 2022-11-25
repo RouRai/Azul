@@ -7,8 +7,16 @@ public class Factory {
     
     private Box<TileObject> tiles;
 
-    public Factory(Box<TileObject> t) {
-        tiles = t;
+    public Factory() {
+        tiles = null;
+    }
+
+    public void setTiles(Box<TileObject> tiles) {
+        this.tiles = tiles;
+    }
+
+    public void addTile(TileObject t) {
+        tiles.add(t);
     }
 
     public Box<TileObject> getTiles() {

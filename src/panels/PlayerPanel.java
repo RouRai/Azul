@@ -10,14 +10,14 @@ import java.io.BufferedInputStream;
 
 import game.Constants;
 
-public class Player1Panel extends JPanel implements ActionListener{
+public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
     private JButton continueButton, Logs;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
 
-    public Player1Panel(CardLayout cl) {
+    public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         background = Constants.getImage("Background");
         setUpButtons();
