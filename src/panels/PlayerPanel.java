@@ -6,19 +6,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-<<<<<<< HEAD
 import java.io.BufferedInputStream;
 import game.*;
 import datastructures.Box;
-=======
-
-import game.Constants;
->>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
-    private JButton continueButton, Logs, row1, row2, row3, r4, row5, penalty;
+    private JButton continueButton, logs, row1, row2, row3, r4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
@@ -28,18 +23,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
-    }
-
-    private void setUpButtons() {
-        // Instantiates JButtons
-        continueButton = new JButton("Continue");
-        logs = new JButton("Logs");
-        // Adds JButtons to the panels
-        add(continueButton, BorderLayout.LINE_END);
-        super.add(logs);
-        // Adds action listeners to the JButtons
-        continueButton.addActionListener(this);
-        logs.addActionListener(this);
     }
 
     private void setUpImages() {
@@ -52,10 +35,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
         redT = Constants.getImage("AzulTileRed");
         yellowT = Constants.getImage("AzulTileYellow");
         whiteT = Constants.getImage("AzulTileWhite");
-<<<<<<< HEAD
-=======
-
->>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -64,24 +43,20 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         g.drawImage(factory, (int)(getWidth() / 1.2), (int)(getHeight() / 30), getHeight() / 8, getHeight() / 8, null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
-<<<<<<< HEAD
-        Logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+        logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
     }
 
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
-        Logs = new JButton("Logs");
+        logs = new JButton("Logs");
         // Adds JButtons to the panels
         super.add(continueButton);
-        super.add(Logs);
+        super.add(logs);
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
-        Logs.addActionListener(this);
-=======
-        logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
->>>>>>> c399757e4da9f5ae9575f5d70e5f7946dd1eb09d
+        logs.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons

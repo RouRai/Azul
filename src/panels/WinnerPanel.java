@@ -1,5 +1,7 @@
 package panels;
 
+import java.awt.event.*;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,31 +10,42 @@ import datastructures.Box;
 import game.Constants;
 import game.Player;
 
-public class WinnerPanel extends JPanel{
+public class WinnerPanel extends JPanel implements ActionListener{
 
     private BufferedImage background, trophy;
+    private JButton returnStart;
     private Box<Player> players; // Will be used when we effectively implement players in our game
-
-    public WinnerPanel(CardLayout cl, Box<Player> players) {
+    private CardLayout cl;
+    public WinnerPanel(CardLayout c, Box<Player> players) {
+        cl = c;
+        returnStart = new JButton("Return to Start");
+        super.add(returnStart);
+        returnStart.addActionListener(this);
         this.players = players;
         background = Constants.getImage("EndScreen");
         trophy = Constants.getImage("Trophy");
     }
-
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource().equals(returnStart)){
+            cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
+        }
+    }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         // Draws the background
+        g.setColor(new Color(255, 223, 0));
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-
+        g.setFont(new Font("Italics", Font.ITALIC, 40));
         // Draws the trophy with the name of the winner. ("Player 1 Won!" was a placeholder for testing, we will)
         // (pass in a Box of players as a parameter and then allow the method getTop to find the top player and get their name)
+        returnStart.setBounds((int)(getWidth() / 2)-getWidth()/12, (int)(getHeight() / 1.2), getWidth()/6 , getHeight() / 14);
         g.drawImage(trophy, (getWidth()/2)-(trophy.getWidth()/2), getHeight()/32, trophy.getWidth(), trophy.getHeight(), this);
-        g.drawString("Player 1 Won!", getWidth()/2-getWidth()/32, getHeight()/10);
+        g.drawString(/*getTop(players) + */"Player 1 Wins!", (int)(getWidth()/2.4), getHeight()/10);
     }
 
     // Returns the top player in terms of points
-    private Player getTop(Box<Player> players) {
+    private String getTop(Box<Player> players) {
         Player top = null;
 
         for(Player p : players) {
@@ -41,6 +54,6 @@ public class WinnerPanel extends JPanel{
             }
         }
 
-        return top;
+        return top.getName();
     }
 }
