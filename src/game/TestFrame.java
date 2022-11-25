@@ -15,7 +15,6 @@ public class TestFrame extends JFrame{
 
     public TestFrame(String str){
         super(str);
-        pack();
         cl = new CardLayout();
         panels = new HashMap<>();
         setUpPanels();
@@ -45,7 +44,7 @@ public class TestFrame extends JFrame{
         Constants.PANEL_CONT.add(panels.get(Constants.INSTRUCTIONS_PANEL), Constants.INSTRUCTIONS_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.END_PANEL), Constants.END_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.PLAYER_PANEL), Constants.PLAYER_PANEL);
-        
+
         // Show startScreen at beginning
         cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 
