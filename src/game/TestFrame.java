@@ -31,7 +31,7 @@ public class TestFrame extends JFrame{
         panels.put(Constants.RULE_PANEL, new RulebookPanel(cl));
         panels.put(Constants.START_PANEL, new StartScreenPanel(cl));
         panels.put(Constants.GAME_PANEL, new GamePanel(cl));
-        panels.put(Constants.P1_PANEL, new Player1Panel(cl));
+        panels.put(Constants.PLAYER_PANEL, new PlayerPanel(cl));
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
 
@@ -44,7 +44,8 @@ public class TestFrame extends JFrame{
         Constants.PANEL_CONT.add(panels.get(Constants.GAME_PANEL), Constants.GAME_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.INSTRUCTIONS_PANEL), Constants.INSTRUCTIONS_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.END_PANEL), Constants.END_PANEL);
-        Constants.PANEL_CONT.add(panels.get(Constants.P1_PANEL), Constants.P1_PANEL);
+        Constants.PANEL_CONT.add(panels.get(Constants.PLAYER_PANEL), Constants.PLAYER_PANEL);
+        
         // Show startScreen at beginning
         cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 

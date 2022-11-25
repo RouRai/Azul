@@ -2,9 +2,6 @@ package panels;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import datastructures.Box;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,16 +19,14 @@ public class GamePanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
     private JButton returnStart;
-    private BufferedImage background, factory, logo;
-    private int factoryWidth, factoryHeight;
+    private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile;
+    private int factoryWidth, factoryHeight, tileWidth, tileHeight;
     private HashMap<Byte, Factory> factoryMap;
-    private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
+    private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine, redCoordinates, yellowCoordinates, whiteCoordinates, blueCoordinates, blackCoordinates;
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
-        background = Constants.getImage("Background");
-        factory = Constants.getImage("Factory");
-        logo = Constants.getImage("AzulLogo");
+        setUpImages();
         setFactoryMap();
         setUpButtons();
     }
@@ -39,15 +34,17 @@ public class GamePanel extends JPanel implements ActionListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        g.setColor(Color.WHITE);
+
         // Paints background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
         // Draws the logo at the center at the top
-        g.drawImage(logo, getWidth()/2-getWidth()/10, 0, getWidth()/5, getHeight()/5, this);
+        g.drawImage(logo, getWidth()/2-getWidth()/10, 0, getWidth()/5, getHeight()/5, this); 
         
         // Paints all the factories (excluding factory floor) at their respective locations
-        factoryWidth = (int)(getWidth()/7.5);
-        factoryHeight = getHeight()/5;
+        factoryWidth = (int)(getWidth()/7.5); 
+        factoryHeight = (int)(getHeight()/5);
 
         setCoordinates();
         
@@ -63,12 +60,33 @@ public class GamePanel extends JPanel implements ActionListener{
         g.drawImage(factory, factorySeven.getX(), factorySeven.getY(), factoryWidth, factoryHeight, this);
         g.drawImage(factory, factoryEight.getX(), factoryEight.getY(), factoryWidth, factoryHeight, this);
         g.drawImage(factory, factoryNine.getX(), factoryNine.getY(), factoryWidth, factoryHeight, this);
+
+        // Paints the factory floor
+        tileWidth = getWidth()/16;
+        tileHeight = getHeight()/10;
+
+        g.drawImage(blueTile, getWidth()/2-tileWidth/2, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
+        g.drawImage(redTile, getWidth()/4-tileWidth/2, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
+        g.drawImage(yellowTile, getWidth()/3, getHeight()/2-tileHeight/2, tileWidth, tileHeight, returnStart);
+        g.drawImage(blackTile, 2*getWidth()/3, getHeight()/2-tileHeight/2, tileWidth, tileHeight, returnStart);
+        g.drawImage(whiteTile, getWidth()/2 + tileWidth, getHeight()/2-tileHeight/2, tileWidth, tileHeight, this);
         
     } 
 
+    private void setUpImages() {
+        background = Constants.getImage("Background");
+        factory = Constants.getImage("Factory");
+        logo = Constants.getImage("AzulLogo");
+        redTile = Constants.getImage("AzulTileRed");
+        blackTile = Constants.getImage("AzulTileBlack");
+        whiteTile = Constants.getImage("AzulTileWhite");
+        blueTile = Constants.getImage("AzulTileBlue");
+        yellowTile = Constants.getImage("AzulTileYellow");
+    }
+
     private void setUpButtons() {
         // Instantiates JButtons
-        returnStart = new JButton("Return to Start Screen");
+        returnStart = new JButton("Return to Player Screen");
 
         // Adds JButtons to the panels
         add(returnStart, BorderLayout.LINE_END);
@@ -81,7 +99,7 @@ public class GamePanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(returnStart)){
-            cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
         }
         
     }
@@ -92,7 +110,7 @@ public class GamePanel extends JPanel implements ActionListener{
         factoryThree = new Coordinates(0, getHeight()-factoryHeight);
         factoryFour = new Coordinates(getWidth()/4-factoryWidth/2, getHeight()-factoryHeight);
         factoryFive = new Coordinates(getWidth()/2-factoryWidth/2, getHeight()-factoryHeight);
-        factorySix = new Coordinates((3 * getWidth()/4) - factoryWidth/2, getHeight()-factoryHeight);
+        factorySix = new Coordinates((3 * getWidth()/4)-factoryWidth/2, getHeight()-factoryHeight);
         factorySeven = new Coordinates(getWidth()-factoryWidth, getHeight()-factoryHeight);
         factoryEight = new Coordinates(getWidth()-factoryWidth, getHeight()/2-factoryHeight/2);
         factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
