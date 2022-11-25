@@ -44,10 +44,6 @@ public class TileObject implements Comparable<TileObject>{
         }
     }
 
-    public ImageIcon getIcon() {
-        return icon;
-    }
-
     public String getType() {
         return type;
     }

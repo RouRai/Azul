@@ -8,7 +8,7 @@ public class Factory {
     private Box<TileObject> tiles;
 
     public Factory() {
-        tiles = null;
+        tiles = new Box<TileObject>();
     }
 
     public void setTiles(Box<TileObject> tiles) {

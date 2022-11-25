@@ -15,10 +15,7 @@ public class Constants {
     public static final String RULE_PANEL = "rulePanel";
     public static final String START_PANEL = "startPanel";
     public static final String GAME_PANEL = "gamePanel";
-    public static final String P1_PANEL = "p1Panel";
-    public static final String P2_PANEL = "p2Panel";
-    public static final String P3_PANEL = "p3Panel";
-    public static final String P4_PANEL = "p4Panel";
+    public static final String PLAYER_PANEL = "playerPanel";
     public static final String INSTRUCTIONS_PANEL = "instructionsPanel";
     public static final String END_PANEL = "endPanel";
 
