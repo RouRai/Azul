@@ -155,11 +155,6 @@ public class Player implements Comparable<Player>{
                 addToPenalty(tile);
             }
         }
-        if (isRowFilled(pyramidThing, row)) { // if row is filled, go add to actual board
-            clearRow(pyramidThing, row);
-            gameBoard[row][getRowTileIdx(tile, row)] = tile;
-        }
-
     }
 
     public static boolean isRowFilled(int[][] mat, int row) {
