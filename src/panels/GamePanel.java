@@ -25,7 +25,10 @@ public class GamePanel extends JPanel implements ActionListener{
     private BufferedImage background, factory, logo;
     private int factoryWidth, factoryHeight;
     private HashMap<Byte, Factory> factoryMap;
+    private HashMap<JButton, Factory> buttonFactory;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
+    private JButton factory1Button, factory2Button, factory3Button, factory4Button, factory5Button, factory6Button, factory7Button, factory8Button, factory9Button;
+    private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
@@ -34,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener{
         logo = Constants.getImage("AzulLogo");
         setFactoryMap();
         setUpButtons();
+        setFactoryButtons();
     }
 
     public void paintComponent(Graphics g) {
@@ -97,7 +101,36 @@ public class GamePanel extends JPanel implements ActionListener{
         factoryEight = new Coordinates(getWidth()-factoryWidth, getHeight()/2-factoryHeight/2);
         factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
     }
-
+    private void setFactoryButtons() {
+        factory1Button = new JButton("Button1");
+        factory2Button = new JButton("Button2");
+        factory3Button = new JButton("Button3");
+        factory4Button = new JButton("Button4");
+        factory5Button = new JButton("Button5");
+        factory6Button = new JButton("Button6");
+        factory7Button = new JButton("Button7");
+        factory8Button = new JButton("Button8");
+        factory9Button = new JButton("Button9");
+        factory1 = new Factory();
+        factory2 = new Factory();
+        factory3 = new Factory();
+        factory4 = new Factory();
+        factory5 = new Factory();
+        factory6 = new Factory();
+        factory7 = new Factory();
+        factory8 = new Factory();
+        factory9 = new Factory();
+        buttonFactory = new HashMap<>();
+        buttonFactory.put(factory1Button, factory1);
+        buttonFactory.put(factory2Button, factory2);
+        buttonFactory.put(factory3Button, factory3);
+        buttonFactory.put(factory4Button, factory4);
+        buttonFactory.put(factory5Button, factory5);
+        buttonFactory.put(factory6Button, factory6);
+        buttonFactory.put(factory7Button, factory7);
+        buttonFactory.put(factory8Button, factory8);
+        buttonFactory.put(factory9Button, factory9);
+    }
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
 
