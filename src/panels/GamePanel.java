@@ -3,6 +3,9 @@ package panels;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import datastructures.Box;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +18,9 @@ import game.Constants;
 import game.Coordinates;
 import game.Factory;
 import tiles.TileObject;
+import datastructures.Node;
+import datastructures.Queue;
+import datastructures.Stack;
 
 public class GamePanel extends JPanel implements ActionListener{
 
@@ -33,9 +39,7 @@ public class GamePanel extends JPanel implements ActionListener{
     public GamePanel(CardLayout cl) {
         this.cl = cl;
         setUpImages();
-        setFactoryMap();
         setUpButtons();
-        setFactoryButtons();
     }
 
     public void paintComponent(Graphics g) {
@@ -65,7 +69,10 @@ public class GamePanel extends JPanel implements ActionListener{
         tileHeight = getHeight()/10;
 
         drawFactoryFloor(g);
+
+        setFactoryMap();
         
+        paintTiles(factoryMap.get(Constants.FACTORY_ONE), factoryOne, g);
     } 
 
     private void setUpImages() {
@@ -141,6 +148,7 @@ public class GamePanel extends JPanel implements ActionListener{
 
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
+        buttonFactory = new HashMap<>();
 
         // Adds each of the factories to the map
         factoryMap.put(Constants.FACTORY_ONE, new Factory());
@@ -154,6 +162,7 @@ public class GamePanel extends JPanel implements ActionListener{
         factoryMap.put(Constants.FACTORY_NINE, new Factory());
 
         setFactoryTiles();
+        setFactoryButtons();
     }
 
     private void setFactoryTiles() {
@@ -201,6 +210,22 @@ public class GamePanel extends JPanel implements ActionListener{
 
     private void drawSingleFactoryFloor(Graphics g, Coordinates coordinates, BufferedImage img) {
         g.drawImage(img, coordinates.getX(), coordinates.getY(), tileWidth, tileHeight, null);
+    }
+
+    private void paintTiles(Factory f, Coordinates c, Graphics g) {
+        int xVal = c.getX();
+        int yVal = c.getY();
+
+        Box<TileObject> tiles = f.getTiles();
+        TileObject tile = tiles.getFirst().getItem();
+
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
+        
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
+        
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
+        
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
     }
 
 }

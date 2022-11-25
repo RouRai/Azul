@@ -15,8 +15,9 @@ public class Queue<T> {
             head = new Node<T>(t, null, null);
             tail = head;
             return;
+        } else {
+            tail = new Node<T>(t, null, tail);
         }
-        tail = new Node<T>(t, null, tail);
     }
 
     // Removes an item from the front of the queue

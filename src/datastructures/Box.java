@@ -53,6 +53,10 @@ public class Box<T> implements Iterable<T>{
 
     // Returns formmated String of contets of Box
     public String toString() {
+        if(first == null){
+            return first + " ";
+        }
+
         String s = "["; 
 
         for(Node<T> n = first; n.getNext() != null; n = n.getNext()){

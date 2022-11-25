@@ -36,4 +36,14 @@ public class Stack<T> {
     public boolean isEmpty() {
         return tail == null;
     }
+
+    public String toString() {
+        String s = "";
+        
+        for(Node<T> n = head; n.getNext()!= null; n = n.getNext()){
+            s += n.getItem().toString() + " ";
+        }
+
+        return s;
+    }
 }
