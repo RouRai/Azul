@@ -13,7 +13,7 @@ import game.Player;
 public class WinnerPanel extends JPanel implements ActionListener{
 
     private BufferedImage background, trophy;
-    private JButton returnStart;
+    private JButton returnStart, row1, row2, row3, row4, row5;
     private Box<Player> players; // Will be used when we effectively implement players in our game
     private CardLayout cl;
     public WinnerPanel(CardLayout c, Box<Player> players) {
@@ -24,6 +24,13 @@ public class WinnerPanel extends JPanel implements ActionListener{
         this.players = players;
         background = Constants.getImage("EndScreen");
         trophy = Constants.getImage("Trophy");
+    }
+    public void initializeRButtons() {
+        row1 = new JButton("Pick row 1");
+        row2 = new JButton("Pick row 2");
+        row3 = new JButton("Pick row 3");
+        row4 = new JButton("Pick row 4");
+        row5 = new JButton("Pick row 5");
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(returnStart)){

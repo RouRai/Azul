@@ -13,7 +13,7 @@ import datastructures.Box;
 public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
-    private JButton continueButton, logs, row1, row2, row3, r4, row5, penalty;
+    private JButton continueButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
@@ -43,19 +43,41 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+        row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.75), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row3.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.10), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row4.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.3), (int)(getWidth() / 15), (int)(getHeight() / 20));
+
     }
 
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
         logs = new JButton("Logs");
+        row1 = new JButton("Select R1");
+        row2 = new JButton("Select row 2");
+        row3 = new JButton("Select row 3");
+        row4 = new JButton("Select row 4");
+        row5 = new JButton("Select row 5");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
+        super.add(row1);
+        super.add(row2);
+        super.add(row3);
+        super.add(row4);
+        super.add(row5);
+
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
         logs.addActionListener(this);
+        row1.addActionListener(this);
+        row2.addActionListener(this);
+        row3.addActionListener(this);
+        row4.addActionListener(this);
+        row5.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons
