@@ -14,7 +14,7 @@ import datastructures.Box;
 public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
-    private JButton continueButton, logs, row1, row2, row3, r4, row5, penalty;
+    private JButton continueButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
@@ -49,29 +49,41 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
-        g2.setStroke(new BasicStroke(10));
-        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
-        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
-        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
-        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
-        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.75), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row3.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.10), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row4.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
+        row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.3), (int)(getWidth() / 15), (int)(getHeight() / 20));
+
     }
 
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
         logs = new JButton("Logs");
+        row1 = new JButton("Select R1");
+        row2 = new JButton("Select row 2");
+        row3 = new JButton("Select row 3");
+        row4 = new JButton("Select row 4");
+        row5 = new JButton("Select row 5");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
+        super.add(row1);
+        super.add(row2);
+        super.add(row3);
+        super.add(row4);
+        super.add(row5);
+
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
         logs.addActionListener(this);
+        row1.addActionListener(this);
+        row2.addActionListener(this);
+        row3.addActionListener(this);
+        row4.addActionListener(this);
+        row5.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons
