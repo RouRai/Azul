@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 public class Constants {
     // Screen dimensions
     private final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final int WIDTH = (int) screenSize.getWidth();
-    public static final int HEIGHT = (int) screenSize.getHeight();
+    public static int WIDTH = (int) screenSize.getWidth();
+    public static int HEIGHT = (int) screenSize.getHeight();
 
     // Panel Constants
     public static final JPanel PANEL_CONT = new JPanel();

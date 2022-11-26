@@ -3,6 +3,7 @@ package panels;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -38,11 +39,26 @@ public class PlayerPanel extends JPanel implements ActionListener{
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.WHITE);
-        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(10));
+        g2.draw(new Line2D.Float(30, 20, 80, 90));
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Italics", Font.ITALIC, 40));
+        g2.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+        g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+        g2.setStroke(new BasicStroke(10));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
+        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
+        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
     }
 
     private void setUpButtons() {

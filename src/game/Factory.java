@@ -1,17 +1,19 @@
 package game;
 
+import java.util.ArrayList;
+
 import datastructures.Box;
 import tiles.TileObject;
 
 public class Factory {
     
-    private Box<TileObject> tiles;
+    private ArrayList<TileObject> tiles;
 
     public Factory() {
-        tiles = new Box<TileObject>();
+        tiles = new ArrayList<TileObject>();
     }
 
-    public void setTiles(Box<TileObject> tiles) {
+    public void setTiles(ArrayList<TileObject> tiles) {
         this.tiles = tiles;
     }
 
@@ -19,7 +21,7 @@ public class Factory {
         tiles.add(t);
     }
 
-    public Box<TileObject> getTiles() {
+    public ArrayList<TileObject> getTiles() {
         return tiles;
     }
 
