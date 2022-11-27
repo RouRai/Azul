@@ -69,6 +69,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.setColor(Color.BLACK);
         drawScore(g2);
         drawPlayerBoard(g2);
+        drawPyramid(g2);
     }
 
     private void drawPlayerBoard(Graphics2D g2){
@@ -97,6 +98,27 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (tW)), tW, tW, null);//yellow tile in col 3
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (2 * tW)), tW, tW, null);//yellow tile in col 4
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//yellow tile in col 5
+    }
+    public void drawPyramid(Graphics2D g) {
+        g.drawImage(oneT, (int)(getWidth() / 7.75), (int)(getHeight() / 4.55), tW, tW, null); // row 1 
+
+        g.drawImage(oneT, (int)(getWidth() / 7.75), (int)(getHeight() / 4.55) + tW, tW, tW, null); // row 2
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW, (int)(getHeight() / 4.55) + tW, tW, tW, null);
+
+        g.drawImage(oneT, (int)(getWidth() / 7.75), (int)(getHeight() / 4.55) + 2 * tW, tW, tW, null); // row 3
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW, (int)(getHeight() / 4.55) + 2 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 2, (int)(getHeight() / 4.55) + 2 * tW, tW, tW, null);
+
+        g.drawImage(oneT, (int)(getWidth() / 7.75), (int)(getHeight() / 4.55) + 3 * tW, tW, tW, null); // row 4
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW, (int)(getHeight() / 4.55) + 3 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 2, (int)(getHeight() / 4.55) + 3 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 3, (int)(getHeight() / 4.55) + 3 * tW, tW, tW, null);
+
+        g.drawImage(oneT, (int)(getWidth() / 7.75), (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null); // row 5
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 2, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 3, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
+        g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 4, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
     }
 
     private void drawScore(Graphics2D g){
