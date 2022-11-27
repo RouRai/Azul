@@ -73,7 +73,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         //WORK NEEDED
         g.fillRect((getWidth() / 70), 0, stW, stW);//0 pos
         //g.fillRect(getWidth() / 70, getHeight() / 30, stW, stW);//Starting y pos for score 1 -20
-        g.fillRect(getWidth() / 70 + 2 * (stW), getHeight() / 30, stW, stW); // to move score block possition one to the right
+        g.fillRect(getWidth() / 70 + 5 * (stW), getHeight() / 30, stW, stW); // to move score block possition one to the right
 
     }
     private void setUpButtons() {
@@ -85,6 +85,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row3 = new JButton("Select Row 3");
         row4 = new JButton("Select Row 4");
         row5 = new JButton("Select Row 5");
+        penalty = new JButton("Select Penalty");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
