@@ -84,7 +84,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.drawImage(whiteT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55)), tW, tW, null);//white tile in col 5
         g2.drawImage(blackT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) +(2 * tW)), tW, tW, null);//black tile in col 1
         g2.drawImage(blackT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//black tile in col 2
-        g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//black tile in col 3
+        g2.drawImage(blackT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//black tile in col 3
         g2.drawImage(blackT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55)), tW, tW, null);//black tile in col 4
         g2.drawImage(blackT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (tW)), tW, tW, null);//black tile in col 5
         g2.drawImage(redT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) +(3 * tW)), tW, tW, null);//red tile in col 1
