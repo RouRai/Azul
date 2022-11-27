@@ -62,10 +62,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
         continueButton = new JButton("Continue");
         logs = new JButton("Logs");
         row1 = new JButton("Select R1");
-        row2 = new JButton("Select row 2");
-        row3 = new JButton("Select row 3");
-        row4 = new JButton("Select row 4");
-        row5 = new JButton("Select row 5");
+        row2 = new JButton("Select R2");
+        row3 = new JButton("Select R3");
+        row4 = new JButton("Select R4");
+        row5 = new JButton("Select R5");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
