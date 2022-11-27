@@ -18,12 +18,14 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
+    private int stW;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         p = new Player("Player 1");
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
+        stW = (int)((getWidth() / 3) / 21.25);
     }
 
     private void setUpImages() {
@@ -38,34 +40,52 @@ public class PlayerPanel extends JPanel implements ActionListener{
         whiteT = Constants.getImage("AzulTileWhite");
     }
     public void paintComponent(Graphics g) {
+        stW = (int)((getWidth() / 3) / 21.25);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
-        g2.setStroke(new BasicStroke(10));
-        g2.draw(new Line2D.Float(30, 20, 80, 90));
-        g2.setColor(Color.WHITE);
         g2.setFont(new Font("Italics", Font.ITALIC, 40));
         g2.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+        g2.setStroke(new BasicStroke(15));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
+        g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
+        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
+        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
         g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
-        row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
-        row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.75), (int)(getWidth() / 15), (int)(getHeight() / 20));
-        row3.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.10), (int)(getWidth() / 15), (int)(getHeight() / 20));
-        row4.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.65), (int)(getWidth() / 15), (int)(getHeight() / 20));
-        row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.3), (int)(getWidth() / 15), (int)(getHeight() / 20));
-
+        row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.7), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        row3.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.05), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        row4.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.6), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
+        g2.setColor(Color.BLACK);
+        drawScore(g2);
     }
 
+    private void drawScore(Graphics2D g){
+        //WORK NEEDED
+        g.fillRect((getWidth() / 70), 0, stW, stW);//0 pos
+        //g.fillRect(getWidth() / 70, getHeight() / 30, stW, stW);//Starting y pos for score 1 -20
+        g.fillRect(getWidth() / 70 + 2 * (stW), getHeight() / 30, stW, stW); // to move score block possition one to the right
+
+    }
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
         logs = new JButton("Logs");
-        row1 = new JButton("Select R1");
-        row2 = new JButton("Select row 2");
-        row3 = new JButton("Select row 3");
-        row4 = new JButton("Select row 4");
-        row5 = new JButton("Select row 5");
+        row1 = new JButton("Select Row 1");
+        row2 = new JButton("Select Row 2");
+        row3 = new JButton("Select Row 3");
+        row4 = new JButton("Select Row 4");
+        row5 = new JButton("Select Row 5");
+        penalty = new JButton("Select Penalty");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
@@ -74,7 +94,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         super.add(row3);
         super.add(row4);
         super.add(row5);
-
+        super.add(penalty);
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
@@ -84,6 +104,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row3.addActionListener(this);
         row4.addActionListener(this);
         row5.addActionListener(this);
+        penalty.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons

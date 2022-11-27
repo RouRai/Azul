@@ -20,13 +20,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
 
     private CardLayout cl;
     private JButton returnStart;
-    private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile;
+    private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile, oneTile;
     private int factoryWidth, factoryHeight, tileWidth, tileHeight;
     private HashMap<Byte, Factory> factoryMap;
     private HashMap<JButton, Factory> buttonFactory;
     private bagClass bag, box;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
-    private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive;
+    private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive, tileSix;
     private JButton factory1Button, factory2Button, factory3Button, factory4Button, factory5Button, factory6Button, factory7Button, factory8Button, factory9Button;
     private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
     private ImageIcon factoryIcon;
@@ -112,6 +112,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         whiteTile = Constants.getImage("AzulTileWhite");
         blueTile = Constants.getImage("AzulTileBlue");
         yellowTile = Constants.getImage("AzulTileYellow");
+        oneTile = Constants.getImage("AzulTileOne");
 
         factoryIcon = new ImageIcon(Constants.IMG_DIRECTORY + "Factory.jpg");
     }
@@ -154,6 +155,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         tileThree = new Coordinates(getWidth()/3, getHeight()/2 - tileHeight/2);
         tileFour = new Coordinates(2 * getWidth()/3, getHeight()/2 - tileHeight/2);
         tileFive = new Coordinates(getWidth()/2 + tileWidth, getHeight()/2 - tileHeight/2);
+        tileSix = new Coordinates((getWidth() / 2) - (tileWidth/2), getHeight()/4);
     }
 
     private void setFactoryButtons() {
@@ -221,6 +223,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     }
 
     private void drawFactoryFloor(Graphics g) {
+        drawSingleFactoryFloor(g, tileSix, oneTile);
         drawSingleFactoryFloor(g, tileOne, blueTile);
         drawSingleFactoryFloor(g, tileTwo, redTile);
         drawSingleFactoryFloor(g, tileThree, yellowTile);
