@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 public class Constants {
+
     // Screen dimensions
     private final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static final int WIDTH = (int) screenSize.getWidth();
@@ -19,14 +20,6 @@ public class Constants {
     public static final String INSTRUCTIONS_PANEL = "instructionsPanel";
     public static final String END_PANEL = "endPanel";
 
-    // Tile Integer Constants
-    public static final int BLACK_TILE_ID = 2;
-    public static final int BLUE_TILE_ID = 3;
-    public static final int ONE_TILE_ID = 1;
-    public static final int RED_TILE_ID = 4;
-    public static final int WHITE_TILE_ID = 5;
-    public static final int YELLOW_TILE_ID = 6;
-
     // Factory Constants
     public static final byte FACTORY_ONE = 0;
     public static final byte FACTORY_TWO = 1;
@@ -39,20 +32,28 @@ public class Constants {
     public static final byte FACTORY_NINE = 8;
     public static final byte FACTORY_FLOOR = 9;
 
-    // Tile String Constants
+    // Tile String Constants (Names that can be used to get their images)
     public static final String BLACK_TILE = "AzulTileBlack";
     public static final String BLUE_TILE = "AzulTileBlue";
     public static final String RED_TILE = "AzulTileRed";
     public static final String WHITE_TILE = "AzulTileWhite";
     public static final String YELLOW_TILE = "AzulTileYellow";
     public static final String ONE_TILE = "AzulTileOne";
-    // Strings
+
+    // Image Directory
     public static final String IMG_DIRECTORY = "/images/";
 
     // FloorLine Constants
     public static final String PENALTY_ONE = "penaltyOne";
     public static final String PENALTY_TWO = "penaltyTwo";
     public static final String PENALTY_THREE = "penaltyThree";
+
+    // PatternLine Constants
+    public static final int ROW_ONE = 0;
+    public static final int ROW_TWO = 1;
+    public static final int ROW_THREE = 2;
+    public static final int ROW_FOUR = 3;
+    public static final int ROW_FIVE = 4;
 
     // Gets Image from image folder
     public static BufferedImage getImage(String name) {
