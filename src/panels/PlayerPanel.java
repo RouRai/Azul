@@ -18,14 +18,13 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
-    private int stW;
+    private int stW, tW;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         p = new Player("Player 1");
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
-        stW = (int)((getWidth() / 3) / 21.25);
     }
 
     private void setUpImages() {
@@ -43,6 +42,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         stW = (int)((getWidth() / 3) / 21.25);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        tW = (int)((getWidth() / 3) / 11.35);
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Italics", Font.ITALIC, 40));
         g2.drawImage(background, 0, 0, getWidth(), getHeight(), null);
@@ -51,11 +51,11 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
         g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
-        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
-        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), (int)((getWidth() / 3) / 11), (int)((getWidth() / 3) / 11), null);
+        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), tW, tW, null);
+        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), tW, tW, null);
+        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), tW, tW, null);
+        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), tW, tW, null);
+        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), tW, tW, null);
         g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
@@ -67,15 +67,60 @@ public class PlayerPanel extends JPanel implements ActionListener{
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         g2.setColor(Color.BLACK);
         drawScore(g2);
+        drawPlayerBoard(g2);
+    }
+
+    private void drawPlayerBoard(Graphics2D g2){
+        g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tW, null); //blue tile in col 1
+        g2.drawImage(blueT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + tW), tW, tW, null);//blue tile in col 2
+        g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (2 * tW)), tW, tW, null);//blue tile in col 3
+        g2.drawImage(blueT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//blue tile in col 4
+        g2.drawImage(blueT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//blue tile in col 5
+        g2.drawImage(whiteT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) + tW), tW, tW, null);//white tile in col 1
+        g2.drawImage(whiteT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + (2 * tW)), tW, tW, null);//white tile in col 2
+        g2.drawImage(whiteT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//white tile in col 3
+        g2.drawImage(whiteT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//white tile in col 4
+        g2.drawImage(whiteT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55)), tW, tW, null);//white tile in col 5
+        g2.drawImage(blackT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) +(2 * tW)), tW, tW, null);//black tile in col 1
+        g2.drawImage(blackT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//black tile in col 2
+        g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//black tile in col 3
+        g2.drawImage(blackT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55)), tW, tW, null);//black tile in col 4
+        g2.drawImage(blackT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (tW)), tW, tW, null);//black tile in col 5
+        g2.drawImage(redT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) +(3 * tW)), tW, tW, null);//red tile in col 1
+        g2.drawImage(redT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + (4 * tW)), tW, tW, null);//red tile in col 2
+        g2.drawImage(redT, (int)(getWidth() / 5.85) + (2* tW), (int)((getHeight() / 4.55) ), tW, tW, null);//red tile in col 3
+        g2.drawImage(redT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + tW), tW, tW, null);//red tile in col 4
+        g2.drawImage(redT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (2 * tW)), tW, tW, null);//red tile in col 5
+        g2.drawImage(yellowT, (int)(getWidth() / 5.8), (int)((getHeight() / 4.55) +(4 * tW)), tW, tW, null);//yellow tile in col 1
+        g2.drawImage(yellowT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55)), tW, tW, null);//yellow tile in col 2
+        g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (tW)), tW, tW, null);//yellow tile in col 3
+        g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (2 * tW)), tW, tW, null);//yellow tile in col 4
+        g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (3 * tW)), tW, tW, null);//yellow tile in col 5
     }
 
     private void drawScore(Graphics2D g){
         //WORK NEEDED
-        g.fillRect((getWidth() / 70), 0, stW, stW);//0 pos
-        //g.fillRect(getWidth() / 70, getHeight() / 30, stW, stW);//Starting y pos for score 1 -20
-        g.fillRect(getWidth() / 70 + 5 * (stW), getHeight() / 30, stW, stW); // to move score block possition one to the right
-
+        int k;
+        if(p.getActualPoints() == 0){
+            g.fillRect((getWidth() / 70), 0, stW, stW);
+        } else if(p.getActualPoints() % 100 <= 20){
+            k = (p.getActualPoints() % 100) - 1;
+            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29, stW, stW);
+        } else if(p.getActualPoints() % 100 <= 40){
+            k = (p.getActualPoints() % 100) - 21;
+            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 15, stW, stW);
+        } else if(p.getActualPoints() % 100 <= 60){
+            k = (p.getActualPoints() % 100) - 41;
+            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 9.6), stW, stW);
+        } else if(p.getActualPoints() % 100 <= 80){
+            k = (p.getActualPoints() % 100) - 61;
+            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 7.2), stW, stW);
+        } else if(p.getActualPoints() % 100 <= 100 || p.getActualPoints() % 100 == 0){
+            k = (p.getActualPoints() % 100) - 81;
+            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stW);
+        }
     }
+    
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
