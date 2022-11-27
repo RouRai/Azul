@@ -1,17 +1,17 @@
 package game;
 
-import datastructures.Box;
+import datastructures.LinkedList;
 import tiles.TileObject;
 
 public class Factory {
     
-    private Box<TileObject> tiles;
+    private LinkedList<TileObject> tiles;
 
     public Factory() {
-        tiles = new Box<TileObject>();
+        tiles = new LinkedList<TileObject>();
     }
 
-    public void setTiles(Box<TileObject> tiles) {
+    public void setTiles(LinkedList<TileObject> tiles) {
         this.tiles = tiles;
     }
 
@@ -19,7 +19,7 @@ public class Factory {
         tiles.add(t);
     }
 
-    public Box<TileObject> getTiles() {
+    public LinkedList<TileObject> getTiles() {
         return tiles;
     }
 

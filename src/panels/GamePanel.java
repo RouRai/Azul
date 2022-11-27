@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import datastructures.Box;
+import datastructures.LinkedList;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -72,7 +72,6 @@ public class GamePanel extends JPanel implements ActionListener{
 
         setFactoryMap();
         
-        paintTiles(factoryMap.get(Constants.FACTORY_ONE), factoryOne, g);
     } 
 
     private void setUpImages() {
@@ -107,6 +106,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
     }
 
+    // Sets up all the coordinates in this panel
     private void setCoordinates() {
         // Sets up factory coordinates
         factoryOne = new Coordinates(0, 0);
@@ -127,6 +127,7 @@ public class GamePanel extends JPanel implements ActionListener{
         tileFive = new Coordinates(getWidth()/2 + tileWidth, getHeight()/2-tileHeight/2);
     }
 
+    // Sets up the JButtons
     private void setFactoryButtons() {
         setUpFactory(factory1Button, factory1);
         setUpFactory(factory2Button, factory2);
@@ -139,6 +140,7 @@ public class GamePanel extends JPanel implements ActionListener{
         setUpFactory(factory9Button, factory9);
     }
 
+    // Sets up single factory button
     private void setUpFactory(JButton button, Factory factory){
         button = new JButton(factoryIcon);
         button.addActionListener(this);
@@ -146,6 +148,7 @@ public class GamePanel extends JPanel implements ActionListener{
         buttonFactory.put(button, factory);
     }
 
+    // Sets up both of the maps
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
         buttonFactory = new HashMap<>();
@@ -165,6 +168,7 @@ public class GamePanel extends JPanel implements ActionListener{
         setFactoryButtons();
     }
 
+    // Sets up the tiles in the factories
     private void setFactoryTiles() {
         ArrayList<TileObject> possibleTiles = new ArrayList<>();
         
@@ -184,6 +188,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
     }
 
+    // Draw factories 
     private void drawFactories(Graphics g) {
         drawFactory(g, factoryOne);
         drawFactory(g, factoryTwo);
@@ -200,6 +205,7 @@ public class GamePanel extends JPanel implements ActionListener{
         g.drawImage(factory, coordinates.getX(), coordinates.getY(), factoryWidth, factoryHeight, null);
     }
 
+    // Draws the factory floor
     private void drawFactoryFloor(Graphics g) {
         drawSingleFactoryFloor(g, tileOne, blueTile);
         drawSingleFactoryFloor(g, tileTwo, redTile);
@@ -212,11 +218,12 @@ public class GamePanel extends JPanel implements ActionListener{
         g.drawImage(img, coordinates.getX(), coordinates.getY(), tileWidth, tileHeight, null);
     }
 
+    // Paint hte tiles from a factory and its coordinates
     private void paintTiles(Factory f, Coordinates c, Graphics g) {
         int xVal = c.getX();
         int yVal = c.getY();
 
-        Box<TileObject> tiles = f.getTiles();
+        LinkedList<TileObject> tiles = f.getTiles();
         TileObject tile = tiles.getFirst().getItem();
 
         g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);

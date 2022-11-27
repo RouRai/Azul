@@ -49,6 +49,11 @@ public class Constants {
     // Strings
     public static final String IMG_DIRECTORY = "/images/";
 
+    // FloorLine Constants
+    public static final String PENALTY_ONE = "penaltyOne";
+    public static final String PENALTY_TWO = "penaltyTwo";
+    public static final String PENALTY_THREE = "penaltyThree";
+
     // Gets Image from image folder
     public static BufferedImage getImage(String name) {
         try{

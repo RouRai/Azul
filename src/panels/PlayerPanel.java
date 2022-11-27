@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
-import datastructures.Box;
+import datastructures.LinkedList;
 
 public class PlayerPanel extends JPanel implements ActionListener{
 

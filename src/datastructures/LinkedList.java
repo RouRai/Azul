@@ -2,11 +2,12 @@ package datastructures;
 
 import java.util.Iterator;
 
-public class Box<T> implements Iterable<T>{
+public class LinkedList<T> implements Iterable<T>{
     
     private Node<T> first, current;
+    private int size;
 
-    public Box() {
+    public LinkedList() {
         first = null;
         current = null;
     }
@@ -19,6 +20,7 @@ public class Box<T> implements Iterable<T>{
             return;
         }
         current = new Node<T>(o, null, current);
+        size++;
     }
 
     // Removes first instance of the T in the Box
@@ -74,11 +76,15 @@ public class Box<T> implements Iterable<T>{
     // Allows us to traverse the data structure
     @Override
     public Iterator<T> iterator() {
-        return new BoxIterator<T>(this);
+        return new LinkedListIterator<T>(this);
     }
 
     // Returns whether or not the box is empty
     public boolean isEmpty() {
         return first == null;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
