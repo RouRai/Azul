@@ -56,9 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         // Paints the factory floor
         /*tileWidth = getWidth()/16;
         tileHeight = getHeight()/10;
-
         setCoordinates();
-
         drawFactoryFloor(g);*/
 
         /*if(reDraw){
@@ -158,25 +156,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         tileSix = new Coordinates((getWidth() / 2) - (tileWidth/2), getHeight()/4);
     }
 
-    private void setFactoryButtons() {
-        setUpFactory(factory1Button, factory1);
-        setUpFactory(factory2Button, factory2);
-        setUpFactory(factory3Button, factory3);
-        setUpFactory(factory4Button, factory4);
-        setUpFactory(factory5Button, factory5);
-        setUpFactory(factory6Button, factory6);
-        setUpFactory(factory7Button, factory7);
-        setUpFactory(factory8Button, factory8);
-        setUpFactory(factory9Button, factory9);
-    }
-
-    private void setUpFactory(JButton button, Factory factory){
-        button = new JButton(factoryIcon);
-        button.addActionListener(this);
-        factory = new Factory();
-        buttonFactory.put(button, factory);
-    }
-
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
         buttonFactory = new HashMap<>();
@@ -193,7 +172,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         factoryMap.put(Constants.FACTORY_NINE, new Factory());
 
         setFactoryTiles();
-        setFactoryButtons();
     }
 
     private void setFactoryTiles() {
@@ -254,17 +232,39 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if(x < (int)(getWidth()/7.5)){
-            if(y < (int)(getHeight()/5)){
-                
-            } else if (y < getHeight()/2-factoryHeight/2 + (int)(getHeight()/5)){
-
-            } else {
-
-            }
+        Factory chosen = null;
+        if(x < factoryWidth)
+        {
+            if(y > 0 && y<factoryHeight)
+                chosen = factory1;
+            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
+            	chosen = factory2;
+            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
+            	chosen = factory3;
         }
+        else if (x>getWidth()-factoryWidth)
+        {
+        	if(y > 0 && y<factoryHeight)
+                chosen = factory1;
+            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
+            	chosen = factory2;
+            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
+            	chosen = factory3;
+        }
+        else if(y > factoryThree.getY())
+        {
+        	if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth)
+        		chosen = factory4;
+        	else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth)
+        		chosen = factory5;
+        	else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
+        		chosen = factory6;
+        }
+        //method to put chosen factory into player panel
+        
+        //switch to player for now, 
+        cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
