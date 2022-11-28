@@ -14,6 +14,14 @@ public class Row {
         tiles = new LinkedList<>();
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public LinkedList<TileObject> getTiles() {
+        return tiles;
+    }
+
     // Returns if the row is full or not
     public boolean isFull() {
         return tiles.getSize() == size;

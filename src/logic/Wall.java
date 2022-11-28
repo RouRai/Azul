@@ -1,5 +1,6 @@
 package logic;
 
+import datastructures.LinkedList;
 import game.Constants;
 
 // Author: Rounak Rai (WIP)
@@ -8,11 +9,13 @@ public class Wall {
     private String[][] board; // Currently has nothing placed in it
     private String[][] indicated; // The part of the board with the images on them
     private Player player;
+    private FloorLine floorLine;
 
-    public Wall(Player p) {
+    public Wall(Player p, FloorLine f) {
         board = new String[5][5];
         buildIndicated();
         player = p;
+        floorLine = f;
     }
 
     // Returns the indicated tiles board
@@ -57,7 +60,13 @@ public class Wall {
     }
 
     private void addToScore(int row, int col) {
-        player.setScore(player.getScore() + 1 + getRowScore(row) + getColScore(col)); // Immediate +1 score for moving tile to wall
+        if(getRowScore(row) == 1 && getColScore(col) == 1) { // Executed if there are no adjacent tiles
+            player.setScore(player.getScore() + 2 - floorLine.getPenalty());
+            floorLine.discardFloor();
+            return;
+        }
+        player.setScore(player.getScore() + 1 + getRowScore(row) + getColScore(col)  - floorLine.getPenalty()); // Immediate +1 score for moving tile to wall
+        floorLine.discardFloor();
     }
 
     private int getRowScore(int row) {
@@ -117,5 +126,88 @@ public class Wall {
         {Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE, Constants.YELLOW_TILE, Constants.RED_TILE},
         {Constants.RED_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE, Constants.YELLOW_TILE},
         {Constants.RED_TILE, Constants.BLUE_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE}};
+    }
+
+    public int completedRows() {
+        int complete = 0;
+        for(int r = 0; r < board.length; r++) {
+            boolean isntNull = true;
+            for(int c = 0; c < board[r].length; c++) {
+                if(board[r][c] == null) {
+                    isntNull = false;
+                    break;
+                }
+            }
+            if(isntNull) {
+                complete++;
+            } 
+        }
+        return complete;
+    }
+
+    public int additionalScoring() {
+        int addScore = 0;
+
+        for(int i = 0; i < board.length; i++) {
+            if(rowCompleted(i)) {
+                addScore += 2;
+            }
+        }
+
+        for(int i = 0; i < board[0].length; i++) {
+            if(columnCompleted(i)) {
+                addScore += 7;
+            }
+        }
+
+        for(String s : getTypes()) {
+            if(hasAllOne(s)){
+                addScore += 10;
+            }
+        }
+
+        return addScore;
+    }
+
+    private boolean hasAllOne(String type) {
+        int count = 0;
+        for(int r = 0; r < board.length; r++) {
+            for(int c = 0; c < board[r].length; c++){
+                if(board[r][c].equals(type)) {
+                    count++;
+                }
+            }
+        }
+        return count == 5;
+    }
+
+    private boolean columnCompleted(int col) {
+        for(int r = 0; r < board[0].length; r++) {
+            if(board[r][col] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean rowCompleted(int row) {
+        for(int i = 0; i < board[row].length; i++) {
+            if(board[row][i] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private LinkedList<String> getTypes() {
+        LinkedList<String> types = new LinkedList<>();
+
+        types.add(Constants.BLACK_TILE);
+        types.add(Constants.BLUE_TILE);
+        types.add(Constants.RED_TILE);
+        types.add(Constants.YELLOW_TILE);
+        types.add(Constants.WHITE_TILE);
+        
+        return types;
     }
 }

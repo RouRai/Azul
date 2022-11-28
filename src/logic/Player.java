@@ -6,7 +6,7 @@ import datastructures.LinkedList;
 public class Player {
 
     private int currentScore; // The player's current score
-    private int completedRows; // The amount of rows the player has completed on the wall
+    private boolean hasOneTile;
     private Wall wall; // Their Wall
     private PatternLine patternLine; // Their PatternLine
     private FloorLine floorLine; // Their Floor
@@ -14,7 +14,7 @@ public class Player {
     public Player(LinkedList<TileObject> lid) {
         floorLine = new FloorLine(lid);
         patternLine = new PatternLine(floorLine);
-        wall = new Wall(this);
+        wall = new Wall(this, floorLine);
     }
 
     public int getScore() {
@@ -25,12 +25,12 @@ public class Player {
         currentScore = s;
     }
 
-    public int getRowsCompleted() {
-        return completedRows;
+    public boolean rowCompleted() {
+        return wall.completedRows() > 0;
     }
 
-    public void setCompletedRows(int r) {
-        completedRows = r;
+    public int getRowsCompleted() {
+        return wall.completedRows();
     }
 
     public Wall getWall() {
@@ -43,5 +43,13 @@ public class Player {
 
     public FloorLine getFloorLine() {
         return floorLine;
+    }
+
+    public void setHasOneTile(boolean b) {
+        hasOneTile = b;
+    }
+
+    public boolean hasOneTile() {
+        return hasOneTile;
     }
 }

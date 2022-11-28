@@ -78,4 +78,8 @@ public class FloorLine {
         tiles.put(Constants.PENALTY_THREE, new LinkedList<TileObject>());
     }
 
+    public void discardFloor() {
+        totalPenalty = 0;
+        tiles = new HashMap<>();
+    }
 }
