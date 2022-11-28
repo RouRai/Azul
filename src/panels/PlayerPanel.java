@@ -14,7 +14,7 @@ import datastructures.Box;
 public class PlayerPanel extends JPanel implements ActionListener{
 
     private CardLayout cl;
-    private JButton continueButton, logs, row1, row2, row3, row4, row5, penalty;
+    private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
@@ -58,6 +58,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), tW, tW, null);
         g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getWidth() / 3), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
+        expandButton.setBounds(getWidth()/22, (int)(getHeight() / 1.3), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 10), (int)(getHeight() / 20));
         row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.7), (int)(getWidth() / 10), (int)(getHeight() / 20));
@@ -136,20 +137,23 @@ public class PlayerPanel extends JPanel implements ActionListener{
         int k;
         if(p.getActualPoints() == 0){
             g.fillRect((getWidth() / 70), 0, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 20){
+        } else if(p.getActualPoints() % 100 <= 20 && p.getActualPoints() % 100 >= 1){
             k = (p.getActualPoints() % 100) - 1;
             g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 40){
+        } else if(p.getActualPoints() % 100 <= 40 && p.getActualPoints() % 100 >= 21){
             k = (p.getActualPoints() % 100) - 21;
             g.fillRect(getWidth() / 70 + k * stW, getHeight() / 15, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 60){
+        } else if(p.getActualPoints() % 100 <= 60 && p.getActualPoints() % 100 >= 41){
             k = (p.getActualPoints() % 100) - 41;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 9.6), stW, stW);
-        } else if(p.getActualPoints() % 100 <= 80){
+        } else if(p.getActualPoints() % 100 <= 80 && p.getActualPoints() % 100 >= 61){
             k = (p.getActualPoints() % 100) - 61;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 7.2), stW, stW);
-        } else if(p.getActualPoints() % 100 <= 100 || p.getActualPoints() % 100 == 0){
+        } else if(p.getActualPoints() % 100 < 100){
             k = (p.getActualPoints() % 100) - 81;
+            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stW);
+        } else if(p.getActualPoints() % 100 == 0){
+            k = 19;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stW);
         }
     }
@@ -164,6 +168,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row4 = new JButton("Select Row 4");
         row5 = new JButton("Select Row 5");
         penalty = new JButton("Select Penalty");
+        expandButton = new JButton("Expand");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
@@ -173,6 +178,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         super.add(row4);
         super.add(row5);
         super.add(penalty);
+        super.add(expandButton);
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
@@ -183,6 +189,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row4.addActionListener(this);
         row5.addActionListener(this);
         penalty.addActionListener(this);
+        expandButton.addActionListener(this);
     }
 
     // Runs this method when something happens to one of the JButtons
@@ -190,6 +197,8 @@ public class PlayerPanel extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(continueButton)){
             checkState();
+        } else if(e.getSource().equals(expandButton)){
+            cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
         }
     }
     public void chose(){
