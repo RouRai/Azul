@@ -126,20 +126,23 @@ public class PlayerPanel extends JPanel implements ActionListener{
         int k;
         if(p.getActualPoints() == 0){
             g.fillRect((getWidth() / 70), 0, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 20){
+        } else if(p.getActualPoints() % 100 <= 20 && p.getActualPoints() % 100 >= 1){
             k = (p.getActualPoints() % 100) - 1;
             g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 40){
+        } else if(p.getActualPoints() % 100 <= 40 && p.getActualPoints() % 100 >= 21){
             k = (p.getActualPoints() % 100) - 21;
             g.fillRect(getWidth() / 70 + k * stW, getHeight() / 15, stW, stW);
-        } else if(p.getActualPoints() % 100 <= 60){
+        } else if(p.getActualPoints() % 100 <= 60 && p.getActualPoints() % 100 >= 41){
             k = (p.getActualPoints() % 100) - 41;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 9.6), stW, stW);
-        } else if(p.getActualPoints() % 100 <= 80){
+        } else if(p.getActualPoints() % 100 <= 80 && p.getActualPoints() % 100 >= 61){
             k = (p.getActualPoints() % 100) - 61;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 7.2), stW, stW);
-        } else if(p.getActualPoints() % 100 <= 100 || p.getActualPoints() % 100 == 0){
+        } else if(p.getActualPoints() % 100 < 100){
             k = (p.getActualPoints() % 100) - 81;
+            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stW);
+        } else if(p.getActualPoints() % 100 == 0){
+            k = 19;
             g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stW);
         }
     }
