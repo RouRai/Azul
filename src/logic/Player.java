@@ -23,12 +23,17 @@ public class Player {
 
     public void setScore(int s) {
         currentScore = s;
+        if(currentScore < 0) {
+            currentScore = 0;
+        }
     }
 
+    // Returns if row was completed
     public boolean rowCompleted() {
         return wall.completedRows() > 0;
     }
 
+    // Returns how many rows were completed
     public int getRowsCompleted() {
         return wall.completedRows();
     }

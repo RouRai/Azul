@@ -59,6 +59,7 @@ public class Wall {
         }
     }
 
+    // Adds points to the score given a row and a column
     private void addToScore(int row, int col) {
         if(getRowScore(row) == 1 && getColScore(col) == 1) { // Executed if there are no adjacent tiles
             player.setScore(player.getScore() + 2 - floorLine.getPenalty());
@@ -69,6 +70,7 @@ public class Wall {
         floorLine.discardFloor();
     }
 
+    // Gets the score of a consecutive row from a given row
     private int getRowScore(int row) {
         int s = 0;
         int c;
@@ -86,7 +88,8 @@ public class Wall {
         }
         return s;
     }
-
+    
+    // Gets the score of a consecutive column from a given column
     private int getColScore(int col) {
         int s = 0;
         int r;
@@ -128,6 +131,7 @@ public class Wall {
         {Constants.RED_TILE, Constants.BLUE_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE}};
     }
 
+    // Returns the amount of completed rows in the wall
     public int completedRows() {
         int complete = 0;
         for(int r = 0; r < board.length; r++) {
@@ -145,6 +149,7 @@ public class Wall {
         return complete;
     }
 
+    // Returns the score given from the additional scoring (including the penalty)
     public int additionalScoring() {
         int addScore = 0;
 
@@ -166,9 +171,10 @@ public class Wall {
             }
         }
 
-        return addScore;
+        return addScore - floorLine.getPenalty();
     }
 
+    // Returns if the board has all 5 tiles of one type
     private boolean hasAllOne(String type) {
         int count = 0;
         for(int r = 0; r < board.length; r++) {
@@ -181,6 +187,7 @@ public class Wall {
         return count == 5;
     }
 
+    // Returns if a column is complete
     private boolean columnCompleted(int col) {
         for(int r = 0; r < board[0].length; r++) {
             if(board[r][col] == null) {
@@ -190,6 +197,7 @@ public class Wall {
         return true;
     }
 
+    // Returns if a row is complete
     private boolean rowCompleted(int row) {
         for(int i = 0; i < board[row].length; i++) {
             if(board[row][i] == null) {
@@ -199,6 +207,7 @@ public class Wall {
         return true;
     }
 
+    // Returns the different types of tiles in the form of a LinkedList
     private LinkedList<String> getTypes() {
         LinkedList<String> types = new LinkedList<>();
 
