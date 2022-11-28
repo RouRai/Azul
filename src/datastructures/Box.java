@@ -1,46 +1,78 @@
+package datastructures;
+
 import java.util.Iterator;
 
-public class Box<T> implements Iterator{
+public class Box<T> implements Iterable<T>{
+    
+    private Node<T> first;
+    private Node<T> current;
 
-    private Node head;
-    private Node current;
-
-    public Box () {
-        head = null;
+    public Box() {
+        first = null;
         current = null;
     }
 
-    public void add (Object o) {
-        Node n = new Node(o);
-        if (head == null) {
-            head = n;
+    // Adds a Node to the Box
+    public void add(T o) {
+        if(first == null) {
+            first = new Node<T>(o, null, null);
+            current = first;
+            return;
         }
-        current.next = n;
-        current = current.next;
-        
+        current = new Node<T>(o, null, current);
     }
 
-
-    public Object remove (Object o) {
-        for (Node n = head; n.next != null; n = n.next) {
-            if (n.item.equals(o)) {
-                Object obj = n.item;
-                n.previous.next = n.next;
-                return obj;
+    // Removes first instance of the T in the Box
+    public void remove (T o) {
+        for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
+            if(n.getItem().equals(o)){
+                n.getNext().setPrevious(n.getPrevious());
+                return;
             }
         }
-        return null;
     }
 
-    @Override
-    public boolean hasNext() {
-        return !(current.next == null);
+    // Removes all instances of the T in the Box
+    public void removeAll (T o) {
+        for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
+            if(n.getItem().equals(o)){
+                n.getNext().setPrevious(n.getPrevious());
+            }
+        }
     }
 
-    @Override
-    public Object next() {
-        Object o = current.item;
-        current = current.next;
-        return o;
+    // Removes the last instance of T in the Box
+    public void removeLast(T o) {
+        Node<T> tail = new Node<T>(current.getItem(), null, current.getPrevious());
+        for(Node<T> n = tail; n.getPrevious() != null; n = n.getPrevious()) {
+            if(n.getItem().equals(o)) {
+                n.getPrevious().setNext(n.getNext());
+                return;
+            }
+        }
     }
+
+    // Returns formmated String of contets of Box
+    public String toString() {
+        String s = "["; 
+
+        for(Node<T> n = first; n.getNext() != null; n = n.getNext()){
+            s += n.getItem() + ", ";
+        }
+
+        return s.substring(0, s.length()-2) + "]";
+    }
+
+    // Gets the first Node in the box, useful when implementing the Iterator
+    public Node<T> getFirst() {
+        return first;
+    }
+
+    // Allows us to traverse the data structure
+    @Override
+    public Iterator<T> iterator() {
+        return new BoxIterator<T>(this);
+    }
+
+
 }
