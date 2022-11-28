@@ -69,6 +69,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         drawScore(g2);
         drawPlayerBoard(g2);
         drawPyramid(g2);
+        drawPenalty(g2);
     }
 
     private void drawPlayerBoard(Graphics2D g2){
@@ -118,6 +119,16 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 2, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
         g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 3, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
         g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 4, (int)(getHeight() / 4.55) + 4 * tW, tW, tW, null);
+    }
+    public void drawPenalty(Graphics2D g) {
+        g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + 5, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + 10, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + 15, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + 20, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + 25, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + 30, (int)(getHeight() / 1.87567879789), tW, tW, null);
+
     }
 
     private void drawScore(Graphics2D g){
