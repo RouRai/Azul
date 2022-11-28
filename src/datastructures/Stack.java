@@ -27,4 +27,8 @@ public class Stack<T> {
     public T peek() {
         return tail.getItem();
     }
+    public boolean isEmpty()
+    {
+        return head == null;
+    }
 }

@@ -22,7 +22,7 @@ public class Player {
     public int getScore() {
         return currentScore;
     }
-
+    
     public void setScore(int s) {
         currentScore = s;
         if(currentScore < 0) {

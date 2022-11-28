@@ -17,10 +17,9 @@ import java.util.HashMap;
 import game.Constants;
 import game.Coordinates;
 import logic.Factory;
-import tiles.TileObject;
-import datastructures.Node;
-import datastructures.Queue;
-import datastructures.Stack;
+import logic.TileObject;
+import datastructures.*;
+
 
 public class GamePanel extends JPanel implements ActionListener{
 
@@ -144,7 +143,7 @@ public class GamePanel extends JPanel implements ActionListener{
     private void setUpFactory(JButton button, Factory factory){
         button = new JButton(factoryIcon);
         button.addActionListener(this);
-        factory = new Factory();
+        factory = new Factory(4);
         buttonFactory.put(button, factory);
     }
 
@@ -154,15 +153,15 @@ public class GamePanel extends JPanel implements ActionListener{
         buttonFactory = new HashMap<>();
 
         // Adds each of the factories to the map
-        factoryMap.put(Constants.FACTORY_ONE, new Factory());
-        factoryMap.put(Constants.FACTORY_TWO, new Factory());
-        factoryMap.put(Constants.FACTORY_THREE, new Factory());
-        factoryMap.put(Constants.FACTORY_FOUR, new Factory());
-        factoryMap.put(Constants.FACTORY_FIVE, new Factory());
-        factoryMap.put(Constants.FACTORY_SIX, new Factory());
-        factoryMap.put(Constants.FACTORY_SEVEN, new Factory());
-        factoryMap.put(Constants.FACTORY_EIGHT, new Factory());
-        factoryMap.put(Constants.FACTORY_NINE, new Factory());
+        factoryMap.put(Constants.FACTORY_ONE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_TWO, new Factory(4));
+        factoryMap.put(Constants.FACTORY_THREE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_FOUR, new Factory(4));
+        factoryMap.put(Constants.FACTORY_FIVE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_SIX, new Factory(4));
+        factoryMap.put(Constants.FACTORY_SEVEN, new Factory(4));
+        factoryMap.put(Constants.FACTORY_EIGHT, new Factory(4));
+        factoryMap.put(Constants.FACTORY_NINE, new Factory(4));
 
         setFactoryTiles();
         setFactoryButtons();
@@ -173,11 +172,11 @@ public class GamePanel extends JPanel implements ActionListener{
         ArrayList<TileObject> possibleTiles = new ArrayList<>();
         
         for(byte i = 0; i < 20; i++) {
-            possibleTiles.add(new TileObject(Constants.BLACK_TILE_ID, Constants.BLACK_TILE));
-            possibleTiles.add(new TileObject(Constants.BLUE_TILE_ID, Constants.BLUE_TILE));
-            possibleTiles.add(new TileObject(Constants.RED_TILE_ID, Constants.RED_TILE));
-            possibleTiles.add(new TileObject(Constants.YELLOW_TILE_ID, Constants.YELLOW_TILE));
-            possibleTiles.add(new TileObject(Constants.WHITE_TILE_ID, Constants.WHITE_TILE));
+            possibleTiles.add(new TileObject(Constants.BLACK_TILE));
+            possibleTiles.add(new TileObject(Constants.BLUE_TILE));
+            possibleTiles.add(new TileObject(Constants.RED_TILE));
+            possibleTiles.add(new TileObject(Constants.YELLOW_TILE));
+            possibleTiles.add(new TileObject(Constants.WHITE_TILE));
         }
 
         Collections.shuffle(possibleTiles);

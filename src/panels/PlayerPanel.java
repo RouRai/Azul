@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
 import datastructures.LinkedList;
+import logic.Player;
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
@@ -19,7 +20,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private Player p;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        p = new Player("Player 1");
+        p = new Player("Player 1", );
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();

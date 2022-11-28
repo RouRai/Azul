@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 import datastructures.LinkedList;
 import game.Constants;
-import game.Player;
+import logic.Player;
 
 public class WinnerPanel extends JPanel implements ActionListener{
 
