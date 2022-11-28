@@ -3,7 +3,7 @@ package logic;
 import datastructures.LinkedList;
 
 // Author: Rounak Rai (WIP)
-public class Player {
+public class Player implements Comparable<Player>{
 
     private int currentScore; // The player's current score
     private boolean hasOneTile; // If they are the holder of the Player 1 Tile
@@ -17,6 +17,10 @@ public class Player {
         patternLine = new PatternLine(floorLine);
         wall = new Wall(this, floorLine);
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getScore() {
@@ -58,5 +62,12 @@ public class Player {
 
     public boolean hasOneTile() {
         return hasOneTile;
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if(getScore() < o.getScore()) return -1;
+        if(getScore() > o.getScore()) return 1;
+        return 0;
     }
 }
