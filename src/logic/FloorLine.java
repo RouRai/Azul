@@ -20,7 +20,7 @@ public class FloorLine {
     // Adds a tile to the penalty line
     public void addTile(TileObject t) {
         if(decidePenalty() != null) {
-            totalPenalty += decidePenaltyInt(decidePenalty())
+            totalPenalty += decidePenaltyInt(decidePenalty());
             tiles.get(decidePenalty()).add(t);
             return;
         }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 import game.Constants;
 import game.Coordinates;
-import game.Factory;
+import logic.Factory;
 import tiles.TileObject;
 import datastructures.Node;
 import datastructures.Queue;
