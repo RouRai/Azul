@@ -6,15 +6,17 @@ import datastructures.LinkedList;
 public class Player {
 
     private int currentScore; // The player's current score
-    private boolean hasOneTile;
+    private boolean hasOneTile; // If they are the holder of the Player 1 Tile
     private Wall wall; // Their Wall
     private PatternLine patternLine; // Their PatternLine
     private FloorLine floorLine; // Their Floor
+    private String name; // The players name
 
-    public Player(LinkedList<TileObject> lid) {
+    public Player(String name, LinkedList<TileObject> lid) {
         floorLine = new FloorLine(lid);
         patternLine = new PatternLine(floorLine);
         wall = new Wall(this, floorLine);
+        this.name = name;
     }
 
     public int getScore() {
