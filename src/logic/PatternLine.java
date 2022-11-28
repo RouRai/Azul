@@ -17,7 +17,7 @@ public class PatternLine {
      * FloorLine
      */
     private void addToRow(int row) throws Exception {
-        if(row > patternLines.length || row < 0 || patternLines[row].getType() == null) {
+        if(row >= patternLines.length || row < 0 || patternLines[row].getType() == null) {
             throw new Exception("You cannot add to the row, as either the row has no type or the row exceeds bounds");
         }
         if(rowIsFull(row)){
@@ -43,7 +43,7 @@ public class PatternLine {
 
     // Checks if the given row is full or not. If the row doesn't exist, the Exception below is thrown.
     public boolean rowIsFull(int row) throws Exception {
-        if(row > patternLines.length || row < 0) {
+        if(row >= patternLines.length || row < 0) {
             throw new Exception("You cannot check if row is full, as the row exceeds bounds");
         }
         return getRow(row).isFull();
@@ -51,7 +51,7 @@ public class PatternLine {
 
     // Returns the desired row. If the row doesn't exist, the Exception below is thrown.
     public Row getRow(int row) throws Exception {
-        if(row > patternLines.length || row < 0) {
+        if(row >= patternLines.length || row < 0) {
             throw new Exception("You cannot get to the row, as the row exceeds bounds");
         }
         return patternLines[row];
@@ -59,7 +59,7 @@ public class PatternLine {
 
     // Sets the type of a specific row.
     public void setRowType(int row, String t) throws Exception {
-        if(row > patternLines.length || row < 0) {
+        if(row >= patternLines.length || row < 0) {
             throw new Exception("You cannot set the type of the row, as the row exceeds bounds");
         }
         getRow(row).setType(t);
