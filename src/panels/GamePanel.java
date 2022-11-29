@@ -4,18 +4,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+//import datastructures.LinkedList;
+
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-
-import game.Constants;
-import game.Coordinates;
-import logic.Factory;
-import game.bagClass;
-import logic.TileObject;
-
+import logic.*;
+import game.*;
+//import logic.*;
+import datastructures.*;
 public class GamePanel extends JPanel implements ActionListener, MouseListener{
 
     private CardLayout cl;
@@ -23,47 +24,29 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile, oneTile;
     private int factoryWidth, factoryHeight, tileWidth, tileHeight;
     private HashMap<Byte, Factory> factoryMap;
-    private HashMap<JButton, Factory> buttonFactory;
-    private bagClass bag, box;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
     private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive, tileSix;
     private JButton factory1Button, factory2Button, factory3Button, factory4Button, factory5Button, factory6Button, factory7Button, factory8Button, factory9Button;
     private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
     private ImageIcon factoryIcon;
-    private boolean reDraw;
+
     public GamePanel(CardLayout cl) {
-        bag = new bagClass();
-        box = new bagClass();
-        bag.fillBag();
         this.cl = cl;
         setUpImages();
         setUpButtons();
-        changeReDraw();
-        setFactoryMap();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Italics", Font.ITALIC, 30));
+
         // Paints background
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
         // Draws the logo at the center at the top
         g.drawImage(logo, getWidth()/2-getWidth()/10, 0, getWidth()/5, getHeight()/5, this); 
         
-        // Paints the factory floor
-        /*tileWidth = getWidth()/16;
-        tileHeight = getHeight()/10;
-        setCoordinates();
-        drawFactoryFloor(g);*/
-
-        /*if(reDraw){
-            repaint();
-            changeReDraw();
-        }*/
-
         // Paints all the factories (excluding factory floor) at their respective locations
         factoryWidth = (int)(getWidth()/7.5); 
         factoryHeight = (int)(getHeight()/5);
@@ -80,6 +63,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         // 3 4 5 6 7
         drawFactories(g);
 
+        // Paints the factory floor
+        tileWidth = getWidth()/16;
+        tileHeight = getHeight()/10;
+
         drawFactoryFloor(g);
 
         g.drawString("20", tileOne.getX() + getWidth() / 45, tileOne.getY() + getHeight() / 7);
@@ -88,7 +75,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         g.drawString("20", tileFour.getX() + getWidth() / 45, tileFour.getY() + getHeight() / 7);
         g.drawString("20", tileFive.getX() + getWidth() / 45, tileFive.getY() + getHeight() / 7);
 
-        paintTiles(factoryMap.get(Constants.FACTORY_ONE), factoryOne, g);
         paintTiles(factoryMap.get(Constants.FACTORY_TWO), factoryTwo, g);
         paintTiles(factoryMap.get(Constants.FACTORY_THREE), factoryThree, g);
         paintTiles(factoryMap.get(Constants.FACTORY_FOUR), factoryFour, g);
@@ -98,9 +84,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         paintTiles(factoryMap.get(Constants.FACTORY_EIGHT), factoryEight, g);
         paintTiles(factoryMap.get(Constants.FACTORY_NINE), factoryNine, g);
     } 
-    public void changeReDraw(){
-        reDraw = !reDraw;
-    }
+
     private void setUpImages() {
         background = Constants.getImage("Background");
         factory = Constants.getImage("Factory");
@@ -111,8 +95,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         blueTile = Constants.getImage("AzulTileBlue");
         yellowTile = Constants.getImage("AzulTileYellow");
         oneTile = Constants.getImage("AzulTileOne");
-
-        factoryIcon = new ImageIcon(Constants.IMG_DIRECTORY + "Factory.jpg");
     }
 
     private void setUpButtons() {
@@ -124,7 +106,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
 
         // Adds action listeners to the JButtons
         returnStart.addActionListener(this);
-        
     }
 
     // Runs this method when something happens to one of the JButtons
@@ -135,6 +116,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         }
     }
 
+    // Sets up all the coordinates in this panel
     private void setCoordinates() {
         // Sets up factory coordinates
         factoryOne = new Coordinates(0, 0);
@@ -148,17 +130,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         factoryNine = new Coordinates(getWidth()-factoryWidth, 0);
 
         // Sets up tile coordinates
-        tileOne = new Coordinates(getWidth()/2 - tileWidth/2, getHeight()/2 - tileHeight/2);
-        tileTwo = new Coordinates(getWidth()/4 - tileWidth/2, getHeight()/2 - tileHeight/2);
-        tileThree = new Coordinates(getWidth()/3, getHeight()/2 - tileHeight/2);
-        tileFour = new Coordinates(2 * getWidth()/3, getHeight()/2 - tileHeight/2);
-        tileFive = new Coordinates(getWidth()/2 + tileWidth, getHeight()/2 - tileHeight/2);
-        tileSix = new Coordinates((getWidth() / 2) - (tileWidth/2), getHeight()/4);
+        tileOne = new Coordinates(getWidth()/2-tileWidth/2, getHeight()/2-tileHeight/2);
+        tileTwo = new Coordinates(getWidth()/4-tileWidth/2, getHeight()/2-tileHeight/2);
+        tileThree = new Coordinates(getWidth()/3, getHeight()/2-tileHeight/2);
+        tileFour = new Coordinates(2 * getWidth()/3, getHeight()/2-tileHeight/2);
+        tileFive = new Coordinates(getWidth()/2 + tileWidth, getHeight()/2-tileHeight/2);
     }
 
+    // Sets up both of the maps
     private void setFactoryMap() {
         factoryMap = new HashMap<>();
-        buttonFactory = new HashMap<>();
 
         // Adds each of the factories to the map
         factoryMap.put(Constants.FACTORY_ONE, new Factory(4));
@@ -174,16 +155,27 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         setFactoryTiles();
     }
 
+    // Sets up the tiles in the factories
     private void setFactoryTiles() {
+        ArrayList<TileObject> possibleTiles = new ArrayList<>();
         
+        for(byte i = 0; i < 20; i++) {
+            possibleTiles.add(new TileObject(Constants.BLACK_TILE));
+            possibleTiles.add(new TileObject(Constants.BLUE_TILE));
+            possibleTiles.add(new TileObject(Constants.RED_TILE));
+            possibleTiles.add(new TileObject(Constants.YELLOW_TILE));
+            possibleTiles.add(new TileObject(Constants.WHITE_TILE));
+        }
+
+        Collections.shuffle(possibleTiles);
+
         for(byte i = 0; i < 36; i++) {
             byte remain = (byte) (i % 9);
-            if(factoryMap.get(remain).getTiles().getSize() < 4){
-                factoryMap.get(remain).addTile(bag.get());
-            }
+            factoryMap.get(remain).addTile(possibleTiles.get(i));
         }
     }
 
+    // Draw factories 
     private void drawFactories(Graphics g) {
         drawFactory(g, factoryOne);
         drawFactory(g, factoryTwo);
@@ -200,6 +192,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         g.drawImage(factory, coordinates.getX(), coordinates.getY(), factoryWidth, factoryHeight, null);
     }
 
+    // Draws the factory floor
     private void drawFactoryFloor(Graphics g) {
         drawSingleFactoryFloor(g, tileSix, oneTile);
         drawSingleFactoryFloor(g, tileOne, blueTile);
@@ -213,62 +206,40 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         g.drawImage(img, coordinates.getX(), coordinates.getY(), tileWidth, tileHeight, null);
     }
 
+    // Paint hte tiles from a factory and its coordinates
     private void paintTiles(Factory f, Coordinates c, Graphics g) {
         int xVal = c.getX();
         int yVal = c.getY();
 
-        ArrayList<TileObject> tiles = new ArrayList<>();
+        LinkedList<TileObject> tiles = f.getTiles();
+        TileObject tile = tiles.getFirst().getItem();
 
-        for(TileObject tile : f.getTiles()) {
-            tiles.add(tile);
-        }
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
 
-        g.drawImage(Constants.getImage(tiles.get(0).getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
         
-        g.drawImage(Constants.getImage(tiles.get(1).getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
         
-        g.drawImage(Constants.getImage(tiles.get(2).getType()), xVal + factoryWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
         
-        g.drawImage(Constants.getImage(tiles.get(3).getType()), xVal + factoryWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
+        g.drawImage(Constants.getImage(tile.getType()), xVal + factoryWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        Factory chosen = null;
-        if(x < factoryWidth)
-        {
-            if(y > 0 && y<factoryHeight)
-                chosen = factory1;
-            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	chosen = factory2;
-            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	chosen = factory3;
+        if(x < (int)(getWidth()/7.5)){
+            if(y < (int)(getHeight()/5)){
+                
+            } else if (y < getHeight()/2-factoryHeight/2 + (int)(getHeight()/5)){
+
+            } else {
+
+            }
         }
-        else if (x>getWidth()-factoryWidth)
-        {
-        	if(y > 0 && y<factoryHeight)
-                chosen = factory1;
-            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	chosen = factory2;
-            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	chosen = factory3;
-        }
-        else if(y > factoryThree.getY())
-        {
-        	if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth)
-        		chosen = factory4;
-        	else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth)
-        		chosen = factory5;
-        	else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
-        		chosen = factory6;
-        }
-        //method to put chosen factory into player panel
-        
-        //switch to player for now, 
-        cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
     }
+
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub

@@ -7,8 +7,8 @@ public class Constants {
 
     // Screen dimensions
     private final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final int WIDTH = (int) screenSize.getWidth();
-    public static final int HEIGHT = (int) screenSize.getHeight();
+    public static int WIDTH = (int) screenSize.getWidth();
+    public static int HEIGHT = (int) screenSize.getHeight();
 
     // Panel Constants
     public static final JPanel PANEL_CONT = new JPanel();
@@ -19,6 +19,15 @@ public class Constants {
     public static final String PLAYER_PANEL = "playerPanel";
     public static final String INSTRUCTIONS_PANEL = "instructionsPanel";
     public static final String END_PANEL = "endPanel";
+    public static final String MAIN_PANEL = "mainPanel";
+    
+    // Tile Integer Constants
+    public static final int BLACK_TILE_ID = 2;
+    public static final int BLUE_TILE_ID = 3;
+    public static final int ONE_TILE_ID = 1;
+    public static final int RED_TILE_ID = 4;
+    public static final int WHITE_TILE_ID = 5;
+    public static final int YELLOW_TILE_ID = 6;
 
     // Factory Constants
     public static final byte FACTORY_ONE = 0;

@@ -6,17 +6,17 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import datastructures.Box;
+import datastructures.*;
 import game.Constants;
-import game.Player;
+import logic.*;
 
 public class WinnerPanel extends JPanel implements ActionListener{
 
     private BufferedImage background, trophy;
-    private JButton returnStart, row1, row2, row3, row4, row5;
-    private Box<Player> players; // Will be used when we effectively implement players in our game
+    private JButton returnStart;
+    private LinkedList<Player> players; // Will be used when we effectively implement players in our game
     private CardLayout cl;
-    public WinnerPanel(CardLayout c, Box<Player> players) {
+    public WinnerPanel(CardLayout c, LinkedList<Player> players) {
         cl = c;
         returnStart = new JButton("Return to Start");
         super.add(returnStart);
@@ -26,11 +26,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
         trophy = Constants.getImage("Trophy");
     }
     public void initializeRButtons() {
-        row1 = new JButton("Pick row 1");
-        row2 = new JButton("Pick row 2");
-        row3 = new JButton("Pick row 3");
-        row4 = new JButton("Pick row 4");
-        row5 = new JButton("Pick row 5");
+        
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(returnStart)){
@@ -52,7 +48,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
     }
 
     // Returns the top player in terms of points
-    private String getTop(Box<Player> players) {
+    private String getTop(LinkedList<Player> players) {
         Player top = null;
 
         for(Player p : players) {

@@ -8,17 +8,14 @@ import javax.swing.JPanel;
 import java.awt.*;
 import game.Constants;
 import game.*;
-import tiles.*;
+import logic.*;
 import java.util.*;
-
 public class MainPanel extends JPanel implements ActionListener{
-
     private CardLayout cl;
     private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile, oneTile, gameBoard;
     private ArrayList<Player> players;
     private int bW, tW, stW;
     private JButton backToPlayerScreen;
-
     public MainPanel(CardLayout cl){
         this.cl = cl;
         players = new ArrayList<>();
@@ -29,7 +26,6 @@ public class MainPanel extends JPanel implements ActionListener{
         setUpImages();
         setUpButtons();
     }
-
     public void paintComponent(Graphics g){
         bW = (int)(getWidth() / 4);
         tW = bW / 11;
@@ -44,9 +40,8 @@ public class MainPanel extends JPanel implements ActionListener{
         drawp2Score(g);
         drawp4Score(g);
     }
-
     private void drawp1Score(Graphics g){
-        int s = players.get(0).getActualPoints();
+        int s = players.get(0).getScore();
         g.setColor(Color.BLACK);
         int k;
         g.fillRect(getWidth() / 90 + (19 *stW) + (19 * getWidth() / 9500), (int)(getHeight() / 41), stW, stW);
@@ -70,16 +65,14 @@ public class MainPanel extends JPanel implements ActionListener{
         }
         g.fillRect(getWidth() / 90 + (19 *stW) + (19 * getWidth() / 9500), (int)(getHeight() / 41), stW, stW);
     }
-
     private void drawp2Score(Graphics g){
-        int s = players.get(1).getActualPoints();
+        int s = players.get(1).getScore();
         g.setColor(Color.BLACK);
         int k;
         g.fillRect((int)(getWidth() / 1.83) + (19 *stW) + (19 * getWidth() / 9500), 0, stW, stW);
     }
-    
     private void drawp4Score(Graphics g){
-        int s = players.get(3).getActualPoints();
+        int s = players.get(3).getScore();
         g.setColor(Color.BLACK);
         int k;
         if(s == 0){

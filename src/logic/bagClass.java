@@ -1,6 +1,7 @@
-package game;
+package logic;
 import java.util.*;
-import logic.TileObject;
+
+import game.Constants;
 
 public class bagClass {
 
