@@ -6,27 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch MainPanelTestRunner",
-            "request": "launch",
-            "mainClass": "game.MainPanelTestRunner",
-            "projectName": "Azul_5c24bc5"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestRunner",
-            "request": "launch",
-            "mainClass": "game.TestRunner",
-            "projectName": "Azul_5c24bc5"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestRunner",
-            "request": "launch",
-            "mainClass": "game.TestRunner",
-            "projectName": "Azul_12f30698"
-        },
-        {
-            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -36,7 +15,7 @@
             "name": "Launch TestRunner",
             "request": "launch",
             "mainClass": "game.TestRunner",
-            "projectName": "Azul_11bfe46d"
+            "projectName": "Azul_46975089"
         }
     ]
 }

@@ -240,38 +240,42 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        Factory chosen = null;
-        if(x < factoryWidth)
+        if(e.getButton() == e.BUTTON1)
         {
-            if(y > 0 && y<factoryHeight)
-                chosen = factory1;
-            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	chosen = factory2;
-            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	chosen = factory3;
-        }
-        else if (x>getWidth()-factoryWidth)
-        {
-        	if(y > 0 && y<factoryHeight)
-                chosen = factory1;
-            else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	chosen = factory2;
-            else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	chosen = factory3;
-        }
-        else if(y > factoryThree.getY())
-        {
-        	if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth)
-        		chosen = factory4;
-        	else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth)
-        		chosen = factory5;
-        	else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
-        		chosen = factory6;
-        }
-        //method to put chosen factory into player panel
+            Factory chosen = null;
+            if(x < factoryWidth)
+            {
+                if(y > 0 && y<factoryHeight)
+                    chosen = factory1;
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
+            	    chosen = factory2;
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
+            	    chosen = factory3;
+            }
+            else if (x>getWidth()-factoryWidth)
+            {
+        	    if(y > 0 && y<factoryHeight)
+                    chosen = factory1;
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
+            	    chosen = factory2;
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
+            	    chosen = factory3;
+            }
+            else if(y > factoryThree.getY())
+            {
+        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth)
+        		    chosen = factory4;
+        	    else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth)
+        		    chosen = factory5;
+        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
+        		    chosen = factory6;
+            }
+            //method to put chosen factory into player panel
         
-        //switch to player for now, 
-        cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+            //switch to player for now, 
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+        }
+        
     }
     @Override
     public void mousePressed(MouseEvent e) {
