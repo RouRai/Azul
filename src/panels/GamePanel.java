@@ -229,17 +229,6 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-<<<<<<< Updated upstream
-        if(x < (int)(getWidth()/7.5)){
-            if(y < (int)(getHeight()/5)){
-                
-            } else if (y < getHeight()/2-factoryHeight/2 + (int)(getHeight()/5)){
-
-            } else {
-
-            }
-        }
-=======
         if(e.getButton() == e.BUTTON1)
         {
             Factory chosen = null;
