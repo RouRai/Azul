@@ -34,7 +34,6 @@ public class TestFrame extends JFrame{
         panels.put(Constants.PLAYER_PANEL, new PlayerPanel(cl));
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
-        
 
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);
@@ -47,7 +46,6 @@ public class TestFrame extends JFrame{
         Constants.PANEL_CONT.add(panels.get(Constants.END_PANEL), Constants.END_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.PLAYER_PANEL), Constants.PLAYER_PANEL);
         
-
         // Show startScreen at beginning
         cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 
