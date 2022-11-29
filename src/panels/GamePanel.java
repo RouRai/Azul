@@ -4,6 +4,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import datastructures.LinkedList;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -12,9 +14,9 @@ import java.util.HashMap;
 
 import game.Constants;
 import game.Coordinates;
-import game.Factory;
+import logic.Factory;
 import game.bagClass;
-import tiles.TileObject;
+import logic.TileObject;
 
 public class GamePanel extends JPanel implements ActionListener, MouseListener{
 
@@ -161,15 +163,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         buttonFactory = new HashMap<>();
 
         // Adds each of the factories to the map
-        factoryMap.put(Constants.FACTORY_ONE, new Factory());
-        factoryMap.put(Constants.FACTORY_TWO, new Factory());
-        factoryMap.put(Constants.FACTORY_THREE, new Factory());
-        factoryMap.put(Constants.FACTORY_FOUR, new Factory());
-        factoryMap.put(Constants.FACTORY_FIVE, new Factory());
-        factoryMap.put(Constants.FACTORY_SIX, new Factory());
-        factoryMap.put(Constants.FACTORY_SEVEN, new Factory());
-        factoryMap.put(Constants.FACTORY_EIGHT, new Factory());
-        factoryMap.put(Constants.FACTORY_NINE, new Factory());
+        factoryMap.put(Constants.FACTORY_ONE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_TWO, new Factory(4));
+        factoryMap.put(Constants.FACTORY_THREE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_FOUR, new Factory(4));
+        factoryMap.put(Constants.FACTORY_FIVE, new Factory(4));
+        factoryMap.put(Constants.FACTORY_SIX, new Factory(4));
+        factoryMap.put(Constants.FACTORY_SEVEN, new Factory(4));
+        factoryMap.put(Constants.FACTORY_EIGHT, new Factory(4));
+        factoryMap.put(Constants.FACTORY_NINE, new Factory(4));
 
         setFactoryTiles();
     }
@@ -178,7 +180,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         
         for(byte i = 0; i < 36; i++) {
             byte remain = (byte) (i % 9);
-            if(factoryMap.get(remain).getTiles().size() < 4){
+            if(factoryMap.get(remain).getTiles().getSize() < 4){
                 factoryMap.get(remain).addTile(bag.get());
             }
         }
@@ -217,7 +219,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         int xVal = c.getX();
         int yVal = c.getY();
 
-        ArrayList<TileObject> tiles = f.getTiles();
+        LinkedList<TileObject> t = f.getTiles();
+
+        ArrayList<TileObject> tiles = new ArrayList<>();
+        
+        for(TileObject tile : t) {
+            tiles.add(tile);
+        }
 
         g.drawImage(Constants.getImage(tiles.get(0).getType()), xVal + factoryWidth/2 - tileWidth/2, yVal+tileHeight/2, tileWidth/2, tileHeight/2, null);
         
