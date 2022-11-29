@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
-import logic.Player;
+import logic.*;
 import datastructures.*;
 
 public class PlayerPanel extends JPanel implements ActionListener{
@@ -20,9 +20,11 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
     private int stW, tW, tH, stH;
+    private LinkedList<TileObject> lid;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        p = new Player("Player 1", );
+        lid = new LinkedList<>();
+        p = new Player("Player 1", lid);
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();

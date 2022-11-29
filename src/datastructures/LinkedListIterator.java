@@ -19,10 +19,8 @@ public class LinkedListIterator<T> implements Iterator<T> {
     // Iterates to next Node in the Box
     @Override
     public T next() {
-        if(!gotFirst){
-            current = current.getNext();
-            gotFirst = true;
-        }
-        return current.getItem();
+        T data = current.getItem();
+        current = current.getNext();
+        return data;
     }
 }
