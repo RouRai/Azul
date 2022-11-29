@@ -15,7 +15,7 @@ import java.util.HashMap;
 import game.Constants;
 import game.Coordinates;
 import logic.Factory;
-import game.bagClass;
+//import game.bagClass;
 import logic.TileObject;
 
 public class GamePanel extends JPanel implements ActionListener, MouseListener{
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private int factoryWidth, factoryHeight, tileWidth, tileHeight;
     private HashMap<Byte, Factory> factoryMap;
     private HashMap<JButton, Factory> buttonFactory;
-    private bagClass bag, box;
+    //private bagClass bag, box;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
     private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive, tileSix;
     private JButton factory1Button, factory2Button, factory3Button, factory4Button, factory5Button, factory6Button, factory7Button, factory8Button, factory9Button;
@@ -34,9 +34,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private ImageIcon factoryIcon;
     private boolean reDraw;
     public GamePanel(CardLayout cl) {
-        bag = new bagClass();
+        /*bag = new bagClass();
         box = new bagClass();
-        bag.fillBag();
+        bag.fillBag();*/
         this.cl = cl;
         setUpImages();
         setUpButtons();
@@ -173,10 +173,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         factoryMap.put(Constants.FACTORY_EIGHT, new Factory(4));
         factoryMap.put(Constants.FACTORY_NINE, new Factory(4));
 
-        setFactoryTiles();
+        //setFactoryTiles();
     }
 
-    private void setFactoryTiles() {
+    /*private void setFactoryTiles() {
         
         for(byte i = 0; i < 36; i++) {
             byte remain = (byte) (i % 9);
@@ -184,7 +184,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                 factoryMap.get(remain).addTile(bag.get());
             }
         }
-    }
+    }*/
 
     private void drawFactories(Graphics g) {
         drawFactory(g, factoryOne);
