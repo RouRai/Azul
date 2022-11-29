@@ -10,19 +10,26 @@ import game.Constants;
 import game.*;
 import logic.*;
 import java.util.*;
+import datastructures.*;
 public class MainPanel extends JPanel implements ActionListener{
     private CardLayout cl;
     private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile, oneTile, gameBoard;
     private ArrayList<Player> players;
     private int bW, tW, stW;
     private JButton backToPlayerScreen;
+    private datastructures.LinkedList<TileObject> lid1, lid2, lid3, lid4;
+
     public MainPanel(CardLayout cl){
         this.cl = cl;
         players = new ArrayList<>();
-        players.add(new Player("Player 1"));
-        players.add(new Player("Player 2"));
-        players.add(new Player("Player 3"));
-        players.add(new Player("Player 4"));
+        lid1 = new datastructures.LinkedList<>();
+        lid2 = new datastructures.LinkedList<>();
+        lid3 = new datastructures.LinkedList<>();
+        lid4 = new datastructures.LinkedList<>();
+        players.add(new Player("Player 1", lid1));
+        players.add(new Player("Player 2", lid2));
+        players.add(new Player("Player 3", lid3));
+        players.add(new Player("Player 4", lid4));
         setUpImages();
         setUpButtons();
     }

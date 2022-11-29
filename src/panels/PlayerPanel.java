@@ -9,8 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
-<<<<<<< Updated upstream
-import logic.Player;
+import logic.*;
 import datastructures.*;
 =======
 import logic.*;
@@ -26,18 +25,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
 <<<<<<< Updated upstream
     private Player p;
     private int stW, tW, tH, stH;
+    private LinkedList<TileObject> lid;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         p = new Player("Player 1", );
-=======
-    private Factory factory1;
-    private Player player;
-    private LinkedList lid;
-    public PlayerPanel(CardLayout cl, Player p) {
-        this.cl = cl;
-        lid = new LinkedList();
-        player = p;
->>>>>>> Stashed changes
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
