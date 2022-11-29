@@ -9,8 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
+<<<<<<< Updated upstream
 import logic.Player;
 import datastructures.*;
+=======
+import logic.*;
+import datastructures.LinkedList;
+>>>>>>> Stashed changes
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
@@ -18,11 +23,21 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
+<<<<<<< Updated upstream
     private Player p;
     private int stW, tW, tH, stH;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         p = new Player("Player 1", );
+=======
+    private Factory factory1;
+    private Player player;
+    private LinkedList lid;
+    public PlayerPanel(CardLayout cl, Player p) {
+        this.cl = cl;
+        lid = new LinkedList();
+        player = p;
+>>>>>>> Stashed changes
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
@@ -74,6 +89,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
         drawPlayerBoard(g2);
         drawPyramid(g2);
         drawPenalty(g2);
+    }
+    public void addFactory(Factory x)
+    {
+        factory1 = x;
     }
 
     private void drawPlayerBoard(Graphics2D g2){

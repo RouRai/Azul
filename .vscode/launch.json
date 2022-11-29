@@ -6,6 +6,7 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< Updated upstream
             "name": "Launch PlayerRunner",
             "request": "launch",
             "mainClass": "game.PlayerRunner",
@@ -62,6 +63,8 @@
         },
         {
             "type": "java",
+=======
+>>>>>>> Stashed changes
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -71,7 +74,7 @@
             "name": "Launch TestRunner",
             "request": "launch",
             "mainClass": "game.TestRunner",
-            "projectName": "Azul_11bfe46d"
+            "projectName": "Azul_46975089"
         }
     ]
 }
