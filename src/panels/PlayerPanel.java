@@ -18,9 +18,11 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player p;
+    private LinkedList lid;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        p = new Player("Player 1", );
+        lid = new LinkedList();
+        p = new Player("Player 1", lid);
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
