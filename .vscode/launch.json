@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PlayerRunner",
+            "request": "launch",
+            "mainClass": "game.PlayerRunner",
+            "projectName": "Azul_73457aa5"
+        },
+        {
+            "type": "java",
             "name": "Launch MainRunner",
             "request": "launch",
             "mainClass": "game.MainRunner",
