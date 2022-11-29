@@ -4,8 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import datastructures.LinkedList;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -219,11 +217,9 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         int xVal = c.getX();
         int yVal = c.getY();
 
-        LinkedList<TileObject> t = f.getTiles();
-
         ArrayList<TileObject> tiles = new ArrayList<>();
-        
-        for(TileObject tile : t) {
+
+        for(TileObject tile : f.getTiles()) {
             tiles.add(tile);
         }
 
