@@ -144,28 +144,12 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
     private void drawScore(Graphics2D g){
         //WORK NEEDED
-        int k;
-        if(player.getScore() == 0){
+        int k = (player.getScore() % 100) - 1;
+        int j = player.getScore()/20+1;
+        if(k == 0)
             g.fillRect((getWidth() / 70), 0, stW, stH);
-        } else if(player.getScore() % 100 <= 20 && player.getScore() % 100 >= 1){
-            k = (player.getScore() % 100) - 1;
-            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29, stW, stH);
-        } else if(player.getScore() % 100 <= 40 && player.getScore() % 100 >= 21){
-            k = (player.getScore() % 100) - 21;
-            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 15, stW, stH);
-        } else if(player.getScore() % 100 <= 60 && player.getScore() % 100 >= 41){
-            k = (player.getScore() % 100) - 41;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 9.6), stW, stH);
-        } else if(player.getScore() % 100 <= 80 && player.getScore() % 100 >= 61){
-            k = (player.getScore() % 100) - 61;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 7.2), stW, stH);
-        } else if(player.getScore() % 100 < 100){
-            k = (player.getScore() % 100) - 81;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stH);
-        } else if(player.getScore() % 100 == 0){
-            k = 19;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stH);
-        }
+        else
+            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 * j, stW, stH);
     }
     
     private void setUpButtons() {
