@@ -81,6 +81,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
     {
         //factory1 = x;
     }
+    // public void addFactory(Factory x)
+    // {
+    //     factory1 = x;
+    // }
 
     private void drawPlayerBoard(Graphics2D g2){
         g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
@@ -143,28 +147,12 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
     private void drawScore(Graphics2D g){
         //WORK NEEDED
-        int k;
-        if(p.getScore() == 0){
-            g.fillRect((getWidth() / 70), 0, stW, stH);
-        } else if(p.getScore() % 100 <= 20 && p.getScore() % 100 >= 1){
-            k = (p.getScore() % 100) - 1;
-            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29, stW, stH);
-        } else if(p.getScore() % 100 <= 40 && p.getScore() % 100 >= 21){
-            k = (p.getScore() % 100) - 21;
-            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 15, stW, stH);
-        } else if(p.getScore() % 100 <= 60 && p.getScore() % 100 >= 41){
-            k = (p.getScore() % 100) - 41;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 9.6), stW, stH);
-        } else if(p.getScore() % 100 <= 80 && p.getScore() % 100 >= 61){
-            k = (p.getScore() % 100) - 61;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 7.2), stW, stH);
-        } else if(p.getScore() % 100 < 100){
-            k = (p.getScore() % 100) - 81;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stH);
-        } else if(p.getScore() % 100 == 0){
-            k = 19;
-            g.fillRect(getWidth() / 70 + k * (stW), (int)(getHeight() / 5.8), stW, stH);
-        }
+        //int k = (player.getScore() % 100)-1;
+        //int j = player.getScore()/20+1;
+        //if(player.getScore() == 0)
+        //    g.fillRect((getWidth() / 70), 0, stW, stH);
+        //else
+        //    g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 + j*stH, stW, stH);
     }
     
     private void setUpButtons() {

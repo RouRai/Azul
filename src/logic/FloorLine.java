@@ -98,6 +98,7 @@ public class FloorLine {
 
     // Sets up the tile hashmap with the penalty and linked list
     private void setUpHashMap() {
+        tiles = new HashMap<>();
         tiles.put(Constants.PENALTY_ONE, new LinkedList<TileObject>());
         tiles.put(Constants.PENALTY_TWO, new LinkedList<TileObject>());
         tiles.put(Constants.PENALTY_THREE, new LinkedList<TileObject>());

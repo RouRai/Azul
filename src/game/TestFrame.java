@@ -2,7 +2,9 @@ package game;
 
 import javax.swing.*;
 
-
+import datastructures.LinkedList;
+import logic.Player;
+import logic.TileObject;
 import panels.*;
 import datastructures.*;
 import datastructures.Queue;
@@ -75,7 +77,6 @@ public class TestFrame extends JFrame{
         playerQueue.enqueue(p4);
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
-        panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
 
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);

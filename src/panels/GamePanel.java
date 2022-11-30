@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         tileWidth = getWidth()/16;
         tileHeight = getHeight()/10;
 
-        drawFactoryFloor(g);
+        //drawFactoryFloor(g);
 
         g.drawString("" + floor.getNumTiles(Constants.BLUE_TILE), tileOne.getX() + getWidth() / 45, tileOne.getY() + getHeight() / 7);
         g.drawString("" + floor.getNumTiles(Constants.RED_TILE), tileTwo.getX() + getWidth() / 45, tileTwo.getY() + getHeight() / 7);
@@ -264,6 +264,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
         }
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> 671c4501bc46d0a8249565f44e02b377aad49a6e
     }
 
     @Override

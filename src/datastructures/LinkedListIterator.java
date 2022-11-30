@@ -13,7 +13,7 @@ public class LinkedListIterator<T> implements Iterator<T> {
 
     // Checks if there are any more Nodes to iterate to
     public boolean hasNext() {
-        return current.getNext() != null; 
+        return current != null; 
     }
 
     // Iterates to next Node in the Box
@@ -25,6 +25,5 @@ public class LinkedListIterator<T> implements Iterator<T> {
             return data;
         }
         return null;
-
         }
 }
