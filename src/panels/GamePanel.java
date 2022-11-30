@@ -265,7 +265,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
         }
         
->>>>>>> Stashed changes
+
     }
 
     @Override

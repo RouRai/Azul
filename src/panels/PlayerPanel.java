@@ -11,10 +11,8 @@ import java.io.BufferedInputStream;
 import game.*;
 import logic.*;
 import datastructures.*;
-=======
 import logic.*;
 import datastructures.LinkedList;
->>>>>>> Stashed changes
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
@@ -22,13 +20,12 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
-<<<<<<< Updated upstream
     private Player p;
     private int stW, tW, tH, stH;
     private LinkedList<TileObject> lid;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        p = new Player("Player 1", );
+        p = new Player("Player 1", lid);
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
@@ -81,10 +78,10 @@ public class PlayerPanel extends JPanel implements ActionListener{
         drawPyramid(g2);
         drawPenalty(g2);
     }
-    public void addFactory(Factory x)
-    {
-        factory1 = x;
-    }
+    // public void addFactory(Factory x)
+    // {
+    //     factory1 = x;
+    // }
 
     private void drawPlayerBoard(Graphics2D g2){
         g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
