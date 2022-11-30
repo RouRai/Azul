@@ -1,15 +1,17 @@
 package logic;
 
-import datastructures.LinkedList;
+import java.util.ArrayList;
 
+import datastructures.LinkedList;
+import java.util.*;
 // Author: Rounak Rai
 public class Factory {
 
-    private LinkedList<TileObject> tiles; // The current tiles in the factory
+    private ArrayList<TileObject> tiles; // The current tiles in the factory
     private int size; // The expected size of the factory (usually four, but exceptions made for FactoryFloor)
 
     public Factory(int s) {
-        tiles = new LinkedList<>();
+        tiles = new ArrayList<>();
         size = s;
     }
 
@@ -25,7 +27,7 @@ public class Factory {
 
     // Returns the Factory's size
     public int getSize() {
-        return tiles.getSize();
+        return tiles.size();
     }
 
     // Adds a tile to the Factory
@@ -41,7 +43,7 @@ public class Factory {
     }
 
     // Returns the tiles currently in the Factory
-    public LinkedList<TileObject> getTiles() {
+    public ArrayList<TileObject> getTiles() {
         return tiles;
     }
 
@@ -55,7 +57,7 @@ public class Factory {
     }
 
     // Returns the remaining TileObjects in the form of a LinkedList to the player
-    public LinkedList<TileObject> getRemaning(String type) {
+    public ArrayList<TileObject> getRemaning(String type) {
         removeType(type);
         return tiles;
     }

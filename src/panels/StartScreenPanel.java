@@ -3,6 +3,9 @@ package panels;
 import javax.swing.*;
 
 import game.Constants;
+import game.TestFrame;
+import logic.Player;
+
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -56,7 +59,17 @@ public class StartScreenPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(gameButton)){
-            cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+            Player temp = TestFrame.getQueue().dequeue();
+            TestFrame.getQueue().enqueue(temp);
+            if(temp.getName().equals("Player 1")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
+            } else if(temp.getName().equals("Player 2")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_2_PANEL);
+            } else if(temp.getName().equals("Player 3")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_3_PANEL);
+            } else if(temp.getName().equals("Player 4")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_4_PANEL);
+            }
         } else if (e.getSource().equals(ruleButton)) {
             cl.show(Constants.PANEL_CONT, Constants.RULE_PANEL);
         } else if (e.getSource().equals(instructionsButton)){

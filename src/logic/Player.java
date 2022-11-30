@@ -1,6 +1,7 @@
 package logic;
 
 import datastructures.LinkedList;
+import panels.PlayerPanel;
 
 // Author: Rounak Rai (WIP)
 public class Player implements Comparable<Player>{
@@ -11,12 +12,13 @@ public class Player implements Comparable<Player>{
     private PatternLine patternLine; // Their PatternLine
     private FloorLine floorLine; // Their Floor
     private String name; // The players name
-
-    public Player(String name, LinkedList<TileObject> lid) {
+    private PlayerPanel playerPanel;
+    public Player(String name, LinkedList<TileObject> lid, PlayerPanel p) {
         floorLine = new FloorLine(lid);
         patternLine = new PatternLine(floorLine);
         wall = new Wall(this, floorLine);
         this.name = name;
+        playerPanel = p;
     }
 
     public String getName() {
@@ -69,5 +71,8 @@ public class Player implements Comparable<Player>{
         if(getScore() < o.getScore()) return -1;
         if(getScore() > o.getScore()) return 1;
         return 0;
+    }
+    public PlayerPanel getPanel(){
+        return playerPanel;
     }
 }

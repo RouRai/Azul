@@ -13,6 +13,7 @@ public class FloorLine {
     private LinkedList<TileObject> lid; // Excess tiles that can't be placed in the FloorLine are placed in the lid
 
     public FloorLine(LinkedList<TileObject> lid) {
+        tiles = new HashMap<>();
         this.lid = lid;
         setUpHashMap();
     }

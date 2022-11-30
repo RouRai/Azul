@@ -11,10 +11,8 @@ import java.io.BufferedInputStream;
 import game.*;
 import logic.*;
 import datastructures.*;
-=======
 import logic.*;
 import datastructures.LinkedList;
->>>>>>> Stashed changes
 
 public class PlayerPanel extends JPanel implements ActionListener{
 
@@ -22,13 +20,11 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
-<<<<<<< Updated upstream
     private Player p;
     private int stW, tW, tH, stH;
-    private LinkedList<TileObject> lid;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        p = new Player("Player 1", );
+        //p = new Player("Player 1", );
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
@@ -59,7 +55,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
-        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
+        //g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
         g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), tW, tH, null);
         g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), tW, tH, null);
         g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), tW, tH, null);
@@ -76,14 +72,14 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         g2.setColor(Color.BLACK);
-        drawScore(g2);
+        //drawScore(g2);
         drawPlayerBoard(g2);
         drawPyramid(g2);
         drawPenalty(g2);
     }
     public void addFactory(Factory x)
     {
-        factory1 = x;
+        //factory1 = x;
     }
 
     private void drawPlayerBoard(Graphics2D g2){
@@ -135,13 +131,13 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 4, (int)(getHeight() / 4.55) + 4 * tH, tW, tH, null);
     }
     public void drawPenalty(Graphics2D g) {
-        g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + 5, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + 10, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + 15, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + 20, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + 25, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + 30, (int)(getHeight() / 1.87567879789), tW, tW, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
 
     }
 
@@ -241,37 +237,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
         if(!endTurn){
            endTurn = !endTurn;
             return;
-        }
-        if(true){ //Needs to be changed
-            if(!scoreR1){
-                
-            scoreR1 = !scoreR1;
-            return;
-            }
-            if(!scoreR2){
-                scoreR2 = !scoreR2;
-                return;
-            }
-            if(!scoreR3){
-                scoreR3 = !scoreR3;
-                return;
-            }
-            if(!scoreR4){
-                scoreR4 = !scoreR4;
-                return;
-            }
-            if(!scoreR5){
-                scoreR5 = !scoreR5;
-                return;
-            }
-            if(!scoreP){
-                scoreP = !scoreP;
-                return;
-            }
-            if(!nextS){
-                reset();
-                return;
-            }
         }
     }
 }
