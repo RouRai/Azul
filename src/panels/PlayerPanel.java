@@ -147,7 +147,7 @@ public class PlayerPanel extends JPanel implements ActionListener{
         if(player.getScore() == 0)
             g.fillRect((getWidth() / 70), 0, stW, stH);
         else
-            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 * j, stW, stH);
+            g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 + j*stH, stW, stH);
     }
     
     private void setUpButtons() {
