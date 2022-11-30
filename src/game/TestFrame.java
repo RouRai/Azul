@@ -2,7 +2,9 @@ package game;
 
 import javax.swing.*;
 
-
+import datastructures.LinkedList;
+import logic.Player;
+import logic.TileObject;
 import panels.*;
 
 import java.awt.*;
@@ -31,10 +33,9 @@ public class TestFrame extends JFrame{
         panels.put(Constants.RULE_PANEL, new RulebookPanel(cl));
         panels.put(Constants.START_PANEL, new StartScreenPanel(cl));
         panels.put(Constants.GAME_PANEL, new GamePanel(cl));
-        panels.put(Constants.PLAYER_PANEL, new PlayerPanel(cl));
+        panels.put(Constants.PLAYER_PANEL, new PlayerPanel(cl, new Player("Player 1", new LinkedList<TileObject>())));
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
-        panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
 
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);
@@ -46,8 +47,7 @@ public class TestFrame extends JFrame{
         Constants.PANEL_CONT.add(panels.get(Constants.INSTRUCTIONS_PANEL), Constants.INSTRUCTIONS_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.END_PANEL), Constants.END_PANEL);
         Constants.PANEL_CONT.add(panels.get(Constants.PLAYER_PANEL), Constants.PLAYER_PANEL);
-        Constants.PANEL_CONT.add(panels.get(Constants.MAIN_PANEL), Constants.MAIN_PANEL);
-
+        
         // Show startScreen at beginning
         cl.show(Constants.PANEL_CONT, Constants.START_PANEL);
 
