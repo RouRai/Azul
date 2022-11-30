@@ -22,7 +22,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player player;
     private int stW, tW, tH, stH; // score tile + tile width and height
-    private LinkedList<TileObject> lid;
     public PlayerPanel(CardLayout cl, Player p) {
         this.cl = cl;
         player = p;
