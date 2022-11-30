@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         this.cl = cl;
         setUpImages();
         setUpButtons();
+        setFactoryMap();
     }
 
     public void paintComponent(Graphics g) {
@@ -67,7 +68,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         tileWidth = getWidth()/16;
         tileHeight = getHeight()/10;
 
-        drawFactoryFloor(g);
+        //drawFactoryFloor(g);
 
         g.drawString("20", tileOne.getX() + getWidth() / 45, tileOne.getY() + getHeight() / 7);
         g.drawString("20", tileTwo.getX() + getWidth() / 45, tileTwo.getY() + getHeight() / 7);
