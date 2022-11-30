@@ -25,7 +25,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
     public PlayerPanel(CardLayout cl, Player p) {
         this.cl = cl;
         player = p;
-        background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
     }
@@ -73,9 +72,9 @@ public class PlayerPanel extends JPanel implements ActionListener{
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         g2.setColor(Color.BLACK);
         drawScore(g2);
-        drawPlayerBoard(g2);
-        drawPyramid(g2);
-        drawPenalty(g2);
+        //drawPlayerBoard(g2);
+        //drawPyramid(g2);
+        //drawPenalty(g2);
     }
     // public void addFactory(Factory x)
     // {
@@ -143,9 +142,9 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
     private void drawScore(Graphics2D g){
         //WORK NEEDED
-        int k = (player.getScore() % 100) - 1;
+        int k = (player.getScore() % 100)-1;
         int j = player.getScore()/20+1;
-        if(k == 0)
+        if(player.getScore() == 0)
             g.fillRect((getWidth() / 70), 0, stW, stH);
         else
             g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 * j, stW, stH);
