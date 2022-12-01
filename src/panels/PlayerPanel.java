@@ -22,9 +22,8 @@ public class PlayerPanel extends JPanel implements ActionListener{
     private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
     private Player player;
     private int stW, tW, tH, stH; // score tile + tile width and height
-    public PlayerPanel(CardLayout cl, Player p) {
+    public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        player = p;
         setUpButtons();
         setUpImages();
     }
@@ -41,8 +40,8 @@ public class PlayerPanel extends JPanel implements ActionListener{
         whiteT = Constants.getImage("AzulTileWhite");
     }
     public void paintComponent(Graphics g) {
-        stW = (int)((getWidth() / 3) / 22);
-        stH = (int)(((getHeight() / 1.6) / 22));
+    	stW = (int)((getWidth() / 3) / 21.25);
+        stH = (int)(((getHeight() / 1.6) / 21.25));
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tW = (int)((getWidth() / 3) / 11.35);
@@ -71,15 +70,15 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         g2.setColor(Color.BLACK);
-        drawScore(g2);
-        //drawPlayerBoard(g2);
-        //drawPyramid(g2);
-        //drawPenalty(g2);
+      //drawScore(g2);
+        drawPlayerBoard(g2);
+        drawPyramid(g2);
+        drawPenalty(g2);
     }
-    // public void addFactory(Factory x)
-    // {
-    //     factory1 = x;
-    // }
+    public void addFactory(Factory x)
+    {
+        //factory1 = x;
+    }
 
     private void drawPlayerBoard(Graphics2D g2){
         g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
@@ -130,13 +129,13 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * 4, (int)(getHeight() / 4.55) + 4 * tH, tW, tH, null);
     }
     public void drawPenalty(Graphics2D g) {
-        g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + 5, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + 10, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + 15, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + 20, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + 25, (int)(getHeight() / 1.87567879789), tW, tW, null);
-        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + 30, (int)(getHeight() / 1.87567879789), tW, tW, null);
+    	g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
 
     }
 
@@ -221,36 +220,6 @@ public class PlayerPanel extends JPanel implements ActionListener{
            endTurn = !endTurn;
             return;
         }
-        if(true){ //Needs to be changed
-            if(!scoreR1){
-                
-            scoreR1 = !scoreR1;
-            return;
-            }
-            if(!scoreR2){
-                scoreR2 = !scoreR2;
-                return;
-            }
-            if(!scoreR3){
-                scoreR3 = !scoreR3;
-                return;
-            }
-            if(!scoreR4){
-                scoreR4 = !scoreR4;
-                return;
-            }
-            if(!scoreR5){
-                scoreR5 = !scoreR5;
-                return;
-            }
-            if(!scoreP){
-                scoreP = !scoreP;
-                return;
-            }
-            if(!nextS){
-                reset();
-                return;
-            }
-        }
+        
     }
 }
