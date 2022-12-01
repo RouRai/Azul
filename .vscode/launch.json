@@ -69,8 +69,6 @@
         },
         {
             "type": "java",
-=======
->>>>>>> Stashed changes
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
