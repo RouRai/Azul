@@ -20,7 +20,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean choseTile, placeTile, endTurn, chooseTile;
-    private Player p;
+    private Player player;
     private Factory pFactory;
     private int stW, tW, tH, stH, numTiles;
     public PlayerPanel(CardLayout cl) {
@@ -32,7 +32,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
 
     public void setPlayer(Player pl){
-        p = pl;
+        player = pl;
     }
     private void setUpImages() {
         background = Constants.getImage("Background");
@@ -59,7 +59,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
-        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
+        g2.drawString(player.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
         g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), tW, tH, null);
         g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), tW, tH, null);
         g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), tW, tH, null);
@@ -96,7 +96,15 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         pFactory = x;
     }
     private void drawPlayerBoard(Graphics2D g2){
-        g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
+        PatternLine temp = player.getPatternLine();
+        datastructures.LinkedList[] rows = new datastructures.LinkedList[5];
+        try {
+            rows = new datastructures.LinkedList[]{temp.getRow(0).getTiles(), temp.getRow(1).getTiles(), temp.getRow(2).getTiles(), temp.getRow(3).getTiles(), temp.getRow(4).getTiles()};
+        } catch (Exception e) {
+            System.out.println("there is a row that is out of bounds");
+        }
+        //however you get the element, i have to do so i cant figure this stuff out... rows[0].remove()!= null ? blueT : null
+        g2.drawImage(blueT , (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
         g2.drawImage(blueT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + tH), tW, tH, null);//blue tile in col 2
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (2 * tH)), tW, tH, null);//blue tile in col 3
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//blue tile in col 4
@@ -158,7 +166,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void drawScore(Graphics2D g){
         //WORK NEEDED
         g.setColor(Color.WHITE);
-        g.drawString("Score :" + p.getScore(), getWidth() / 100, getHeight() / 10);
+        g.drawString("Score :" + player.getScore(), getWidth() / 100, getHeight() / 10);
     }
     
     private void setUpButtons() {
@@ -206,36 +214,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             if(chooseTile){
                 if(selected.equals("black")){
                     try {
-                        p.getPatternLine().setRowType(1, Constants.BLACK_TILE);
-                        p.getPatternLine().addToRow(numTiles, 1);
+                        player.getPatternLine().setRowType(1, Constants.BLACK_TILE);
+                        player.getPatternLine().addToRow(numTiles, 1);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("red")){
                     try {
-                        p.getPatternLine().setRowType(1, Constants.RED_TILE);
-                        p.getPatternLine().addToRow(numTiles, 1);
+                        player.getPatternLine().setRowType(1, Constants.RED_TILE);
+                        player.getPatternLine().addToRow(numTiles, 1);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("blue")){
                     try {
-                        p.getPatternLine().setRowType(1, Constants.BLUE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 1);
+                        player.getPatternLine().setRowType(1, Constants.BLUE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 1);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("white")){
                     try {
-                        p.getPatternLine().setRowType(1, Constants.WHITE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 1);
+                        player.getPatternLine().setRowType(1, Constants.WHITE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 1);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("yellow")){
                     try {
-                        p.getPatternLine().setRowType(1, Constants.YELLOW_TILE);
-                        p.getPatternLine().addToRow(numTiles, 1);
+                        player.getPatternLine().setRowType(1, Constants.YELLOW_TILE);
+                        player.getPatternLine().addToRow(numTiles, 1);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -246,36 +254,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             if(chooseTile){
                 if(selected.equals("black")){
                     try {
-                        p.getPatternLine().setRowType(2, Constants.BLACK_TILE);
-                        p.getPatternLine().addToRow(numTiles, 2);
+                        player.getPatternLine().setRowType(2, Constants.BLACK_TILE);
+                        player.getPatternLine().addToRow(numTiles, 2);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("red")){
                     try {
-                        p.getPatternLine().setRowType(2, Constants.RED_TILE);
-                        p.getPatternLine().addToRow(numTiles, 2);
+                        player.getPatternLine().setRowType(2, Constants.RED_TILE);
+                        player.getPatternLine().addToRow(numTiles, 2);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("blue")){
                     try {
-                        p.getPatternLine().setRowType(2, Constants.BLUE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 2);
+                        player.getPatternLine().setRowType(2, Constants.BLUE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 2);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("white")){
                     try {
-                        p.getPatternLine().setRowType(2, Constants.WHITE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 2);
+                        player.getPatternLine().setRowType(2, Constants.WHITE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 2);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("yellow")){
                     try {
-                        p.getPatternLine().setRowType(2, Constants.YELLOW_TILE);
-                        p.getPatternLine().addToRow(numTiles, 2);
+                        player.getPatternLine().setRowType(2, Constants.YELLOW_TILE);
+                        player.getPatternLine().addToRow(numTiles, 2);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -286,36 +294,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             if(chooseTile){
                 if(selected.equals("black")){
                     try {
-                        p.getPatternLine().setRowType(3, Constants.BLACK_TILE);
-                        p.getPatternLine().addToRow(numTiles, 3);
+                        player.getPatternLine().setRowType(3, Constants.BLACK_TILE);
+                        player.getPatternLine().addToRow(numTiles, 3);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("red")){
                     try {
-                        p.getPatternLine().setRowType(3, Constants.RED_TILE);
-                        p.getPatternLine().addToRow(numTiles, 3);
+                        player.getPatternLine().setRowType(3, Constants.RED_TILE);
+                        player.getPatternLine().addToRow(numTiles, 3);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("blue")){
                     try {
-                        p.getPatternLine().setRowType(3, Constants.BLUE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 3);
+                        player.getPatternLine().setRowType(3, Constants.BLUE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 3);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("white")){
                     try {
-                        p.getPatternLine().setRowType(3, Constants.WHITE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 3);
+                        player.getPatternLine().setRowType(3, Constants.WHITE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 3);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("yellow")){
                     try {
-                        p.getPatternLine().setRowType(3, Constants.YELLOW_TILE);
-                        p.getPatternLine().addToRow(numTiles, 3);
+                        player.getPatternLine().setRowType(3, Constants.YELLOW_TILE);
+                        player.getPatternLine().addToRow(numTiles, 3);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -326,36 +334,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             if(chooseTile){
                 if(selected.equals("black")){
                     try {
-                        p.getPatternLine().setRowType(4, Constants.BLACK_TILE);
-                        p.getPatternLine().addToRow(numTiles, 4);
+                        player.getPatternLine().setRowType(4, Constants.BLACK_TILE);
+                        player.getPatternLine().addToRow(numTiles, 4);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("red")){
                     try {
-                        p.getPatternLine().setRowType(4, Constants.RED_TILE);
-                        p.getPatternLine().addToRow(numTiles, 4);
+                        player.getPatternLine().setRowType(4, Constants.RED_TILE);
+                        player.getPatternLine().addToRow(numTiles, 4);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("blue")){
                     try {
-                        p.getPatternLine().setRowType(4, Constants.BLUE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 4);
+                        player.getPatternLine().setRowType(4, Constants.BLUE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 4);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("white")){
                     try {
-                        p.getPatternLine().setRowType(4, Constants.WHITE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 4);
+                        player.getPatternLine().setRowType(4, Constants.WHITE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 4);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("yellow")){
                     try {
-                        p.getPatternLine().setRowType(4, Constants.YELLOW_TILE);
-                        p.getPatternLine().addToRow(numTiles, 4);
+                        player.getPatternLine().setRowType(4, Constants.YELLOW_TILE);
+                        player.getPatternLine().addToRow(numTiles, 4);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -366,36 +374,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             if(chooseTile){
                 if(selected.equals("black")){
                     try {
-                        p.getPatternLine().setRowType(5, Constants.BLACK_TILE);
-                        p.getPatternLine().addToRow(numTiles, 5);
+                        player.getPatternLine().setRowType(5, Constants.BLACK_TILE);
+                        player.getPatternLine().addToRow(numTiles, 5);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("red")){
                     try {
-                        p.getPatternLine().setRowType(5, Constants.RED_TILE);
-                        p.getPatternLine().addToRow(numTiles, 5);
+                        player.getPatternLine().setRowType(5, Constants.RED_TILE);
+                        player.getPatternLine().addToRow(numTiles, 5);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("blue")){
                     try {
-                        p.getPatternLine().setRowType(5, Constants.BLUE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 5);
+                        player.getPatternLine().setRowType(5, Constants.BLUE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 5);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("white")){
                     try {
-                        p.getPatternLine().setRowType(5, Constants.WHITE_TILE);
-                        p.getPatternLine().addToRow(numTiles, 5);
+                        player.getPatternLine().setRowType(5, Constants.WHITE_TILE);
+                        player.getPatternLine().addToRow(numTiles, 5);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 } else if(selected.equals("yellow")){
                     try {
-                        p.getPatternLine().setRowType(5, Constants.YELLOW_TILE);
-                        p.getPatternLine().addToRow(numTiles, 5);
+                        player.getPatternLine().setRowType(5, Constants.YELLOW_TILE);
+                        player.getPatternLine().addToRow(numTiles, 5);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
@@ -416,7 +424,10 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void checkState(){
         if(!choseTile){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
-            GamePanel.setPlayerCameFrom(p);
+            GamePanel.setPlayerCameFrom(player);
+            return;
+        }
+        if(!chooseTile){
             return;
         }
         if(!chooseTile){
