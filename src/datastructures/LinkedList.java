@@ -14,12 +14,13 @@ public class LinkedList<T> implements Iterable<T>{
 
     // Adds a Node to the Box
     public void add(T o) {
+        Node<T> newNode = new Node<T>(o, null, null);
         if(first == null) {
-            first = new Node<T>(o, null, null);
-            current = first;
+            first = current = newNode;
             return;
         }
-        current = new Node<T>(o, null, current);
+        current.setNext(newNode);
+        newNode.setPrevious(current);
         size++;
     }
 
