@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
+        System.out.println("hi");
         setUpImages();
         setUpButtons();
         setFactoryMap();
