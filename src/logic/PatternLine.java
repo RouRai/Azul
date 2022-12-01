@@ -24,7 +24,6 @@ public class PatternLine {
             floor.addTile(new TileObject(patternLines[row].getType()));
             return;
         }
-        patternLines[row].addTiles(1);
     }
 
     // Does what addToRow does but given a certain count. If one must be added, use one as the parameter.

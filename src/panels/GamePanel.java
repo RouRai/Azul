@@ -28,9 +28,10 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private HashMap<Byte, Factory> factoryMap;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
     private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive, tileSix;
-    private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
+    //private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
     private FactoryFloor floor;
     private ImageIcon factoryIcon;
+    private static Player temp;
     private bagClass bag;
 
     public GamePanel(CardLayout cl) {
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         setUpImages();
         setUpButtons();
         setFactoryMap();
+        addMouseListener(this);
     }
 
     public void paintComponent(Graphics g) {
@@ -71,7 +73,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         tileWidth = getWidth()/16;
         tileHeight = getHeight()/10;
 
-        //drawFactoryFloor(g);
+        drawFactoryFloor(g);
 
         g.drawString("" + floor.getNumTiles(Constants.BLUE_TILE), tileOne.getX() + getWidth() / 45, tileOne.getY() + getHeight() / 7);
         g.drawString("" + floor.getNumTiles(Constants.RED_TILE), tileTwo.getX() + getWidth() / 45, tileTwo.getY() + getHeight() / 7);
@@ -117,7 +119,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(returnStart)){
-            //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+            if(temp.getName().equals("Player 1")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
+            } else if(temp.getName().equals("Player 2")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_2_PANEL);
+            } else if(temp.getName().equals("Player 3")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_3_PANEL);
+            }else if(temp.getName().equals("Player 4")){
+                cl.show(Constants.PANEL_CONT, Constants.PLAYER_4_PANEL);
+            }    
         }
     }
 
@@ -148,15 +158,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         factoryMap = new HashMap<>();
         floor = new FactoryFloor();
         // Adds each of the factories to the map
-        factoryMap.put(Constants.FACTORY_ONE, new Factory(4));
-        factoryMap.put(Constants.FACTORY_TWO, new Factory(4));
-        factoryMap.put(Constants.FACTORY_THREE, new Factory(4));
-        factoryMap.put(Constants.FACTORY_FOUR, new Factory(4));
-        factoryMap.put(Constants.FACTORY_FIVE, new Factory(4));
-        factoryMap.put(Constants.FACTORY_SIX, new Factory(4));
-        factoryMap.put(Constants.FACTORY_SEVEN, new Factory(4));
-        factoryMap.put(Constants.FACTORY_EIGHT, new Factory(4));
-        factoryMap.put(Constants.FACTORY_NINE, new Factory(4));
+        factoryMap.put((byte)0, new Factory(4));
+        factoryMap.put((byte)1, new Factory(4));
+        factoryMap.put((byte)2, new Factory(4));
+        factoryMap.put((byte)3, new Factory(4));
+        factoryMap.put((byte)4, new Factory(4));
+        factoryMap.put((byte)5, new Factory(4));
+        factoryMap.put((byte)6, new Factory(4));
+        factoryMap.put((byte)7, new Factory(4));
+        factoryMap.put((byte)8, new Factory(4));
 
         setFactoryTiles();
     }
@@ -170,6 +180,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         for(byte i = 0; i < 36; i++) {
             byte remain = (byte) (i % 9);
             factoryMap.get(remain).addTile(bag.get());
+            System.out.println("Added tile to factory" + remain);
         }
     }
 
@@ -228,46 +239,51 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if(e.getButton() == e.BUTTON1)
-        {
             Factory chosen = null;
             if(x < factoryWidth)
             {
-                if(y > 0 && y<factoryHeight)
-                    chosen = factory1;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	    chosen = factory2;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	    chosen = factory3;
+                if(y > 0 && y<factoryHeight && factoryMap.get((byte)0) != null)
+                    chosen = factoryMap.get((byte)0);//factory1;
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)1) != null)
+            	    chosen = factoryMap.get((byte)1);//factory2;
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)2) != null)
+            	    chosen = factoryMap.get((byte)2);//factory3;
             }
             else if (x>getWidth()-factoryWidth)
             {
-        	    if(y > 0 && y<factoryHeight)
-                    chosen = factory1;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight)
-            	    chosen = factory2;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight)
-            	    chosen = factory3;
+        	    if(y > 0 && y<factoryHeight && factoryMap.get((byte)8) != null)
+                    chosen = factoryMap.get((byte)8);//factory9;
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)7) != null)
+            	    chosen = factoryMap.get((byte)7);//factory8;
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)6) != null)
+            	    chosen = factoryMap.get((byte)6);//factory7;
             }
             else if(y > factoryThree.getY())
             {
-        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth)
-        		    chosen = factory4;
-        	    else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth)
-        		    chosen = factory5;
-        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
-        		    chosen = factory6;
+        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3) != null)
+        		    chosen = factoryMap.get((byte)3);//factory4;
+        	    else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)4) != null)
+        		    chosen = factoryMap.get((byte)4);//factory5;
+        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5) != null)
+        		    chosen = factoryMap.get((byte)5); //factory6;
+            } else if((floor.getSize() > 1 && floor.hasOneTile()) || (floor.getSize() > 0 && !floor.hasOneTile())){
+                chosen = floor;
             }
+            //temp.getPanel().addFactory(chosen);
             //method to put chosen factory into player panel
-        
-            //switch to player for now, 
-            //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
-        }
-        
-<<<<<<< HEAD
-=======
-
->>>>>>> 671c4501bc46d0a8249565f44e02b377aad49a6e
+            if(chosen != null){
+                temp.getPanel().addFactory(chosen);
+                temp.getPanel().changeChoseTile();
+                if(temp.getName().equals("Player 1")){
+                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
+                } else if(temp.getName().equals("Player 2")){
+                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_2_PANEL);
+                } else if(temp.getName().equals("Player 3")){
+                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_3_PANEL);
+                }else if(temp.getName().equals("Player 4")){
+                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_4_PANEL);
+                }    
+            }
     }
 
     @Override
@@ -293,5 +309,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         // TODO Auto-generated method stub
         
     }
-
+    public static void setPlayerCameFrom(Player p){
+        temp = p;
+    }
 }

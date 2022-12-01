@@ -19,6 +19,7 @@ public class Player implements Comparable<Player>{
         wall = new Wall(this, floorLine);
         this.name = name;
         playerPanel = p;
+        playerPanel.setPlayer(this);
     }
 
     public String getName() {

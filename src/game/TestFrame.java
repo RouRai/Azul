@@ -36,7 +36,6 @@ public class TestFrame extends JFrame{
     private void setQueue(){
         playerQueue = new Queue<>();
         lid = new LinkedList<>();
-        ArrayList<Player> temp = new ArrayList<>();
         p1 = new Player("Player 1", lid, new PlayerPanel(cl));
         p2 = new Player("Player 2", lid, new PlayerPanel(cl));
         p3 = new Player("Player 3", lid, new PlayerPanel(cl));
@@ -67,15 +66,12 @@ public class TestFrame extends JFrame{
         panels.put(Constants.RULE_PANEL, new RulebookPanel(cl));
         panels.put(Constants.START_PANEL, new StartScreenPanel(cl));
         panels.put(Constants.GAME_PANEL, new GamePanel(cl));
-        panels.put(Constants.PLAYER_1_PANEL, playerQueue.dequeue().getPanel());
-        playerQueue.enqueue(p1);
-        panels.put(Constants.PLAYER_2_PANEL, playerQueue.dequeue().getPanel());
-        playerQueue.enqueue(p2);
-        panels.put(Constants.PLAYER_3_PANEL, playerQueue.dequeue().getPanel());
-        playerQueue.enqueue(p3);
-        panels.put(Constants.PLAYER_4_PANEL, playerQueue.dequeue().getPanel());
-        playerQueue.enqueue(p4);
+        panels.put(Constants.PLAYER_1_PANEL, p1.getPanel());
+        panels.put(Constants.PLAYER_2_PANEL, p2.getPanel());
+        panels.put(Constants.PLAYER_3_PANEL, p3.getPanel());
+        panels.put(Constants.PLAYER_4_PANEL, p4.getPanel());
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
+        panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
 
         // Set up layout 

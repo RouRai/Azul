@@ -3,9 +3,8 @@ package panels;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.geom.Line2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import game.*;
@@ -14,13 +13,14 @@ import datastructures.*;
 import logic.*;
 import datastructures.LinkedList;
 
-public class PlayerPanel extends JPanel implements ActionListener{
+public class PlayerPanel extends JPanel implements ActionListener, MouseListener{
 
     private CardLayout cl;
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
-    private boolean choseTile, placeTile, endTurn, scoreR1, scoreR2, scoreR3, scoreR4, scoreR5, scoreP, nextS;
+    private boolean choseTile, placeTile, endTurn, chooseTile;
     private Player p;
+    private Factory pFactory;
     private int stW, tW, tH, stH;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
@@ -30,6 +30,9 @@ public class PlayerPanel extends JPanel implements ActionListener{
         setUpImages();
     }
 
+    public void setPlayer(Player pl){
+        p = pl;
+    }
     private void setUpImages() {
         background = Constants.getImage("Background");
         gameBoard = Constants.getImage("AzulBoard");
@@ -55,13 +58,13 @@ public class PlayerPanel extends JPanel implements ActionListener{
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), 0, (int)((getWidth() / 3) * 2), getHeight()));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
-        //g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
+        g2.drawString(p.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
         g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), tW, tH, null);
         g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), tW, tH, null);
         g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), tW, tH, null);
         g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), tW, tH, null);
         g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), tW, tH, null);
-        g2.drawImage(gameBoard, 0, 0, (int)(getWidth() / 3), (int)(getHeight() / 1.6), null);
+        g2.drawImage(gameBoard, 0, (int)(getHeight() / 4.8), (int)(getWidth() / 3), (int)(getHeight() / 2.4), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         expandButton.setBounds(getWidth()/22, (int)(getHeight() / 1.3), getWidth() / 8, getHeight() / 15);
         logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
@@ -71,21 +74,26 @@ public class PlayerPanel extends JPanel implements ActionListener{
         row4.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.6), (int)(getWidth() / 10), (int)(getHeight() / 20));
         row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
-        g2.setColor(Color.BLACK);
-        //drawScore(g2);
+        drawScore(g2);
         drawPlayerBoard(g2);
         drawPyramid(g2);
         drawPenalty(g2);
+        if(pFactory != null){
+            drawFactoryTiles(g2);
+        }
+    }
+    public void drawFactoryTiles(Graphics2D g){
+        g.setColor(Color.WHITE);
+        g.drawString("" + pFactory.getNumTiles(Constants.BLACK_TILE), (int)((getWidth() / 7) * 6), (int)((getHeight() / 11) * 3) + tW);
+        g.drawString("" + pFactory.getNumTiles(Constants.RED_TILE), (int)((getWidth() / 7) * 6), (int)((getHeight() / 11) * 4) + tW);
+        g.drawString("" + pFactory.getNumTiles(Constants.BLUE_TILE), (int)((getWidth() / 7) * 6), (int)((getHeight() / 11) * 5) + tW);
+        g.drawString("" + pFactory.getNumTiles(Constants.WHITE_TILE), (int)((getWidth() / 7) * 6),  (int)((getHeight() / 11) * 6) + tW);
+        g.drawString("" + pFactory.getNumTiles(Constants.YELLOW_TILE), (int)((getWidth() / 7) * 6),  (int)((getHeight() / 11) * 7) + tW);
     }
     public void addFactory(Factory x)
     {
-        //factory1 = x;
+        pFactory = x;
     }
-    // public void addFactory(Factory x)
-    // {
-    //     factory1 = x;
-    // }
-
     private void drawPlayerBoard(Graphics2D g2){
         g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
         g2.drawImage(blueT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + tH), tW, tH, null);//blue tile in col 2
@@ -147,12 +155,8 @@ public class PlayerPanel extends JPanel implements ActionListener{
 
     private void drawScore(Graphics2D g){
         //WORK NEEDED
-        //int k = (player.getScore() % 100)-1;
-        //int j = player.getScore()/20+1;
-        //if(player.getScore() == 0)
-        //    g.fillRect((getWidth() / 70), 0, stW, stH);
-        //else
-        //    g.fillRect(getWidth() / 70 + k * stW, getHeight() / 29 + j*stH, stW, stH);
+        g.setColor(Color.WHITE);
+        g.drawString("Score :" + p.getScore(), getWidth() / 100, getHeight() / 10);
     }
     
     private void setUpButtons() {
@@ -196,6 +200,8 @@ public class PlayerPanel extends JPanel implements ActionListener{
             checkState();
         } else if(e.getSource().equals(expandButton)){
             cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
+        } else if(e.getSource().equals(row1)){
+            checkState();
         }
     }
     public void chose(){
@@ -205,26 +211,54 @@ public class PlayerPanel extends JPanel implements ActionListener{
         choseTile = false;
         placeTile = false;
         endTurn = false;
-        scoreR1 = false;
-        scoreR2 = false;
-        scoreR3 = false;
-        scoreR4 = false;
-        scoreR5 = false;
-        scoreP = false;
-        nextS = false;
+        chooseTile = false;
     }
     private void checkState(){
         if(!choseTile){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
+            GamePanel.setPlayerCameFrom(p);
             return;
         }
         if(!placeTile){
-            placeTile = !placeTile;
+            //placeTile = !placeTile;
             return;
         }
         if(!endTurn){
            endTurn = !endTurn;
             return;
         }
+    }
+    public void changeChoseTile(){
+        choseTile = true;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 }

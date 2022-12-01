@@ -61,4 +61,14 @@ public class Factory {
         removeType(type);
         return tiles;
     }
+    public int getNumTiles(String str){
+        int cnt = 0;
+        System.out.println(getSize() + ": size");
+        for(int i = 0; i < getSize(); i++){
+            if(getTiles().get(i).getType().equals(str)){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 }

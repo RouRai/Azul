@@ -19,14 +19,6 @@ public class FactoryFloor extends Factory{
         return hasOneTile;
     }
 
-    public int getNumTiles(String str){
-        int cnt = 0;
-        for(int i = 0; i < super.getSize(); i++){
-            if(super.getTiles().get(i).getType().equals(str)){
-                cnt++;
-            }
-        }
-        return cnt;
-    }
+    
     // Everything else is inherited from the Factory class, and works the same
 }
