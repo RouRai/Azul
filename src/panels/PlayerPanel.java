@@ -29,7 +29,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
 
     public void setPlayer(Player pl){
-        p = pl;
+        player = pl;
     }
     private void setUpImages() {
         background = Constants.getImage("Background");
@@ -214,7 +214,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         choseTile = false;
         placeTile = false;
         endTurn = false;
-        chooseTile = false;
+        //chooseTile = false;
     }
     private void checkState(){
         if(!choseTile){
