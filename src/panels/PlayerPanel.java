@@ -94,7 +94,15 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         pFactory = x;
     }
     private void drawPlayerBoard(Graphics2D g2){
-        g2.drawImage(blueT, (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
+        PatternLine temp = player.getPatternLine();
+        datastructures.LinkedList[] rows = new datastructures.LinkedList[5];
+        try {
+            rows = new datastructures.LinkedList[]{temp.getRow(0).getTiles(), temp.getRow(1).getTiles(), temp.getRow(2).getTiles(), temp.getRow(3).getTiles(), temp.getRow(4).getTiles()};
+        } catch (Exception e) {
+            System.out.println("there is a row that is out of bounds");
+        }
+        //however you get the element, i have to do so i cant figure this stuff out... rows[0].remove()!= null ? blueT : null
+        g2.drawImage(blueT , (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
         g2.drawImage(blueT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + tH), tW, tH, null);//blue tile in col 2
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (2 * tH)), tW, tH, null);//blue tile in col 3
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//blue tile in col 4
@@ -219,7 +227,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void checkState(){
         if(!choseTile){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
-            GamePanel.setPlayerCameFrom(p);
+            GamePanel.setPlayerCameFrom(player);
             return;
         }
         if(!placeTile){
