@@ -75,6 +75,7 @@ public class TestFrame extends JFrame{
         playerQueue.enqueue(p3);
         panels.put(Constants.PLAYER_4_PANEL, playerQueue.dequeue().getPanel());
         playerQueue.enqueue(p4);
+        panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
 
