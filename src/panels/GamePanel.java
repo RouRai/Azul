@@ -224,8 +224,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         g.drawImage(Constants.getImage(tiles.get(3).getType()), xVal + factoryWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) 
+    {
         int x = e.getX();
         int y = e.getY();
         if(e.getButton() == e.BUTTON1)
@@ -258,17 +258,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth)
         		    chosen = factory6;
             }
+        }
             //method to put chosen factory into player panel
         
             //switch to player for now, 
             //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
-        }
-        
-<<<<<<< HEAD
-=======
-
->>>>>>> 671c4501bc46d0a8249565f44e02b377aad49a6e
     }
+        
 
     @Override
     public void mousePressed(MouseEvent e) {
