@@ -21,6 +21,7 @@ public class LinkedList<T> implements Iterable<T>{
         }
         current.setNext(newNode);
         newNode.setPrevious(current);
+        current = newNode;
         size++;
     }
 
