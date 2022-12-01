@@ -235,8 +235,8 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         g.drawImage(Constants.getImage(tiles.get(3).getType()), xVal + factoryWidth/2, yVal+tileHeight, tileWidth/2, tileHeight/2, null);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) 
+    {
         int x = e.getX();
         int y = e.getY();
             Factory chosen = null;
@@ -285,6 +285,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                 }    
             }
     }
+        
 
     @Override
     public void mousePressed(MouseEvent e) {
