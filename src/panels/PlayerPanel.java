@@ -24,12 +24,14 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private Factory pFactory;
     private int stW, tW, tH, stH, numTiles;
     private String continuePlay, choosePieces, chooseAction;
+    private Coordinates chooseBlackTile, chooseRedTile, chooseBlueTile, chooseWhiteTile, chooseYellowTile;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
         //p = new Player("Player 1", );
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
+        setUpCoordinates();
         continuePlay = "Click on the Continue Button to Proceed";
         choosePieces = "Click on a Tile Color on the Right to Choose";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
@@ -44,6 +46,14 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         stH = (int)(((getHeight() / 1.6) / 21.25));
         tW = (int)((getWidth() / 3) / 11.35);
         tH = (int)((getHeight() / 1.6) / 11.35);
+    }
+    private void setUpCoordinates()
+    {
+    	chooseBlackTile = new Coordinates((int)((getWidth() / 7) * 5), (int)((getHeight() / 11) * 3));
+    	chooseRedTile = new Coordinates((int)((getWidth() / 7) * 5), (int)((getHeight() / 11) * 4));
+    	chooseBlueTile = new Coordinates((int)((getWidth() / 7) * 5), (int)((getHeight() / 11) * 5));
+    	chooseWhiteTile = new Coordinates((int)((getWidth() / 7) * 5), (int)((getHeight() / 11) * 6));
+    	chooseYellowTile = new Coordinates((int)((getWidth() / 7) * 5), (int)((getHeight() / 11) * 7));
     }
     private void setUpImages() {
         background = Constants.getImage("Background");
@@ -68,11 +78,11 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 6)), (int)((getWidth())), (int)((getHeight() / 6))));
         g2.draw(new Line2D.Float((int)((getWidth() / 3) * 2), (int)((getHeight() / 4) * 3), (int)((getWidth())), (int)((getHeight() / 4) * 3)));
         g2.drawString(player.getName(), (int)((getWidth() / 5) * 4), getHeight() / 10);
-        g2.drawImage(blackT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 3), tW, tH, null);
-        g2.drawImage(redT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 4), tW, tH, null);
-        g2.drawImage(blueT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 5), tW, tH, null);
-        g2.drawImage(whiteT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 6), tW, tH, null);
-        g2.drawImage(yellowT, (int)((getWidth() / 7) * 5),  (int)((getHeight() / 11) * 7), tW, tH, null);
+        g2.drawImage(blackT, chooseBlackTile.getX(),  chooseBlackTile.getY(), tW, tH, null);
+        g2.drawImage(redT, chooseRedTile.getX(),  chooseRedTile.getY(), tW, tH, null);
+        g2.drawImage(blueT, chooseBlueTile.getX(),  chooseBlueTile.getY(), tW, tH, null);
+        g2.drawImage(whiteT, chooseWhiteTile.getX(),  chooseWhiteTile.getY(), tW, tH, null);
+        g2.drawImage(yellowT, chooseYellowTile.getX(),  chooseYellowTile.getY(), tW, tH, null);
         g2.drawImage(gameBoard, 0, (int)(getHeight() / 4.8), (int)(getWidth() / 3), (int)(getHeight() / 2.4), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         expandButton.setBounds(getWidth()/22, (int)(getHeight() / 1.3), getWidth() / 8, getHeight() / 15);
@@ -84,11 +94,13 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         drawScore(g2);
-        drawPlayerBoard(g2);
+        //drawPlayerBoard(g2);
         drawPyramid(g2);
         drawPenalty(g2);
         if(pFactory != null){
             drawFactoryTiles(g2);
+        if(chooseTile)
+        	drawPrompt(choosePieces, g2);
         
         }
     }
@@ -106,7 +118,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     public void drawPrompt(String s, Graphics2D g)
     {
-    	
+    	g.drawString(s, 0, 0);
     }
     private void drawPlayerBoard(Graphics2D g2){
         PatternLine temp = player.getPatternLine();
@@ -145,8 +157,21 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     public void drawPyramid(Graphics2D g) {
     	for(int rows = 0; rows<5; rows++)
-    		for(int i = 0; i<=rows; i++)
-    			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
+    	{
+    		Row line;
+			try {
+				line = player.getPatternLine().getRow(rows+1);
+				int i = 0;
+	    		while(i<line.getTiles().getSize())
+	    		{
+					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
+					i++;
+	    		}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(-1);
+			}
+    	}
     }
     public void drawPenalty(Graphics2D g) {
         
@@ -199,215 +224,54 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         penalty.addActionListener(this);
         expandButton.addActionListener(this);
     }
-
+    
     // Runs this method when something happens to one of the JButtons
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(continueButton)){
             checkState();
-        } else if(e.getSource().equals(expandButton)){
+        } 
+        else if(e.getSource().equals(expandButton)){
             cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
-        } else if(e.getSource().equals(row1)){
-            if(chooseTile){
-                if(selected.equals("black")){
-                    try {
-                        player.getPatternLine().setRowType(1, Constants.BLACK_TILE);
-                        player.getPatternLine().addToRow(numTiles, 1);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("red")){
-                    try {
-                        player.getPatternLine().setRowType(1, Constants.RED_TILE);
-                        player.getPatternLine().addToRow(numTiles, 1);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("blue")){
-                    try {
-                        player.getPatternLine().setRowType(1, Constants.BLUE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 1);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("white")){
-                    try {
-                        player.getPatternLine().setRowType(1, Constants.WHITE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 1);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("yellow")){
-                    try {
-                        player.getPatternLine().setRowType(1, Constants.YELLOW_TILE);
-                        player.getPatternLine().addToRow(numTiles, 1);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            repaint();
-        } else if(e.getSource().equals(row2)){
-            if(chooseTile){
-                if(selected.equals("black")){
-                    try {
-                        player.getPatternLine().setRowType(2, Constants.BLACK_TILE);
-                        player.getPatternLine().addToRow(numTiles, 2);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("red")){
-                    try {
-                        player.getPatternLine().setRowType(2, Constants.RED_TILE);
-                        player.getPatternLine().addToRow(numTiles, 2);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("blue")){
-                    try {
-                        player.getPatternLine().setRowType(2, Constants.BLUE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 2);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("white")){
-                    try {
-                        player.getPatternLine().setRowType(2, Constants.WHITE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 2);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("yellow")){
-                    try {
-                        player.getPatternLine().setRowType(2, Constants.YELLOW_TILE);
-                        player.getPatternLine().addToRow(numTiles, 2);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            repaint();
-        } else if(e.getSource().equals(row3)){
-            if(chooseTile){
-                if(selected.equals("black")){
-                    try {
-                        player.getPatternLine().setRowType(3, Constants.BLACK_TILE);
-                        player.getPatternLine().addToRow(numTiles, 3);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("red")){
-                    try {
-                        player.getPatternLine().setRowType(3, Constants.RED_TILE);
-                        player.getPatternLine().addToRow(numTiles, 3);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("blue")){
-                    try {
-                        player.getPatternLine().setRowType(3, Constants.BLUE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 3);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("white")){
-                    try {
-                        player.getPatternLine().setRowType(3, Constants.WHITE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 3);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("yellow")){
-                    try {
-                        player.getPatternLine().setRowType(3, Constants.YELLOW_TILE);
-                        player.getPatternLine().addToRow(numTiles, 3);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            repaint();
-        } else if(e.getSource().equals(row4)){
-            if(chooseTile){
-                if(selected.equals("black")){
-                    try {
-                        player.getPatternLine().setRowType(4, Constants.BLACK_TILE);
-                        player.getPatternLine().addToRow(numTiles, 4);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("red")){
-                    try {
-                        player.getPatternLine().setRowType(4, Constants.RED_TILE);
-                        player.getPatternLine().addToRow(numTiles, 4);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("blue")){
-                    try {
-                        player.getPatternLine().setRowType(4, Constants.BLUE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 4);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("white")){
-                    try {
-                        player.getPatternLine().setRowType(4, Constants.WHITE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 4);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("yellow")){
-                    try {
-                        player.getPatternLine().setRowType(4, Constants.YELLOW_TILE);
-                        player.getPatternLine().addToRow(numTiles, 4);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            repaint();
-        } else if(e.getSource().equals(row5)){
-            if(chooseTile){
-                if(selected.equals("black")){
-                    try {
-                        player.getPatternLine().setRowType(5, Constants.BLACK_TILE);
-                        player.getPatternLine().addToRow(numTiles, 5);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("red")){
-                    try {
-                        player.getPatternLine().setRowType(5, Constants.RED_TILE);
-                        player.getPatternLine().addToRow(numTiles, 5);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("blue")){
-                    try {
-                        player.getPatternLine().setRowType(5, Constants.BLUE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 5);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("white")){
-                    try {
-                        player.getPatternLine().setRowType(5, Constants.WHITE_TILE);
-                        player.getPatternLine().addToRow(numTiles, 5);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                } else if(selected.equals("yellow")){
-                    try {
-                        player.getPatternLine().setRowType(5, Constants.YELLOW_TILE);
-                        player.getPatternLine().addToRow(numTiles, 5);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            repaint();
         }
+        else if(chooseTile)
+        {
+        	if(e.getSource().equals(row1))
+        		placeTiles(row1);
+        	else if(e.getSource().equals(row2))
+        		placeTiles(row2);
+        	else if(e.getSource().equals(row3))
+        		placeTiles(row3);
+        	else if(e.getSource().equals(row4))
+        		placeTiles(row4);
+        	else if(e.getSource().equals(row5))
+        		placeTiles(row5);
+        	chooseTile = !chooseTile;
+        }
+            repaint();
+    }
+    public void placeTiles(JButton x)
+    {
+    	int row = 0;
+    	if(x == row1)
+    		row = 1;
+    	else if(x == row2)
+    		row = 2;
+    	else if(x == row3)
+    		row = 3;
+    	else if(x == row4)
+    		row = 4;
+    	else if(x == row5)
+    		row = 5;
+    	try
+    	{
+    		player.getPatternLine().setRowType(row, "AzulTile"+selected);
+    		player.getPatternLine().addToRow(numTiles, row);
+    	}
+    	catch(Exception e1)
+    	{
+    		e1.printStackTrace();
+    	}
     }
     public void chose(){
         choseTile =! choseTile;
@@ -419,9 +283,10 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         chooseTile = false;
     }
     private void checkState(){
-        if(!choseTile){
+        if(endTurn){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
             GamePanel.setPlayerCameFrom(player);
+            endTurn = !endTurn;
         }
         else if(!chooseTile){
             return;
@@ -432,8 +297,8 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         else if(!placeTile){
             //placeTile = !placeTile;
         }
-        else if(!endTurn){
-           endTurn = !endTurn;
+        else if(!choseTile){
+           return;
         }
     }
     public void changeChoseTile(){
@@ -452,23 +317,23 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         		if(x >= (int)((getWidth() / 7) * 5) && x <= (int)((getWidth() / 7) * 5) + tW){
         			if(y >= (int)((getHeight() / 11) * 3) && y <= (int)((getHeight() / 11) * 3) + tH){
         				numTiles = pFactory.getNumTiles(Constants.BLACK_TILE);
-        				selected = "black";
+        				selected = "Black";
         			} 
         			else if(y >= (int)((getHeight() / 11) * 4) && y <= (int)((getHeight() / 11) * 4) + tH){
         				numTiles = pFactory.getNumTiles(Constants.RED_TILE);
-        				selected = "red";
+        				selected = "Red";
         			} 
         			else if(y >= (int)((getHeight() / 11) * 5) && y <= (int)((getHeight() / 11) * 5) + tH){
         				numTiles = pFactory.getNumTiles(Constants.BLUE_TILE);
-        				selected = "blue";
+        				selected = "Blue";
         			} 
         			else if(y >= (int)((getHeight() / 11) * 6) && y <= (int)((getHeight() / 11) * 6) + tH){
         				numTiles = pFactory.getNumTiles(Constants.WHITE_TILE); 
-        				selected = "white";
+        				selected = "White";
         			} 
         			else if(y >= (int)((getHeight() / 11) * 7) && y <= (int)((getHeight() / 11) * 7) + tH){
         				numTiles = pFactory.getNumTiles(Constants.YELLOW_TILE);
-        				selected = "white";
+        				selected = "Yellow";
         			}
         		}
             }
