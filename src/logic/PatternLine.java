@@ -53,7 +53,7 @@ public class PatternLine {
         if(row >= patternLines.length || row < 0) {
             throw new Exception("You cannot get to the row, as the row exceeds bounds");
         }
-        return patternLines[row];
+        return patternLines[row-1];
     }
 
     // Sets the type of a specific row.
