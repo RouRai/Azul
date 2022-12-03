@@ -161,7 +161,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     public void drawPyramid(Graphics2D g) {
     	for(int rows = 0; rows<5; rows++)
     	{
-    		/*Row line;
+    		Row line;
 			try {
 				line = player.getPatternLine().getRow(rows+1);
 				int i = 0;
@@ -173,9 +173,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(-1);
-			}*/
-    		for(int i = 0; i<=rows; i++)
-    			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
+			}
+    		/*for(int i = 0; i<=rows; i++)
+    			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);*/
     	}
     }
     public void drawPenalty(Graphics2D g) {
