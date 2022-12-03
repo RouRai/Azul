@@ -31,7 +31,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
-        setUpCoordinates();
+        endTurn = true;
         continuePlay = "Click on the Continue Button to Proceed";
         choosePieces = "Click on a Tile Color on the Right to Choose";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
@@ -68,6 +68,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     public void paintComponent(Graphics g) {
     	setWidthHeight();
+    	setUpCoordinates();
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
@@ -101,6 +102,8 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             drawFactoryTiles(g2);
         if(chooseTile)
         	drawPrompt(choosePieces, g2);
+        else
+        	drawPrompt(continuePlay, g2);
         
         }
     }
@@ -118,7 +121,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     public void drawPrompt(String s, Graphics2D g)
     {
-    	g.drawString(s, 0, 0);
+    	g.drawString(s, getWidth()/28, getHeight()/40);
     }
     private void drawPlayerBoard(Graphics2D g2){
         PatternLine temp = player.getPatternLine();
@@ -158,7 +161,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     public void drawPyramid(Graphics2D g) {
     	for(int rows = 0; rows<5; rows++)
     	{
-    		Row line;
+    		/*Row line;
 			try {
 				line = player.getPatternLine().getRow(rows+1);
 				int i = 0;
@@ -170,7 +173,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(-1);
-			}
+			}*/
+    		for(int i = 0; i<=rows; i++)
+    			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
     	}
     }
     public void drawPenalty(Graphics2D g) {
