@@ -10,6 +10,7 @@ public class LinkedList<T> implements Iterable<T>{
     public LinkedList() {
         first = null;
         current = null;
+        size = 0;
     }
 
     // Adds a Node to the Box
@@ -30,6 +31,7 @@ public class LinkedList<T> implements Iterable<T>{
         for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
             if(n.getItem().equals(o)){
                 n.getNext().setPrevious(n.getPrevious());
+                size--;
                 return;
             }
         }
@@ -40,6 +42,7 @@ public class LinkedList<T> implements Iterable<T>{
         for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
             if(n.getItem().equals(o)){
                 n.getNext().setPrevious(n.getPrevious());
+                size--;
             }
         }
     }
@@ -50,6 +53,7 @@ public class LinkedList<T> implements Iterable<T>{
         for(Node<T> n = tail; n.getPrevious() != null; n = n.getPrevious()) {
             if(n.getItem().equals(o)) {
                 n.getPrevious().setNext(n.getNext());
+                size--;
                 return;
             }
         }
