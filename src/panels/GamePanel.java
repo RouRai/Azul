@@ -120,6 +120,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(returnStart)){
+        	temp.getPanel().reset();
             if(temp.getName().equals("Player 1")){
                 cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
             } else if(temp.getName().equals("Player 2")){
@@ -267,14 +268,15 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         		    chosen = factoryMap.get((byte)4);//factory5;
         	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5) != null)
         		    chosen = factoryMap.get((byte)5); //factory6;
-            } else if((floor.getSize() > 1 && floor.hasOneTile()) || (floor.getSize() > 0 && !floor.hasOneTile())){
+            } 
+            //needs coordinates
+            else if((floor.getSize() > 1 && floor.hasOneTile()) || (floor.getSize() > 0 && !floor.hasOneTile())){
                 chosen = floor;
             }
             //temp.getPanel().addFactory(chosen);
             //method to put chosen factory into player panel
             if(chosen != null){
                 temp.getPanel().addFactory(chosen);
-                temp.getPanel().changeChoseTile();
                 if(temp.getName().equals("Player 1")){
                     cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
                 } else if(temp.getName().equals("Player 2")){
