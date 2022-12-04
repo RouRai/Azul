@@ -12,10 +12,16 @@ public class Queue<T> {
     }
 
     public T dequeue() {
+        if(isEmpty()) {
+            return null;
+        }
         return ll.remove(ll.getFirst().getItem());
     }
 
     public T peek() {
+        if(isEmpty()) {
+            return null;
+        }
         return ll.getFirst().getItem();
     }
 

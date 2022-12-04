@@ -13,10 +13,16 @@ public class Stack<T> {
     }
 
     public T pop(){
+        if(isEmpty()) {
+            return null;
+        }
         return linkedList.removeLast(linkedList.getLast().getItem());
     }
 
     public T peek() {
+        if(isEmpty()) {
+            return null;
+        }
         return linkedList.getLast().getItem();
     }
 
