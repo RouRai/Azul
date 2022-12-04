@@ -5,10 +5,10 @@ import game.Constants;
 
 public class bagClass {
 
-    private ArrayList<TileObject>bag;
+    private LinkedList<TileObject>bag;
 
     public bagClass(){
-        bag = new ArrayList<>();
+        bag = new LinkedList<>();
     }
 
     public void fillBag(){
@@ -22,7 +22,7 @@ public class bagClass {
         Collections.shuffle(bag);
     }
 
-    public ArrayList<TileObject> gTileObjects(){
+    public LinkedList<TileObject> gTileObjects(){
         return bag;
     }
 

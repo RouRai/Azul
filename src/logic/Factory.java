@@ -7,11 +7,11 @@ import java.util.*;
 // Author: Rounak Rai
 public class Factory {
 
-    private ArrayList<TileObject> tiles; // The current tiles in the factory
+    private LinkedList<TileObject> tiles; // The current tiles in the factory
     private int size; // The expected size of the factory (usually four, but exceptions made for FactoryFloor)
 
     public Factory(int s) {
-        tiles = new ArrayList<>();
+        tiles = new LinkedList<>();
         size = s;
     }
 
@@ -27,7 +27,7 @@ public class Factory {
 
     // Returns the Factory's size
     public int getSize() {
-        return tiles.size();
+        return tiles.getSize();
     }
 
     // Adds a tile to the Factory
@@ -43,29 +43,35 @@ public class Factory {
     }
 
     // Returns the tiles currently in the Factory
-    public ArrayList<TileObject> getTiles() {
+    public LinkedList<TileObject> getTiles() {
         return tiles;
     }
 
     // Removes all the tiles of a single type from the Factory
     private void removeType(String type) {
-        for(TileObject t : tiles) {
-            if(t.getType().equals(type)) {
+        /*for(int i = tiles.size() - 1; i >= 0; i--) {
+            if(tiles.get(i).getType().equals(type)) {
+                tiles.remove(i);
+            }
+        }*/
+        for(TileObject t :tiles){
+            if(t.getType().equals(type)){
                 tiles.remove(t);
             }
         }
     }
 
     // Returns the remaining TileObjects in the form of a LinkedList to the player
-    public ArrayList<TileObject> getRemaning(String type) {
+    public LinkedList<TileObject> getRemaning(String type) {
         removeType(type);
         return tiles;
     }
     public int getNumTiles(String str){
         int cnt = 0;
         //System.out.println(getSize() + ": size");
-        for(int i = 0; i < getSize(); i++){
-            if(getTiles().get(i).getType().equals(str)){
+        Iterator<TileObject> iter = tiles.iterator();
+        while(iter.hasNext()){
+            if(iter.next().getType().equals(str)){
                 cnt++;
             }
         }

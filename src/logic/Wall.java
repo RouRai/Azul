@@ -210,8 +210,8 @@ public class Wall {
     }
 
     // Returns the different types of tiles in the form of a LinkedList
-    private ArrayList<String> getTypes() {
-        ArrayList<String> types = new ArrayList<>();
+    private LinkedList<String> getTypes() {
+        LinkedList<String> types = new LinkedList<>();
 
         types.add(Constants.BLACK_TILE);
         types.add(Constants.BLUE_TILE);

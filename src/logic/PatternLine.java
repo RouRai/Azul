@@ -33,7 +33,7 @@ public class PatternLine {
             if(!rowIsFull(row)){
                 getRow(row).addTile();
             } else{
-                floor.addTile(getRow(row).getTiles().get(0));
+                floor.addTile(getRow(row).getTiles().getFirst().getItem());
             }
         }
     }

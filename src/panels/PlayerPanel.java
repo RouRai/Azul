@@ -25,7 +25,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private String selected;
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
-    private boolean choseTile, placeTile, chooseFactory, chooseTile;
+    private boolean placeTile, chooseFactory, chooseTile;
     private Player player;
     private Factory pFactory;
     private int stW, tW, tH, stH, numTiles;
@@ -39,7 +39,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
-        chooseFactory = true;
+        chooseFactory = false;
         continuePlay = "Click on the Continue Button to Proceed";
         choosePieces = "Click on a Tile Color on the Right to Choose";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
@@ -208,7 +208,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 			try {
 				line = player.getPatternLine().getRow(rows);
 				int i = 0;
-                int j = line.getTiles().size();
+                int j = line.getTiles().getSize();
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
@@ -223,36 +223,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	}
     }
     public void drawPenalty(Graphics2D g) {
-        HashMap<String, ArrayList<TileObject>> temp = player.getFloorLine().getHashMap();
+        HashMap<String, LinkedList<TileObject>> temp = player.getFloorLine().getHashMap();
         BufferedImage tem;
         Iterator<TileObject> iter;
-        if(temp.get(Constants.PENALTY_ONE).size() > 0){
+        if(temp.get(Constants.PENALTY_ONE).getSize() > 0){
             iter = temp.get(Constants.PENALTY_ONE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_ONE).size() > 1){
+            if(temp.get(Constants.PENALTY_ONE).getSize() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
         }
-        if(temp.get(Constants.PENALTY_TWO).size() > 0){
+        if(temp.get(Constants.PENALTY_TWO).getSize() > 0){
             iter = temp.get(Constants.PENALTY_TWO).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_TWO).size() > 1){
+            if(temp.get(Constants.PENALTY_TWO).getSize() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                if(temp.get(Constants.PENALTY_TWO).size() > 2){
+                if(temp.get(Constants.PENALTY_TWO).getSize() > 2){
                     tem = Constants.getImage(iter.next().getType());
                     g.drawImage(tem, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
                 }
             }
         }
-        if(temp.get(Constants.PENALTY_THREE).size() > 0){
+        if(temp.get(Constants.PENALTY_THREE).getSize() > 0){
             iter = temp.get(Constants.PENALTY_THREE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_THREE).size() > 1){
+            if(temp.get(Constants.PENALTY_THREE).getSize() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
@@ -353,26 +353,28 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	{
     		player.getPatternLine().setRowType(row, "AzulTile" + selected);
     		player.getPatternLine().addToRow(numTiles, row);
+            GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
+            pFactory = new Factory(4);
+            numTiles = 0;
+            selected = "";
     	}
     	catch(Exception e1)
     	{
     		e1.printStackTrace();
     	}
     }
-    public void chose(){
-        choseTile =! choseTile;
+    public void changeChoseFactory(){
+        chooseFactory = true;
     }
     private void reset(){
-        choseTile = false;
         placeTile = false;
         chooseFactory = false;
         chooseTile = false;
     }
     private void checkState(){
-        if(chooseFactory){
+        if(!chooseFactory){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
             GamePanel.setPlayerCameFrom(player);
-            chooseFactory = !chooseFactory;
         }
         else if(!chooseTile){
             return;
@@ -380,12 +382,10 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         else if(!placeTile){
             return;
         }
-        else if(!choseTile){
-           return;
+        else{
+            TestFrame.nextPlayer();
+            reset();
         }
-    }
-    public void changeChoseTile(){
-        choseTile = true;
     }
 
     @Override

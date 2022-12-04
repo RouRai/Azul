@@ -8,11 +8,11 @@ import game.Constants;
 // Author: Rounak Rai
 public class FloorLine {
     
-    private HashMap<String, ArrayList<TileObject>> tiles; // Associates Penalty with tiles in that penalty
+    private HashMap<String, LinkedList<TileObject>> tiles; // Associates Penalty with tiles in that penalty
     private int totalPenalty; // The total penalty of everything added up
-    private ArrayList<TileObject> lid; // Excess tiles that can't be placed in the FloorLine are placed in the lid
+    private LinkedList<TileObject> lid; // Excess tiles that can't be placed in the FloorLine are placed in the lid
 
-    public FloorLine(ArrayList<TileObject> lid) {
+    public FloorLine(LinkedList<TileObject> lid) {
         tiles = new HashMap<>();
         this.lid = lid;
         setUpHashMap();
@@ -43,14 +43,14 @@ public class FloorLine {
     }
 
     // Adds multiple tiles to the floorline in the form of a LinkedList
-    public void addTiles(ArrayList<TileObject> t) {
+    public void addTiles(LinkedList<TileObject> t) {
         for(TileObject obj : t) {
             addTile(obj);
         }
     }
 
     // Returns the tiles associated with a specific penalty
-    public ArrayList<TileObject> getTileList(String penalty) {
+    public LinkedList<TileObject> getTileList(String penalty) {
         if(tiles.containsKey(penalty)) {
             return tiles.get(penalty);
         }
@@ -58,7 +58,7 @@ public class FloorLine {
     }
 
     // Returns the whole penalty HashMap
-    public HashMap<String, ArrayList<TileObject>> getHashMap() {
+    public HashMap<String, LinkedList<TileObject>> getHashMap() {
         return tiles;
     }
 
@@ -84,13 +84,13 @@ public class FloorLine {
 
     // Decides the penalty for the next tile to be added to the floor line
     private String decidePenalty() {
-        if(tiles.get(Constants.PENALTY_ONE).size() < 2) {
+        if(tiles.get(Constants.PENALTY_ONE).getSize() < 2) {
             return Constants.PENALTY_ONE;
         }
-        if(tiles.get(Constants.PENALTY_TWO).size() < 3) {
+        if(tiles.get(Constants.PENALTY_TWO).getSize() < 3) {
             return Constants.PENALTY_TWO;
         }
-        if(tiles.get(Constants.PENALTY_THREE).size() < 2) {
+        if(tiles.get(Constants.PENALTY_THREE).getSize() < 2) {
             return Constants.PENALTY_THREE;
         }
         return null;
@@ -99,9 +99,9 @@ public class FloorLine {
     // Sets up the tile hashmap with the penalty and linked list
     private void setUpHashMap() {
         tiles = new HashMap<>();
-        tiles.put(Constants.PENALTY_ONE, new ArrayList<TileObject>());
-        tiles.put(Constants.PENALTY_TWO, new ArrayList<TileObject>());
-        tiles.put(Constants.PENALTY_THREE, new ArrayList<TileObject>());
+        tiles.put(Constants.PENALTY_ONE, new LinkedList<TileObject>());
+        tiles.put(Constants.PENALTY_TWO, new LinkedList<TileObject>());
+        tiles.put(Constants.PENALTY_THREE, new LinkedList<TileObject>());
     }
 
     // Discards all the tiles in the floor and sets the penalty to 0

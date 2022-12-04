@@ -5,26 +5,26 @@ import java.util.*;
 // Author: Rounak Rai
 public class Row {
     
-    private ArrayList<TileObject> tiles; // Tiles currently in the row
+    private LinkedList<TileObject> tiles; // Tiles currently in the row
     private int size; // The maximum size of the row that is possible
     private String type; // The type of the tile that is currently in the row
 
     public Row(int s) {
         size = s;
-        tiles = new ArrayList<>();
+        tiles = new LinkedList<>();
     }
 
     public int getSize() {
         return size;
     }
 
-    public ArrayList<TileObject> getTiles() {
+    public LinkedList<TileObject> getTiles() {
         return tiles;
     }
 
     // Returns if the row is full or not
     public boolean isFull() {
-        return tiles.size() == size;
+        return tiles.getSize() == size;
     }
 
     // Adds the desired amount tiles of the row's type
@@ -55,7 +55,7 @@ public class Row {
 
     // Discards the tiles in the row.
     public void discardTiles() {
-        tiles = new ArrayList<>();
+        tiles = new LinkedList<>();
         type = null;
     }
 }
