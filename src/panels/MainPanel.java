@@ -17,19 +17,19 @@ public class MainPanel extends JPanel implements ActionListener{
     private ArrayList<Player> players;
     private int bW, tW, stW;
     private JButton backToPlayerScreen;
-    private datastructures.LinkedList<TileObject> lid1, lid2, lid3, lid4;
+    //private datastructures.LinkedList<TileObject> lid1, lid2, lid3, lid4;
 
     public MainPanel(CardLayout cl){
         this.cl = cl;
-        players = new ArrayList<>();
-        lid1 = new datastructures.LinkedList<>();
+        //players = new ArrayList<>();
+        /*lid1 = new datastructures.LinkedList<>();
         lid2 = new datastructures.LinkedList<>();
         lid3 = new datastructures.LinkedList<>();
-        lid4 = new datastructures.LinkedList<>();
-        /*players.add(new Player("Player 1", lid1));
-        players.add(new Player("Player 2", lid2));
-        players.add(new Player("Player 3", lid3));
-        players.add(new Player("Player 4", lid4));*/
+        lid4 = new datastructures.LinkedList<>();*/
+        /*players.add(TestFrame.getP1());
+        players.add(TestFrame.getP2());
+        players.add(TestFrame.getP3());
+        players.add(TestFrame.getP4());*/
         setUpImages();
         setUpButtons();
     }
@@ -81,28 +81,7 @@ public class MainPanel extends JPanel implements ActionListener{
     private void drawp4Score(Graphics g){
         int s = players.get(3).getScore();
         g.setColor(Color.BLACK);
-        int k;
-        if(s == 0){
-            g.fillRect(getWidth() / 90, getHeight() / 2, stW, stW);
-        } else if(s % 100 == 0){
-            k = 19;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.58), stW, stW);
-        } else if(s % 100 >= 81){
-            k = (s % 100) - 81;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.58), stW, stW);
-        } else if (s % 100 >= 61){
-            k = (s % 100) - 61;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.66), stW, stW);
-        } else if(s % 100 >= 41){
-            k = (s % 100) - 41;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.74), stW, stW);
-        } else if (s % 100 >= 21){
-            k = (s % 100) - 21;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.81), stW, stW);
-        } else if (s % 100 >= 1){
-            k = (s % 100) - 1;
-            g.fillRect(getWidth() / 90 + (k *stW) + (k * getWidth() / 9500), (int)(getHeight() / 1.9), stW, stW);
-        }
+        g.drawString("Score :" + p4.getScore(), s, s);
     }
     private void drawNames(Graphics g){
         g.setColor(Color.WHITE);
@@ -138,7 +117,7 @@ public class MainPanel extends JPanel implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(backToPlayerScreen)){
-            //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+            cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
         }
     }
 }
