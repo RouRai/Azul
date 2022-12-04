@@ -26,10 +26,10 @@ public class MainPanel extends JPanel implements ActionListener{
         lid2 = new datastructures.LinkedList<>();
         lid3 = new datastructures.LinkedList<>();
         lid4 = new datastructures.LinkedList<>();
-        /*players.add(new Player("Player 1", lid1));
-        players.add(new Player("Player 2", lid2));
-        players.add(new Player("Player 3", lid3));
-        players.add(new Player("Player 4", lid4));*/
+        players.add(TestFrame.getP1());
+        players.add(TestFrame.getP2());
+        players.add(TestFrame.getP3());
+        players.add(TestFrame.getP4());
         setUpImages();
         setUpButtons();
     }
@@ -138,7 +138,7 @@ public class MainPanel extends JPanel implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(backToPlayerScreen)){
-            //cl.show(Constants.PANEL_CONT, Constants.PLAYER_PANEL);
+            cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
         }
     }
 }
