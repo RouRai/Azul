@@ -1,30 +1,29 @@
 package datastructures;
 
 public class Queue<T> {
-    private Node<T> head;
-    private Node<T> tail; 
+    LinkedList<T> ll;
     
     public Queue() {
-        head = null;
-        tail = null;
+        ll = new LinkedList<>();
     }
 
     public void enqueue(T t) {
-        if(head == null) {
-            head = new Node<T>(t, null, null);
-            tail = head;
-            return;
-        }
-        tail = new Node<T>(t, null, tail);
+        ll.add(t);
     }
 
     public T dequeue() {
-        T data = head.getItem();
-        head = head.getNext();
-        return data;
+        return ll.remove(ll.getFirst().getItem());
     }
 
     public T peek() {
-        return head.getItem();
+        return ll.getFirst().getItem();
+    }
+
+    public boolean isEmpty() {
+        return getSize() == 0;
+    }
+
+    public int getSize() {
+        return ll.getSize();
     }
 }

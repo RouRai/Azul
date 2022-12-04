@@ -1,34 +1,36 @@
 package datastructures;
 
 public class Stack<T> {
-    private Node<T> head;
-    private Node<T> tail;
+
+    private LinkedList<T> linkedList;
 
     public Stack() {
-        head = null;
-        tail = null;
+        linkedList = new LinkedList<>();
     }
 
     public void push(T t) {
-        if(head == null) {
-            head = new Node<T>(t, null, null);
-            tail = head;
-            return;
-        }
-        tail = new Node<T>(t, null, tail);
+        linkedList.add(t);
     }
 
     public T pop(){
-        T data = tail.getItem();
-        tail = tail.getPrevious();
-        return data;
+        return linkedList.removeLast(linkedList.getLast().getItem());
     }
 
     public T peek() {
-        return tail.getItem();
+        return linkedList.getLast().getItem();
     }
-    public boolean isEmpty()
-    {
-        return head == null;
+
+    public boolean isEmpty() {
+        return getSize() == 0;
+    }
+
+    public int getSize() {
+        return linkedList.getSize();
+    }
+
+    public void printString() {
+        for(T s : linkedList) {
+            System.out.println(s);
+        }
     }
 }

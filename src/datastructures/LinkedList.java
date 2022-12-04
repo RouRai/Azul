@@ -28,22 +28,23 @@ public class LinkedList<T> implements Iterable<T>{
     }
 
     // Removes first instance of the T in the Box
-    public void remove (T o) {
-        for(Node<T> n = getFirst(); n.getNext() != null; n = n.getNext()) {
-            if(n.getItem().equals(first.getItem())) {
+    public T remove (T o) {
+        for(Node<T> n = getFirst(); n != null; n = n.getNext()) {
+            if(n.getItem().equals(first.getItem()) && first.getItem().equals(o)) {
                 first = first.getNext();
                 size--;
-                return;
-            } else if(n.getItem().equals(current.getItem())){
-                current = current.getPrevious();
+                return o;
+            } else if(n == current && n.getItem().equals(o)){
+                current.getPrevious().setNext(null);
                 size--;
-                return;
+                return o;
             } else if(n.getItem().equals(o)){
                 n.getPrevious().setNext(n.getNext());
                 size--;
-                return;
+                return o;
             }
         } 
+        return null;
     }
 
     // Removes all instances of the T in the Box
@@ -57,15 +58,24 @@ public class LinkedList<T> implements Iterable<T>{
     }
 
     // Removes the last instance of T in the Box
-    public void removeLast(T o) {
-        Node<T> tail = new Node<T>(current.getItem(), null, current.getPrevious());
-        for(Node<T> n = tail; n.getPrevious() != null; n = n.getPrevious()) {
-            if(n.getItem().equals(o)) {
+    public T removeLast(T o) {
+        for(Node<T> n = getLast(); n != null; n = n.getPrevious()) {
+            if(n.getItem().equals(first.getItem()) && first.getItem().equals(o)) {
+                first = first.getNext();
+                size--;
+                return o;
+            } else if(n == current && n.getItem().equals(o)){
+                current.getPrevious().setNext(null);
+                current = current.getPrevious();
+                size--;
+                return o;
+            } else if(n.getItem().equals(o)){
                 n.getPrevious().setNext(n.getNext());
                 size--;
-                return;
+                return o;
             }
-        }
+        } 
+        return null;
     }
 
     // Returns formmated String of contets of Box
@@ -86,6 +96,10 @@ public class LinkedList<T> implements Iterable<T>{
     // Gets the first Node in the box, useful when implementing the Iterator
     public Node<T> getFirst() {
         return first;
+    }
+
+    public Node<T> getLast() {
+        return current;
     }
 
     // Allows us to traverse the data structure
