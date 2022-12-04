@@ -63,7 +63,7 @@ public class Factory {
     }
     public int getNumTiles(String str){
         int cnt = 0;
-        System.out.println(getSize() + ": size");
+        //System.out.println(getSize() + ": size");
         for(int i = 0; i < getSize(); i++){
             if(getTiles().get(i).getType().equals(str)){
                 cnt++;

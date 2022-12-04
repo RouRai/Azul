@@ -25,6 +25,5 @@ public class LinkedListIterator<T> implements Iterator<T> {
             return data;
         }
         return null;
-
         }
 }

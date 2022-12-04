@@ -1,30 +1,30 @@
 package logic;
 
 import datastructures.LinkedList;
-
+import java.util.*;
 // Author: Rounak Rai
 public class Row {
     
-    private LinkedList<TileObject> tiles; // Tiles currently in the row
+    private ArrayList<TileObject> tiles; // Tiles currently in the row
     private int size; // The maximum size of the row that is possible
     private String type; // The type of the tile that is currently in the row
 
     public Row(int s) {
         size = s;
-        tiles = new LinkedList<>();
+        tiles = new ArrayList<>();
     }
 
     public int getSize() {
         return size;
     }
 
-    public LinkedList<TileObject> getTiles() {
+    public ArrayList<TileObject> getTiles() {
         return tiles;
     }
 
     // Returns if the row is full or not
     public boolean isFull() {
-        return tiles.getSize() == size;
+        return tiles.size() == size;
     }
 
     // Adds the desired amount tiles of the row's type
@@ -35,7 +35,7 @@ public class Row {
     }
 
     // Adds a single tile to the Row
-    private void addTile() {
+    public void addTile() {
         tiles.add(new TileObject(type));
     }
 
@@ -54,7 +54,7 @@ public class Row {
 
     // Discards the tiles in the row.
     public void discardTiles() {
-        tiles = new LinkedList<>();
+        tiles = new ArrayList<>();
         type = null;
     }
 }
