@@ -18,6 +18,7 @@ public class LinkedList<T> implements Iterable<T>{
         Node<T> newNode = new Node<T>(o, null, null);
         if(first == null) {
             first = current = newNode;
+            size++;
             return;
         }
         current.setNext(newNode);
@@ -28,13 +29,21 @@ public class LinkedList<T> implements Iterable<T>{
 
     // Removes first instance of the T in the Box
     public void remove (T o) {
-        for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
-            if(n.getItem().equals(o)){
-                n.getNext().setPrevious(n.getPrevious());
+        for(Node<T> n = getFirst(); n.getNext() != null; n = n.getNext()) {
+            if(n.getItem().equals(first.getItem())) {
+                first = first.getNext();
+                size--;
+                return;
+            } else if(n.getItem().equals(current.getItem())){
+                current = current.getPrevious();
+                size--;
+                return;
+            } else if(n.getItem().equals(o)){
+                n.getPrevious().setNext(n.getNext());
                 size--;
                 return;
             }
-        }
+        } 
     }
 
     // Removes all instances of the T in the Box
