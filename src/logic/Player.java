@@ -1,8 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+
 import datastructures.LinkedList;
 import panels.PlayerPanel;
-
+import java.util.*;
 // Author: Rounak Rai (WIP)
 public class Player implements Comparable<Player>{
 
@@ -13,7 +15,7 @@ public class Player implements Comparable<Player>{
     private FloorLine floorLine; // Their Floor
     private String name; // The players name
     private PlayerPanel playerPanel;
-    public Player(String name, LinkedList<TileObject> lid, PlayerPanel p) {
+    public Player(String name, ArrayList<TileObject> lid, PlayerPanel p) {
         floorLine = new FloorLine(lid);
         patternLine = new PatternLine(floorLine);
         wall = new Wall(this, floorLine);

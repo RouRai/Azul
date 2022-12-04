@@ -32,6 +32,8 @@ public class PatternLine {
         for(int i = 0; i < count; i++) {
             if(!rowIsFull(row)){
                 getRow(row).addTile();
+            } else{
+                floor.addTile(getRow(row).getTiles().get(0));
             }
         }
     }

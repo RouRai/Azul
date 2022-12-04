@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class TestFrame extends JFrame{
     private static Queue<Player> playerQueue;
     private static Player p1, p2, p3, p4;
-    private LinkedList<TileObject> lid;
+    private ArrayList<TileObject> lid;
     private CardLayout cl;
     private HashMap<String,JPanel> panels;
 
@@ -35,7 +35,7 @@ public class TestFrame extends JFrame{
     }
     private void setQueue(){
         playerQueue = new Queue<>();
-        lid = new LinkedList<>();
+        lid = new ArrayList<>();
         p1 = new Player("Player 1", lid, new PlayerPanel(cl));
         p2 = new Player("Player 2", lid, new PlayerPanel(cl));
         p3 = new Player("Player 3", lid, new PlayerPanel(cl));

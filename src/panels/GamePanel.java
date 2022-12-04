@@ -263,7 +263,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             {
         	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3) != null)
         		    chosen = factoryMap.get((byte)3);//factory4;
-        	    else if(x>factoryFive.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)4) != null)
+        	    else if(x>factoryFive.getX() && x<factoryFive.getX()+factoryWidth && factoryMap.get((byte)4) != null)
         		    chosen = factoryMap.get((byte)4);//factory5;
         	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5) != null)
         		    chosen = factoryMap.get((byte)5); //factory6;

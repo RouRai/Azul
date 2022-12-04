@@ -1,8 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+
 import datastructures.LinkedList;
 import game.Constants;
-
+import java.util.*;
 // Author: Rounak Rai (WIP)
 public class Wall {
     
@@ -208,8 +210,8 @@ public class Wall {
     }
 
     // Returns the different types of tiles in the form of a LinkedList
-    private LinkedList<String> getTypes() {
-        LinkedList<String> types = new LinkedList<>();
+    private ArrayList<String> getTypes() {
+        ArrayList<String> types = new ArrayList<>();
 
         types.add(Constants.BLACK_TILE);
         types.add(Constants.BLUE_TILE);

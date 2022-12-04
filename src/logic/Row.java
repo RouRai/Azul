@@ -47,7 +47,8 @@ public class Row {
     // Changes the current type of tile in the Row. If the row has tiles of a different type, it will throw an exception
     public void setType(String t) throws Exception {
         if(!tiles.isEmpty()){
-            throw new Exception("You cannot set the type of the row as it currently contains tiles.");
+            return;
+            //throw new Exception("You cannot set the type of the row as it currently contains tiles.");
         }
         type = t;
     }

@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.awt.event.MouseEvent;
@@ -104,8 +105,14 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         row5.setBounds((int)(getWidth() / 3), (int)(getHeight() / 2.25), (int)(getWidth() / 10), (int)(getHeight() / 20));
         penalty.setBounds((int)(getWidth() / 3),(int)(getHeight() / 1.9), (int)(getWidth() / 10), (int)(getHeight() / 20));
         drawScore(g2);
+        drawPenalty(g2);
         drawPlayerBoard(g2);
-        drawPyramid(g2);
+        try {
+            drawPyramid(g2);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         drawPenalty(g2);
         if(pFactory != null){
             drawFactoryTiles(g2);
@@ -143,19 +150,31 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     public void drawPrompt(String s, Graphics2D g)
     {
-    	g.drawString(s, getWidth()/28, getHeight()/40);
+    	g.drawString(s, getWidth()/100, getHeight()/28);
     }
     private void drawPlayerBoard(Graphics2D g2){
         Wall wall = player.getWall();
-        PatternLine temp = player.getPatternLine();
         /*LinkedList[] rows = new datastructures.LinkedList[5];
         try {
             rows = new datastructures.LinkedList[]{temp.getRow(0).getTiles(), temp.getRow(1).getTiles(), temp.getRow(2).getTiles(), temp.getRow(3).getTiles(), temp.getRow(4).getTiles()};
         } catch (Exception e) {
             System.out.println("there is a row that is out of bounds");
         }*/
+        String[][] mat = wall.getBoard();
+        for(int r = 0; r < mat.length; r++){
+            for(int c = 0; c < mat.length; c++){
+                if(mat[r][c] != null){
+                    try {
+                        g2.drawImage(Constants.getImage(wall.getIndicatedTile(r, c)), (int)((getWidth() / 5.85) + (tW * c)), (int)((getHeight() / 4.55) + (r * tH)), null);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
         //however you get the element, i have to do so i cant figure this stuff out... rows[0].remove()!= null ? blueT : null
-        g2.drawImage(blueT , (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
+        /*g2.drawImage(blueT , (int)(getWidth() / 5.8), (int)(getHeight() / 4.55), tW, tH, null); //blue tile in col 1
         g2.drawImage(blueT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55) + tH), tW, tH, null);//blue tile in col 2
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (2 * tH)), tW, tH, null);//blue tile in col 3
         g2.drawImage(blueT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//blue tile in col 4
@@ -179,9 +198,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.drawImage(yellowT, (int)((getWidth() / 5.8) + tW), (int)((getHeight() / 4.55)), tW, tH, null);//yellow tile in col 2
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (2 * tW)), (int)((getHeight() / 4.55) + (tH)), tW, tH, null);//yellow tile in col 3
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (3 * tW)), (int)((getHeight() / 4.55) + (2 * tH)), tW, tH, null);//yellow tile in col 4
-        g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//yellow tile in col 5
+        g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//yellow tile in col 5*/
     }
-    public void drawPyramid(Graphics2D g) {
+    public void drawPyramid(Graphics2D g) throws Exception {
         Row line;
         //PatternLine temp = player.getPatternLine();
     	for(int rows = 1; rows < 6; rows++)
@@ -193,48 +212,47 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
-					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)- tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
+					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)- tW*i, (int)(getHeight() / 4.55)+ tH* (rows - 1), tW, tH, null);
+                    //g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * (j), (int)(getHeight() / 4.55)+tH * (i - 1), tW, tH, null);
 					i++;
 	    		}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(-1);
 			}
-    		/*for(int i = 0; i<=rows; i++)
-    			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);*/
     	}
     }
     public void drawPenalty(Graphics2D g) {
-        HashMap<String, LinkedList<TileObject>> temp = player.getFloorLine().getHashMap();
+        HashMap<String, ArrayList<TileObject>> temp = player.getFloorLine().getHashMap();
         BufferedImage tem;
         Iterator<TileObject> iter;
-        if(temp.get(Constants.PENALTY_ONE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
             iter = temp.get(Constants.PENALTY_ONE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_ONE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_ONE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
         }
-        if(temp.get(Constants.PENALTY_TWO).getSize() > 0){
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
             iter = temp.get(Constants.PENALTY_TWO).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_TWO).getSize() > 1){
+            if(temp.get(Constants.PENALTY_TWO).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                if(temp.get(Constants.PENALTY_TWO).getSize() > 2){
+                if(temp.get(Constants.PENALTY_TWO).size() > 2){
                     tem = Constants.getImage(iter.next().getType());
                     g.drawImage(tem, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
                 }
             }
         }
-        if(temp.get(Constants.PENALTY_THREE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
             iter = temp.get(Constants.PENALTY_THREE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_THREE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_THREE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
@@ -252,7 +270,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void drawScore(Graphics2D g){
         //WORK NEEDED
         g.setColor(Color.WHITE);
-        g.drawString("Score :" + player.getScore(), getWidth() / 100, getHeight() / 10);
+        g.drawString("Score :" + player.getScore(), getWidth() / 100, getHeight() / 8);
     }
     
     private void setUpButtons() {
