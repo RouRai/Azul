@@ -122,7 +122,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(returnStart)){
-        	temp.getPanel().reset();
+        	//temp.getPanel().reset();
             if(temp.getName().equals("Player 1")){
                 cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
             } else if(temp.getName().equals("Player 2")){

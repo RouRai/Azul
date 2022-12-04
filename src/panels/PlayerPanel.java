@@ -257,14 +257,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
         }
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-        //g.drawImage(gameBoard, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
-
     }
 
     private void drawScore(Graphics2D g){
@@ -315,6 +307,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         } 
         else if(e.getSource().equals(expandButton)){
             cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
+            MainPanel.setPlayerCameFrom(player);
         } else if(chooseTile && !placeTile){
             if(e.getSource().equals(row1)){
                 placeTiles(row1);
@@ -396,27 +389,27 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         int y = e.getY();
         	if(!chooseTile){
         		if(x >= (int)((getWidth() / 7) * 5) && x <= (int)((getWidth() / 7) * 5) + tW){
-        			if(y >= (int)((getHeight() / 11) * 3) && y <= (int)((getHeight() / 11) * 3) + tH){
+        			if(y >= (int)((getHeight() / 11) * 3) && y <= (int)((getHeight() / 11) * 3) + tH && pFactory.getNumTiles(Constants.BLACK_TILE) > 0){
         				numTiles = pFactory.getNumTiles(Constants.BLACK_TILE);
                         System.out.println("Got " + numTiles + " black");
         				selected = "Black";
         			} 
-        			else if(y >= (int)((getHeight() / 11) * 4) && y <= (int)((getHeight() / 11) * 4) + tH){
+        			else if(y >= (int)((getHeight() / 11) * 4) && y <= (int)((getHeight() / 11) * 4) + tH && pFactory.getNumTiles(Constants.RED_TILE) > 0){
         				numTiles = pFactory.getNumTiles(Constants.RED_TILE);
                         System.out.println("Got " + numTiles + " red");
         				selected = "Red";
         			} 
-        			else if(y >= (int)((getHeight() / 11) * 5) && y <= (int)((getHeight() / 11) * 5) + tH){
+        			else if(y >= (int)((getHeight() / 11) * 5) && y <= (int)((getHeight() / 11) * 5) + tH && pFactory.getNumTiles(Constants.BLUE_TILE) > 0){
         				numTiles = pFactory.getNumTiles(Constants.BLUE_TILE);
                         System.out.println("Got " + numTiles + " blue");
         				selected = "Blue";
         			} 
-        			else if(y >= (int)((getHeight() / 11) * 6) && y <= (int)((getHeight() / 11) * 6) + tH){
+        			else if(y >= (int)((getHeight() / 11) * 6) && y <= (int)((getHeight() / 11) * 6) + tH  && pFactory.getNumTiles(Constants.WHITE_TILE) > 0){
         				numTiles = pFactory.getNumTiles(Constants.WHITE_TILE); 
                         System.out.println("Got " + numTiles + " white");
         				selected = "White";
         			} 
-        			else if(y >= (int)((getHeight() / 11) * 7) && y <= (int)((getHeight() / 11) * 7) + tH){
+        			else if(y >= (int)((getHeight() / 11) * 7) && y <= (int)((getHeight() / 11) * 7) + tH && pFactory.getNumTiles(Constants.YELLOW_TILE) > 0){
         				numTiles = pFactory.getNumTiles(Constants.YELLOW_TILE);
                         System.out.println("Got " + numTiles + " yellow");
         				selected = "Yellow";

@@ -18,7 +18,7 @@ public class TestFrame extends JFrame{
     private static Queue<Player> playerQueue;
     private static Player p1, p2, p3, p4, currentPlayer;
     private LinkedList<TileObject> lid;
-    private CardLayout cl;
+    private static CardLayout cl;
     private HashMap<String,JPanel> panels;
 
     public TestFrame(String str){
