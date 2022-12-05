@@ -347,7 +347,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     		player.getPatternLine().setRowType(row, "AzulTile" + selected);
     		player.getPatternLine().addToRow(numTiles, row);
             GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
-            pFactory = new Factory(4);
+            if(!pFactory.equals(GamePanel.geFactoryFloor())){
+                Iterator<TileObject> iter = pFactory.getTiles().iterator();
+                while(iter.hasNext()){
+                    pFactory.getTiles().remove(iter.next());
+                }
+            }
             numTiles = 0;
             selected = "";
     	}

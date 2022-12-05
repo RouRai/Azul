@@ -281,6 +281,17 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             //temp.getPanel().addFactory(chosen);
             //method to put chosen factory into player panel
             if(chosen != null){
+                if(chosen.equals(floor)){
+                    if(floor.hasOneTile()){
+                        floor.setHasOneTile(false);
+                        Iterator<TileObject> iter = floor.getTiles().iterator();
+                        TileObject t = floor.getTiles().getFirst().getItem();
+                        while(!t.getType().equals(Constants.ONE_TILE)){
+                            t = iter.next();
+                        }
+                        temp.getFloorLine().addTile(t);
+                    }
+                }
                 temp.getPanel().addFactory(chosen);
                 temp.getPanel().changeChoseFactory();
                 if(temp.getName().equals("Player 1")){
