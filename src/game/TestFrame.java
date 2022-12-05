@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class TestFrame extends JFrame{
     private static Queue<Player> playerQueue;
     private static Player p1, p2, p3, p4, currentPlayer;
-    private LinkedList<TileObject> lid;
+    private static LinkedList<TileObject> lid;
     private CardLayout cl;
     private HashMap<String,JPanel> panels;
 
@@ -81,6 +81,10 @@ public class TestFrame extends JFrame{
     public static Player getCurrentPlayer()
     {
     	return currentPlayer;
+    }
+    public static LinkedList<TileObject> getLid()
+    {
+    	return lid;
     }
     private void setUpPanels() {
 
