@@ -310,22 +310,56 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             MainPanel.setPlayerCameFrom(player);
         } else if(chooseTile && !placeTile){
             if(e.getSource().equals(row1)){
-                placeTiles(row1);
-                System.out.println("Added to row 1");
+                try {
+                    if(!(player.getPatternLine().getRow(1).getTiles().getSize() > 0) || player.getPatternLine().getRow(1).getType().equals("AzulTile" + selected)){
+                        placeTiles(row1);
+                        System.out.println("Added to row 1");
+                    }
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }else if(e.getSource().equals(row2)){
-                placeTiles(row2);
-                System.out.println("Added to row 2");
+                try {
+                    if(!(player.getPatternLine().getRow(2).getTiles().getSize() > 0) || player.getPatternLine().getRow(2).getType().equals("AzulTile" + selected)){
+                        placeTiles(row2);
+                        System.out.println("Added to row 2");
+                    }
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }else if(e.getSource().equals(row3)){
-                placeTiles(row3);
-                System.out.println("Added to row 3");
+                try {
+                    if(!(player.getPatternLine().getRow(3).getTiles().getSize() > 0) || player.getPatternLine().getRow(3).getType().equals("AzulTile" + selected)){
+                        placeTiles(row3);
+                        System.out.println("Added to row 3");
+                    }
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }else if(e.getSource().equals(row4)){
-                placeTiles(row4);
-                System.out.println("Added to row 4");
+                try {
+                    if(!(player.getPatternLine().getRow(4).getTiles().getSize() > 0) || player.getPatternLine().getRow(4).getType().equals("AzulTile" + selected)){
+                        placeTiles(row4);
+                        System.out.println("Added to row 4");
+                    }
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }else if(e.getSource().equals(row5)){
-                placeTiles(row5);
-                System.out.println("Added to row 5");
+                try {
+                    if(!(player.getPatternLine().getRow(5).getTiles().getSize() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                        placeTiles(row5);
+                        System.out.println("Added to row 5");
+                    }
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
-            placeTile = true;
             }
         repaint();
     }
@@ -344,17 +378,20 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     		row = 5;
     	try
     	{
+
     		player.getPatternLine().setRowType(row, "AzulTile" + selected);
     		player.getPatternLine().addToRow(numTiles, row);
-            GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
             if(!pFactory.equals(GamePanel.geFactoryFloor())){
+                GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
                 Iterator<TileObject> iter = pFactory.getTiles().iterator();
                 while(iter.hasNext()){
                     pFactory.getTiles().remove(iter.next());
                 }
             }
+            pFactory = null;
             numTiles = 0;
             selected = "";
+            placeTile = true;
     	}
     	catch(Exception e1)
     	{

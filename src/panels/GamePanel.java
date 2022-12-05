@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private JButton returnStart;
     private BufferedImage background, factory, logo, redTile, yellowTile, whiteTile, blueTile, blackTile, oneTile;
     private int factoryWidth, factoryHeight, tileWidth, tileHeight;
-    private HashMap<Byte, Factory> factoryMap;
+    private static HashMap<Byte, Factory> factoryMap;
     private Coordinates factoryOne, factoryTwo, factoryThree, factoryFour, factoryFive, factorySix, factorySeven, factoryEight, factoryNine;
     private Coordinates tileOne, tileTwo, tileThree, tileFour, tileFive, tileSix;
     //private Factory factory1, factory2, factory3, factory4, factory5, factory6, factory7, factory8, factory9;
@@ -249,29 +249,29 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             Factory chosen = null;
             if(x < factoryWidth)
             {
-                if(y > 0 && y<factoryHeight && factoryMap.get((byte)0) != null)
+                if(y > 0 && y<factoryHeight && factoryMap.get((byte)0).getTiles().getFirst().getItem()  != null)
                     chosen = factoryMap.get((byte)0);//factory1;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)1) != null)
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)1).getTiles().getFirst().getItem()  != null)
             	    chosen = factoryMap.get((byte)1);//factory2;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)2) != null)
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)2).getTiles().getFirst().getItem()  != null)
             	    chosen = factoryMap.get((byte)2);//factory3;
             }
             else if (x>getWidth()-factoryWidth)
             {
-        	    if(y > 0 && y<factoryHeight && factoryMap.get((byte)8) != null)
+        	    if(y > 0 && y<factoryHeight && factoryMap.get((byte)8).getTiles().getFirst().getItem() != null)
                     chosen = factoryMap.get((byte)8);//factory9;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)7) != null)
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)7).getTiles().getFirst().getItem() != null)
             	    chosen = factoryMap.get((byte)7);//factory8;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)6) != null)
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)6).getTiles().getFirst().getItem()  != null)
             	    chosen = factoryMap.get((byte)6);//factory7;
             }
             else if(y > factoryThree.getY())
             {
-        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3) != null)
+        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3).getTiles().getFirst().getItem() != null)
         		    chosen = factoryMap.get((byte)3);//factory4;
-        	    else if(x>factoryFive.getX() && x<factoryFive.getX()+factoryWidth && factoryMap.get((byte)4) != null)
+        	    else if(x>factoryFive.getX() && x<factoryFive.getX()+factoryWidth && factoryMap.get((byte)4).getTiles().getFirst().getItem() != null)
         		    chosen = factoryMap.get((byte)4);//factory5;
-        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5) != null)
+        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5).getTiles().getFirst().getItem() != null)
         		    chosen = factoryMap.get((byte)5); //factory6;
             } 
             //needs coordinates
@@ -306,7 +306,30 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             }
             repaint();
     }
-        
+    public static boolean isEmpty(){
+        if(factoryMap.get((byte)0).getTiles().getFirst().getItem() == null){
+            if(factoryMap.get((byte)1).getTiles().getFirst().getItem() == null){
+                if(factoryMap.get((byte)2).getTiles().getFirst().getItem() == null){
+                    if(factoryMap.get((byte)3).getTiles().getFirst().getItem() == null){
+                        if(factoryMap.get((byte)4).getTiles().getFirst().getItem() == null){
+                            if(factoryMap.get((byte)5).getTiles().getFirst().getItem() == null){
+                                if(factoryMap.get((byte)6).getTiles().getFirst().getItem() == null){
+                                    if(factoryMap.get((byte)7).getTiles().getFirst().getItem() == null){
+                                        if(factoryMap.get((byte)8).getTiles().getFirst().getItem() == null){
+                                            if(floor.getTiles().getFirst().getItem() == null){
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
