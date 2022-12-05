@@ -241,6 +241,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     {
         int x = e.getX();
         int y = e.getY();
+        if(e.getButton() == e.BUTTON1) {
             Factory chosen = null;
             if(x < factoryWidth)
             {
@@ -273,23 +274,26 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             else if((floor.getSize() > 1 && floor.hasOneTile()) || (floor.getSize() > 0 && !floor.hasOneTile())){
                 chosen = floor;
             }
-            //temp.getPanel().addFactory(chosen);
             //method to put chosen factory into player panel
             if(chosen != null){
                 temp.getPanel().addFactory(chosen);
-                if(temp.getName().equals("Player 1")){
-                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
-                } else if(temp.getName().equals("Player 2")){
-                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_2_PANEL);
-                } else if(temp.getName().equals("Player 3")){
-                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_3_PANEL);
-                }else if(temp.getName().equals("Player 4")){
-                    cl.show(Constants.PANEL_CONT, Constants.PLAYER_4_PANEL);
-                }    
+                cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());  
             }
+        }
     }
-        
-
+    public void refill()
+    {
+    	floor.addTile(new TileObject(Constants.ONE_TILE));
+        floor.setHasOneTile(true);
+        for(byte i = 0; i < 36; i++) {
+            byte remain = (byte) (i % 9);
+            if(bag.gTileObjects().size()>0)
+            	factoryMap.get(remain).addTile(bag.get());
+            else
+            	factoryMap.get(remain).addTile(TestFrame.getLid().iterator().next());
+            //System.out.println("Added tile to factory" + remain);
+        }
+    }
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
