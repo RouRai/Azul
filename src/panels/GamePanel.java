@@ -275,8 +275,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         		    chosen = factoryMap.get((byte)5); //factory6;
             } 
             //needs coordinates
-            else if((floor.getSize() > 1 && floor.hasOneTile()) || (floor.getSize() > 0 && !floor.hasOneTile())){
-                chosen = floor;
+            else if(floor.getTiles().getFirst() != null){
+                if(floor.hasOneTile()){
+                    if(floor.getTiles().getSize() > 1){
+                        chosen = floor;
+                    }
+                } else {
+                    if(floor.getTiles().getSize() > 0){
+                        chosen = floor;
+                    }
+                }
             }
             //temp.getPanel().addFactory(chosen);
             //method to put chosen factory into player panel
@@ -307,16 +315,16 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             repaint();
     }
     public static boolean isEmpty(){
-        if(factoryMap.get((byte)0).getTiles().getFirst().getItem() == null){
-            if(factoryMap.get((byte)1).getTiles().getFirst().getItem() == null){
-                if(factoryMap.get((byte)2).getTiles().getFirst().getItem() == null){
-                    if(factoryMap.get((byte)3).getTiles().getFirst().getItem() == null){
-                        if(factoryMap.get((byte)4).getTiles().getFirst().getItem() == null){
-                            if(factoryMap.get((byte)5).getTiles().getFirst().getItem() == null){
-                                if(factoryMap.get((byte)6).getTiles().getFirst().getItem() == null){
-                                    if(factoryMap.get((byte)7).getTiles().getFirst().getItem() == null){
-                                        if(factoryMap.get((byte)8).getTiles().getFirst().getItem() == null){
-                                            if(floor.getTiles().getFirst().getItem() == null){
+        if(factoryMap.get((byte)0).getTiles().getFirst() == null){
+            if(factoryMap.get((byte)1).getTiles().getFirst() == null){
+                if(factoryMap.get((byte)2).getTiles().getFirst() == null){
+                    if(factoryMap.get((byte)3).getTiles().getFirst() == null){
+                        if(factoryMap.get((byte)4).getTiles().getFirst() == null){
+                            if(factoryMap.get((byte)5).getTiles().getFirst() == null){
+                                if(factoryMap.get((byte)6).getTiles().getFirst() == null){
+                                    if(factoryMap.get((byte)7).getTiles().getFirst() == null){
+                                        if(factoryMap.get((byte)8).getTiles().getFirst() == null){
+                                            if(floor.getTiles().getFirst() == null){
                                                 return true;
                                             }
                                         }

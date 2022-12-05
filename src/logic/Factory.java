@@ -54,11 +54,19 @@ public class Factory {
                 tiles.remove(i);
             }
         }*/
-        for(TileObject t :tiles){
+        TileObject t;
+        Iterator<TileObject> iter = tiles.iterator();
+        while(iter.hasNext()){
+            t = iter.next();
             if(t.getType().equals(type)){
                 tiles.remove(t);
             }
         }
+        /*for(TileObject t :tiles){
+            if(t.getType().equals(type)){
+                tiles.remove(t);
+            }
+        }*/
     }
 
     // Returns the remaining TileObjects in the form of a LinkedList to the player

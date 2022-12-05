@@ -25,7 +25,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private String selected;
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
-    private boolean placeTile, chooseFactory, chooseTile;
+    private boolean placeTile, chooseFactory, chooseTile, scoring1, scoring2;
     private Player player;
     private Factory pFactory;
     private int stW, tW, tH, stH, numTiles;
@@ -36,6 +36,8 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         reset();
         selected = "";
         //p = new Player("Player 1", );
+        scoring1 = false;
+        scoring2 = false;
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
@@ -453,8 +455,35 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         chooseFactory = false;
         chooseTile = false;
     }
+    private void checkScoring(){
+        try {
+            if(player.getPatternLine().getRow(1).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(1).getType(), 0);
+                player.getPatternLine().getRow(1).discardTiles();
+            } else if(player.getPatternLine().getRow(2).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(2).getType(), 1);
+                player.getPatternLine().getRow(2).discardTiles();
+            } else if(player.getPatternLine().getRow(3).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(3).getType(), 2);
+                player.getPatternLine().getRow(3).discardTiles();
+            } else if(player.getPatternLine().getRow(4).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(4).getType(), 3);
+                player.getPatternLine().getRow(4).discardTiles();
+            } else if(player.getPatternLine().getRow(5).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(5).getType(), 4);
+                player.getPatternLine().getRow(5).discardTiles();
+    } } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+    public void changeScoring1(){
+        scoring1 = !scoring1;
+    }
     private void checkState(){
-        if(!chooseFactory){
+        if(scoring1){
+            checkScoring();
+        } else if(!chooseFactory){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
             GamePanel.setPlayerCameFrom(player);
         }
@@ -464,9 +493,11 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         else if(!placeTile){
             return;
         }
-        else{
+        else {
             TestFrame.nextPlayer();
-            reset();
+            if(!GamePanel.isEmpty()){
+                reset();
+            }
         }
     }
 
