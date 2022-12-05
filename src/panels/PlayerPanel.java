@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -217,7 +218,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 			try {
 				line = player.getPatternLine().getRow(rows);
 				int i = 0;
-	    		while(i<line.getTiles().getSize())
+	    		while(i<line.getTiles().size())
 	    		{
 					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
 					i++;
@@ -231,36 +232,36 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	}
     }
     public void drawPenalty(Graphics2D g) {
-    	HashMap<String, LinkedList<TileObject>> temp = player.getFloorLine().getHashMap();
+    	HashMap<String, ArrayList<TileObject>> temp = player.getFloorLine().getHashMap();
         BufferedImage tem;
         Iterator<TileObject> iter;
-        if(temp.get(Constants.PENALTY_ONE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
             iter = temp.get(Constants.PENALTY_ONE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_ONE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_ONE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
         }
-        if(temp.get(Constants.PENALTY_TWO).getSize() > 0){
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
             iter = temp.get(Constants.PENALTY_TWO).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_TWO).getSize() > 1){
+            if(temp.get(Constants.PENALTY_TWO).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                if(temp.get(Constants.PENALTY_TWO).getSize() > 2){
+                if(temp.get(Constants.PENALTY_TWO).size() > 2){
                     tem = Constants.getImage(iter.next().getType());
                     g.drawImage(tem, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
                 }
             }
         }
-        if(temp.get(Constants.PENALTY_THREE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
             iter = temp.get(Constants.PENALTY_THREE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_THREE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_THREE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
