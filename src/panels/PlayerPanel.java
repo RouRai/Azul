@@ -212,20 +212,22 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.drawImage(yellowT, (int)((getWidth() / 5.85) + (4 * tW)), (int)((getHeight() / 4.55) + (3 * tH)), tW, tH, null);//yellow tile in col 5*/
     }
     public void drawPyramid(Graphics2D g) throws Exception{
-    	for(int rows = 1; rows<6; rows++)
+    	for(int rows = 0; rows<5; rows++)
     	{
     		Row line;
 			try {
 				line = player.getPatternLine().getRow(rows);
-				int i = 0;
-	    		while(i<line.getTiles().size())
+                System.out.println(line);
+				
+	    		for (int i = 0; i<line.getTiles().size(); i++)
 	    		{
 					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);
-					i++;
+                    System.out.println("rows: " + rows + "i:" + i);
 	    		}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println(-1);
+                System.out.println(e);
 			}
     		/*for(int i = 0; i<=rows; i++)
     			g.drawImage(oneT, (int)(getWidth() / 7.75)-tW*i, (int)(getHeight() / 4.55)+tH*rows, tW, tH, null);*/
