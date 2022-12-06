@@ -118,6 +118,9 @@ public class TestFrame extends JFrame{
     }
     public static void nextPlayer(){
         Player temp = playerQueue.dequeue();
+        if(GamePanel.isEmpty()){
+            temp.getPanel().changeScoring1();
+        }
         if(temp.getName().equals("Player 1")){
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
         } else if(temp.getName().equals("Player 2")){

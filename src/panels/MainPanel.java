@@ -62,7 +62,7 @@ public class MainPanel extends JPanel implements ActionListener{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        drawPenaltyP1(g);
+        //drawPenaltyP1(g);
     }
     public void drawPenaltyP1(Graphics g) {
         HashMap<String, LinkedList<TileObject>> temp = TestFrame.getP1().getFloorLine().getHashMap();

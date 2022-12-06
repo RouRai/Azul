@@ -22,23 +22,25 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private String selected;
     private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
-    private boolean choseTile, placeTile, endTurn, chooseTile, placedTiles;
+    private boolean placeTile, chooseFactory, chooseTile, scoring1, scoring2;
     private Player player;
     private Factory pFactory;
-    private int stW, tW, tH, stH, numTiles;
+    private int tW, tH, numTiles;
     private String continuePlay, choosePieces, chooseAction;
     private Coordinates chooseBlackTile, chooseRedTile, chooseBlueTile, chooseWhiteTile, chooseYellowTile;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        // player = new Player("Player 1", );
+        //p = new Player("Player 1", );
+        scoring1 = false;
+        scoring2 = false;
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();
         //setUpCoordinates();
-        endTurn = true;
+        //endTurn = true;
         chooseTile = false;
-        choseTile = false;
-        placedTiles = false;
+        //choseTile = false;
+        //placedTiles = false;
         continuePlay = "Click on the Continue Button to Proceed";
         choosePieces = "Click on a Tile Color on the Right to Choose, then Press Continue";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
@@ -50,8 +52,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     private void setWidthHeight()
     {
-    	stW = (int)((getWidth() / 3) / 21.25);
-        stH = (int)(((getHeight() / 1.6) / 21.25));
         tW = (int)((getWidth() / 3) / 11.35);
         tH = (int)((getHeight() / 1.6) / 11.35);
     }
@@ -89,13 +89,14 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             drawPrompt(choosePieces, g2);
             g2.setFont(new Font("Italics", Font.ITALIC, 30));
         }
-        else if(placeTile)
+        else if(chooseTile)
         {
         	drawPrompt(chooseAction, g2);
         }
-        else if(endTurn)
+        else{
             drawPrompt(continuePlay, g2);
-        if(choseTile)
+        }
+        if(chooseTile)
         {
         	drawHighlight(selected, g2);
         }
@@ -155,10 +156,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	case "Blue": h = chooseBlueTile.getY();break;
     	case "White": h = chooseWhiteTile.getY();break;
     	case "Yellow": h = chooseYellowTile.getY();break;
-    	default: h = chooseBlackTile.getY();
+    	case "Black" : h = chooseBlackTile.getY();break;
+        default: h = 99999;
     	}
-    	g.drawRect(chooseBlackTile.getX(), h, tW, tH);
-    }
+        if(!(h == 99999))
+    	    g.drawRect(chooseBlackTile.getX(), h, tW, tH);
+        }
     public void drawPrompt(String s, Graphics2D g)
     {
     	g.drawString(s, getWidth()/6, getHeight()/10);
@@ -327,8 +330,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         } 
         else if(e.getSource().equals(expandButton)){
             cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
+            MainPanel.setPlayerCameFrom(player);
         }
-        else if(placeTile)
+        else if(!placeTile && chooseTile)
         {
         	if(e.getSource().equals(row1))
         	{
@@ -389,9 +393,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-        	}
-        }
-            repaint();
+            } else if(e.getSource().equals(penalty)){
+                placeTiles(penalty);
+                
+            }
+            }
+        repaint();
     }
     public void placeTiles(JButton x)
     {
@@ -406,69 +413,136 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     		row = 4;
     	else if(x.equals(row5))
     		row = 5;
-    	try
+    	
+            if(!(row == 0)){
+        try
     	{
     		player.getPatternLine().setRowType(row, "AzulTile"+selected);
     		player.getPatternLine().addToRow(numTiles, row);
-            if(!pFactory.equals(GamePanel.getFactoryFloor())){
-            	GamePanel.getFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
+            if(!pFactory.equals(GamePanel.geFactoryFloor())){
+            	GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
                 Iterator<TileObject> iter = pFactory.getTiles().iterator();
                 while(iter.hasNext()){
                     pFactory.getTiles().remove(iter.next());
                 }
+            } else{
+                //GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
+                Iterator<TileObject> iter = pFactory.getTiles().iterator();
+                TileObject t;
+                while(iter.hasNext()){
+                    t = iter.next();
+                    if(t.getType().equals("AzulTile" + selected)){
+                        pFactory.getTiles().remove(t);
+                    }
+                }
+                GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
             }
+            pFactory = null;
             numTiles = 0;
             selected = "";
+            placeTile = true;
     	}
     	catch(Exception e1)
     	{
     		e1.printStackTrace();
     	}
+    } else{
+        if(!pFactory.equals(GamePanel.geFactoryFloor())){
+        TileObject t;
+        Iterator<TileObject> iter = pFactory.getTiles().iterator();
+        //GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
+        while(iter.hasNext()){
+                t = iter.next();
+                if(t.getType().equals("AzulTile" + selected)){
+                   player.getFloorLine().addTile(t);
+                }
+        }
+        GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
+        iter = pFactory.getTiles().iterator();
+            while(iter.hasNext()){
+                pFactory.getTiles().remove(iter.next());
+        }
+        } else{
+            TileObject t;
+            Iterator<TileObject> iter = pFactory.getTiles().iterator();
+            while(iter.hasNext()){
+                t = iter.next();
+                if(t.getType().equals("AzulTile" + selected)){
+                   player.getFloorLine().addTile(t);
+                }
+            }
+            GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
+        }
+        pFactory = null;
+        numTiles = 0;
+        selected = "";
+        placeTile = true;
+    }
     }
     public void chose(){
-        choseTile =! choseTile;
+        chooseTile =! chooseTile;
     }
     public void reset(){
-        choseTile = false;
+        chooseFactory = false;
+        chooseTile = false;
         placeTile = false;
-        endTurn = true;
+        //endTurn = true;
         chooseTile = false;
     }
+    private void checkScoring(){
+        try {
+            if(player.getPatternLine().getRow(1).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(1).getType(), 0);
+                player.getPatternLine().getRow(1).discardTiles();
+            } else if(player.getPatternLine().getRow(2).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(2).getType(), 1);
+                player.getPatternLine().getRow(2).discardTiles();
+            } else if(player.getPatternLine().getRow(3).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(3).getType(), 2);
+                player.getPatternLine().getRow(3).discardTiles();
+            } else if(player.getPatternLine().getRow(4).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(4).getType(), 3);
+                player.getPatternLine().getRow(4).discardTiles();
+            } else if(player.getPatternLine().getRow(5).isFull()){
+                player.getWall().addToRow(player.getPatternLine().getRow(5).getType(), 4);
+                player.getPatternLine().getRow(5).discardTiles();
+    } } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+    public void changeScoring1(){
+        scoring1 = !scoring1;
+    }
+    public void changeChooseFactory(){
+        chooseFactory = !chooseFactory;
+    }
     private void checkState(){
-        if(endTurn){
-        	if(player.rowCompleted())
-        	{
-        		cl.show(Constants.PANEL_CONT, Constants.END_PANEL);
-        	}
-        	else if(placedTiles)
-        	{
-        		TestFrame.getNextPlayer();
-        		cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
-        	}
-        	else
-        		cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
+        if(scoring1){
+            checkScoring();
+        } else if(!chooseFactory){
+            cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
             GamePanel.setPlayerCameFrom(player);
-            endTurn = !endTurn;
-            chooseTile = !chooseTile;
         }
-        else if(chooseTile && choseTile){
-            chooseTile = !chooseTile;
-            choseTile = !choseTile;
-            placeTile = !placeTile;
+        /*else if(chooseTile && placeTile){
+            //chooseTile = !chooseTile;
+            //chooseTile = !chooseTile;
+            //placeTile = !placeTile;
             //pFactory.removeType("AzulTile"+selected);
-        }
+        }*/
         else if(!chooseTile){
             return;
         }
-        else if(placeTile){
-            placeTile = !placeTile;
+        else if(!placeTile){
+            return;
         }
-        else if(!choseTile){
-           return;
+        else{
+            TestFrame.nextPlayer();
+            reset();
         }
     }
     public void changeChoseTile(){
-        choseTile = true;
+        chooseTile = true;
     }
 
     @Override
@@ -478,32 +552,32 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         int y = e.getY();
         if(e.getButton() == e.BUTTON1 )
         {
-        	if(chooseTile){
+        	if(!chooseTile){
         		if(x > chooseBlackTile.getX() && x < chooseBlackTile.getX() + tW){
         			if(y > chooseBlackTile.getY() && y < chooseBlackTile.getY() + tH && pFactory.getNumTiles(Constants.BLACK_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.BLACK_TILE);
         				selected = "Black";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseRedTile.getY() && y < chooseRedTile.getY() + tH && pFactory.getNumTiles(Constants.RED_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.RED_TILE);
         				selected = "Red";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseBlueTile.getY() && y < chooseBlueTile.getY() + tH && pFactory.getNumTiles(Constants.BLUE_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.BLUE_TILE);
         				selected = "Blue";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseWhiteTile.getY() && y < chooseWhiteTile.getY() + tH && pFactory.getNumTiles(Constants.WHITE_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.WHITE_TILE); 
         				selected = "White";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseYellowTile.getY() && y < chooseYellowTile.getY() + tH && pFactory.getNumTiles(Constants.YELLOW_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.YELLOW_TILE);
         				selected = "Yellow";
-        				choseTile = true;
+        				chooseTile = true;
         			}
         			
         		}
