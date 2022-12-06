@@ -50,12 +50,21 @@ public class LinkedList<T> implements Iterable<T>{
 
     // Removes all instances of the T in the Box
     public void removeAll (T o) {
-        for(Node<T> n = first; n.getNext()!= null; n = n.getNext()) {
-            if(n.getItem().equals(o)){
-                n.getNext().setPrevious(n.getPrevious());
+        for(Node<T> n = getFirst(); n != null; n = n.getNext()) {
+            if(n.getItem().equals(first.getItem()) && first.getItem().equals(o)) {
+                first = first.getNext();
+                first.setPrevious(null);
+                size--;
+            } else if(n == current && n.getItem().equals(o)){
+                current = current.getPrevious();
+                current.setNext(null);
+                size--;
+            } else if(n.getItem().equals(o)){
+                n.getPrevious().setNext(n.getNext());
                 size--;
             }
-        }
+        } 
+        removeLast(o);
     }
 
     // Removes the last instance of T in the Box
