@@ -65,6 +65,7 @@ public class LinkedList<T> implements Iterable<T>{
             }
         } 
         removeLast(o);
+        size++;
     }
 
     // Removes the last instance of T in the Box
@@ -120,7 +121,7 @@ public class LinkedList<T> implements Iterable<T>{
 
     // Returns whether or not the box is empty
     public boolean isEmpty() {
-        return first == null;
+        return getSize() == 0;
     }
 
     public int getSize() {
