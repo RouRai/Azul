@@ -298,6 +298,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                             t = iter.next();
                         }
                         temp.getFloorLine().addTile(t);
+                        floor.getTiles().remove(t);
                     }
                 }
                 temp.getPanel().addFactory(chosen);

@@ -42,7 +42,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         //choseTile = false;
         //placedTiles = false;
         continuePlay = "Click on the Continue Button to Proceed";
-        choosePieces = "Click on a Tile Color on the Right to Choose, then Press Continue";
+        choosePieces = "Click on a Tile Color on the Right to Choose";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
         addMouseListener(this);
     }
@@ -337,7 +337,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	if(e.getSource().equals(row1))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(1).getTiles().getSize() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                    if(!(player.getPatternLine().getRow(1).getTiles().getSize() > 0) || player.getPatternLine().getRow(1).getType().equals("AzulTile" + selected)){
                         placeTiles(row1);
                         System.out.println("Added to row 1");
                     }
@@ -349,7 +349,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row2))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(2).getTiles().getSize() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                    if(!(player.getPatternLine().getRow(2).getTiles().getSize() > 0) || player.getPatternLine().getRow(2).getType().equals("AzulTile" + selected)){
                         placeTiles(row2);
                         System.out.println("Added to row 2");
                     }
@@ -361,7 +361,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row3))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(3).getTiles().getSize() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                    if(!(player.getPatternLine().getRow(3).getTiles().getSize() > 0) || player.getPatternLine().getRow(3).getType().equals("AzulTile" + selected)){
                         placeTiles(row3);
                         System.out.println("Added to row 3");
                     }
@@ -373,7 +373,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row4))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(4).getTiles().getSize() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                    if(!(player.getPatternLine().getRow(4).getTiles().getSize() > 0) || player.getPatternLine().getRow(4).getType().equals("AzulTile" + selected)){
                         placeTiles(row4);
                         System.out.println("Added to row 4");
                     }
@@ -435,6 +435,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                         pFactory.getTiles().remove(t);
                     }
                 }
+                if(pFactory.getTiles().getFirst().getItem().getType().equals("AzulTile" + selected)){
+                    pFactory.getTiles().remove(pFactory.getTiles().getFirst().getItem());
+                }
+                if(pFactory.getTiles().getLast().getItem().getType().equals("AzulTile" + selected)){
+                    pFactory.getTiles().remove(pFactory.getTiles().getLast().getItem());
+                }
                 GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
             }
             pFactory = null;
@@ -469,6 +475,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                 t = iter.next();
                 if(t.getType().equals("AzulTile" + selected)){
                    player.getFloorLine().addTile(t);
+                   pFactory.getTiles().remove(t);
                 }
             }
             GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
