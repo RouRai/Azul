@@ -544,7 +544,8 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             return;
         }
         else{
-            TestFrame.nextPlayer();
+            TestFrame.getNextPlayer();
+            cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
             reset();
         }
     }
