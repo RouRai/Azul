@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import datastructures.LinkedList;
 import panels.PlayerPanel;
 import java.util.*;
-// Author: Rounak Rai (WIP)
 public class PlayerTemp implements Comparable<Player>{
 
     private int currentScore; // The player's current score
@@ -14,7 +13,7 @@ public class PlayerTemp implements Comparable<Player>{
     private PatternLine patternLine; // Their PatternLine
     private FloorLine floorLine; // Their Floor
     private String name; // The players name
-    public PlayerTemp(String name, LinkedList<TileObject> lid, PlayerPanel p) {
+    public PlayerTemp(String name, ArrayList<TileObject> lid, PlayerPanel p) {
         try {
             floorLine = new FloorLine(lid);
             patternLine = new PatternLine(floorLine);
@@ -80,7 +79,7 @@ public class PlayerTemp implements Comparable<Player>{
     }
     public String toString(){
         String ret = "";
-        HashMap<String, LinkedList<TileObject>> thing = floorLine.getHashMap();
+        HashMap<String, ArrayList<TileObject>> thing = floorLine.getHashMap();
         ret += thing;
         Row[] idk = new Row[5];
             try {

@@ -19,6 +19,10 @@ public class Testing {
         for(Node<String> n = ll.getFirst(); n != null; n = n.getNext()) {
             System.out.println(n.getItem());
         }
+        for(String s : ll) {
+            System.out.println(s);
+        }
+
         PlayerTemp sriharsha = new PlayerTemp("bozo", null, new PlayerPanel(null));
         System.out.println(sriharsha);
 

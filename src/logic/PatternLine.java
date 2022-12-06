@@ -1,6 +1,5 @@
 package logic;
 
-// Author: Rounak Rai
 public class PatternLine {
     
     private Row[] patternLines; // The area where the player docks their tiles
@@ -33,7 +32,7 @@ public class PatternLine {
         	if(!rowIsFull(row))
         		getRow(row).addTile();
         	else{
-        		floor.addTile(getRow(row).getTiles().getFirst().getItem());
+        		floor.addTile(getRow(row).getTiles().get(0));
         	}
         }
     }

@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class TestFrame extends JFrame{
     private static Queue<Player> playerQueue;
     private static Player p1, p2, p3, p4, currentPlayer;
-    private LinkedList<TileObject> lid;
+    private ArrayList<TileObject> lid;
     private static CardLayout cl;
     private HashMap<String,JPanel> panels;
 
@@ -35,7 +35,7 @@ public class TestFrame extends JFrame{
     }
     private void setQueue(){
         playerQueue = new Queue<>();
-        lid = new LinkedList<>();
+        lid = new ArrayList<>();
         p1 = new Player("Player 1", lid, new PlayerPanel(cl));
         p2 = new Player("Player 2", lid, new PlayerPanel(cl));
         p3 = new Player("Player 3", lid, new PlayerPanel(cl));
@@ -118,9 +118,9 @@ public class TestFrame extends JFrame{
     }
     public static void nextPlayer(){
         Player temp = playerQueue.dequeue();
-        if(GamePanel.isEmpty()){
+        /*if(GamePanel.isEmpty()){
             temp.getPanel().changeScoring1();
-        }
+        }*/
         if(temp.getName().equals("Player 1")){
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
         } else if(temp.getName().equals("Player 2")){

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import datastructures.LinkedList;
 import game.Constants;
 import java.util.*;
-// Author: Rounak Rai (WIP)
 public class Wall {
     
     private String[][] board; // Currently has nothing placed in it

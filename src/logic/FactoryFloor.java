@@ -1,6 +1,5 @@
 package logic;
 
-// Author: Rounak Rai
 public class FactoryFloor extends Factory{
     
     private boolean hasOneTile; // Value deciding if the FactoryFloor contains the OneTile

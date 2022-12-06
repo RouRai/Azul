@@ -1,6 +1,5 @@
 package logic;
 
-// Author: Rounak Rai
 public class TileObject {
     private String type;
 

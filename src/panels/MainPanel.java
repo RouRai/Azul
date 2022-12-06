@@ -9,7 +9,7 @@ import java.awt.*;
 import game.Constants;
 import game.*;
 import logic.*;
-//import java.util.*;
+import java.util.*;
 import java.util.Iterator;
 import java.util.HashMap;
 import datastructures.*;
@@ -65,36 +65,36 @@ public class MainPanel extends JPanel implements ActionListener{
         //drawPenaltyP1(g);
     }
     public void drawPenaltyP1(Graphics g) {
-        HashMap<String, LinkedList<TileObject>> temp = TestFrame.getP1().getFloorLine().getHashMap();
+        HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP1().getFloorLine().getHashMap();
         BufferedImage tem;
         Iterator<TileObject> iter;
-        if(temp.get(Constants.PENALTY_ONE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
             iter = temp.get(Constants.PENALTY_ONE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_ONE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_ONE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 3), tW, tH, null);
             }
         }
-        if(temp.get(Constants.PENALTY_TWO).getSize() > 0){
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
             iter = temp.get(Constants.PENALTY_TWO).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_TWO).getSize() > 1){
+            if(temp.get(Constants.PENALTY_TWO).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                if(temp.get(Constants.PENALTY_TWO).getSize() > 2){
+                if(temp.get(Constants.PENALTY_TWO).size() > 2){
                     tem = Constants.getImage(iter.next().getType());
                     g.drawImage(tem, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
                 }
             }
         }
-        if(temp.get(Constants.PENALTY_THREE).getSize() > 0){
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
             iter = temp.get(Constants.PENALTY_THREE).iterator();
             tem = Constants.getImage(iter.next().getType());
             g.drawImage(tem, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_THREE).getSize() > 1){
+            if(temp.get(Constants.PENALTY_THREE).size() > 1){
                 tem = Constants.getImage(iter.next().getType());
                 g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
             }
@@ -111,7 +111,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			try {
 				line = TestFrame.getP4().getPatternLine().getRow(rows);
 				int i = 0;
-                int j = line.getTiles().getSize();
+                int j = line.getTiles().size();
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
@@ -135,7 +135,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			try {
 				line = TestFrame.getP3().getPatternLine().getRow(rows);
 				int i = 0;
-                int j = line.getTiles().getSize();
+                int j = line.getTiles().size();
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
@@ -159,7 +159,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			try {
 				line = TestFrame.getP2().getPatternLine().getRow(rows);
 				int i = 0;
-                int j = line.getTiles().getSize();
+                int j = line.getTiles().size();
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
@@ -182,7 +182,7 @@ public class MainPanel extends JPanel implements ActionListener{
 			try {
 				line = TestFrame.getP1().getPatternLine().getRow(rows);
 				int i = 0;
-                int j = line.getTiles().getSize();
+                int j = line.getTiles().size();
 	    		while(i < j)
 	    		{
                     System.out.println(line.getType() + " : row " + rows);
