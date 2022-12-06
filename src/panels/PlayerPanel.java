@@ -83,13 +83,13 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         g2.setStroke(new BasicStroke(15));
         g2.setFont(new Font("Italics", Font.ITALIC, 30));
-        if(chooseTile)
+        if(!chooseTile && chooseFactory)
         {
         	g2.setFont(new Font("Italics", Font.ITALIC, 20));
             drawPrompt(choosePieces, g2);
             g2.setFont(new Font("Italics", Font.ITALIC, 30));
         }
-        else if(chooseTile)
+        else if(chooseTile && !placeTile)
         {
         	drawPrompt(chooseAction, g2);
         }
