@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch WinnerRunner",
+            "request": "launch",
+            "mainClass": "game.WinnerRunner",
+            "projectName": "Azul_41ec609"
+        },
+        {
+            "type": "java",
+            "name": "Launch Testing",
+            "request": "launch",
+            "mainClass": "datastructures.Testing",
+            "projectName": "Azul_41ec609"
+        },
+        {
+            "type": "java",
             "name": "Launch Testing",
             "request": "launch",
             "mainClass": "datastructures.Testing",

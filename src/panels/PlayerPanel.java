@@ -30,7 +30,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private Coordinates chooseBlackTile, chooseRedTile, chooseBlueTile, chooseWhiteTile, chooseYellowTile;
     public PlayerPanel(CardLayout cl) {
         this.cl = cl;
-        //p = new Player("Player 1", );
+        // player = new Player("Player 1", );
         background = Constants.getImage("Background");
         setUpButtons();
         setUpImages();

@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import datastructures.*;
 import game.Constants;
 import logic.*;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WinnerPanel extends JPanel implements ActionListener{
 
@@ -45,6 +48,28 @@ public class WinnerPanel extends JPanel implements ActionListener{
         returnStart.setBounds((int)(getWidth() / 2)-getWidth()/12, (int)(getHeight() / 1.2), getWidth()/6 , getHeight() / 14);
         g.drawImage(trophy, (getWidth()/2)-(trophy.getWidth()/2), getHeight()/32, trophy.getWidth(), trophy.getHeight(), this);
         g.drawString(/*getTop(players) + */"Player 1 Wins!", (int)(getWidth()/2.4), getHeight()/10);
+        //g.setColor(Color.yellow);
+        g.drawString("Leaderboard", (getWidth()/8), getHeight()/16);
+        // PlayerTemp thing1 = new PlayerTemp("ez1", null, null);
+        // PlayerTemp thing2 = new PlayerTemp("ez2", null, null);
+        // PlayerTemp thing3 = new PlayerTemp("ez3", null, null);
+        // PlayerTemp thing4 = new PlayerTemp("ez4", null, null);
+        // thing1.setScoreOR(1);
+        // thing2.setScoreOR(555);
+        // thing3.setScoreOR(1);
+        // thing4.setScoreOR(3);
+        // LinkedList<PlayerTemp> ez = new LinkedList();
+        // ez.add(thing1);
+        // ez.add(thing2);
+        // ez.add(thing3);
+        // ez.add(thing4);
+        // ez.add(new PlayerTemp("ez", null, null));
+        ArrayList<Player> list= getPlacement(players);
+        g.drawString(list.get(0).getName() + " - " + list.get(0).getScore(), (getWidth()/8), getHeight()/8);
+        g.drawString(list.get(1).getName() + " - " + list.get(1).getScore(), (getWidth()/8), getHeight()/6);
+        g.drawString(list.get(2).getName() + " - " + list.get(2).getScore(), (getWidth()/8), (int)(getHeight()/4.75));
+        g.drawString(list.get(3).getName() + " - " + list.get(3).getScore(), (getWidth()/8), (int)(getHeight()/3.95));
+
     }
 
     // Returns the top player in terms of points
@@ -58,5 +83,23 @@ public class WinnerPanel extends JPanel implements ActionListener{
         }
 
         return top.getName();
+    }
+    private ArrayList<Player> getPlacement(LinkedList<Player> players) {
+        ArrayList<Player> ret = new ArrayList<>();
+        for (Player p: players) {
+            if (ret.size() == 0) {
+                ret.add(p);
+            } else {
+                int idx = 0;
+                for (int i = 0; i < ret.size(); i++) {
+                    if (p.getScore() < ret.get(i).getScore()) {
+                        idx++;
+                    }
+                }
+                ret.add(idx, p);
+            }
+            
+        }
+        return ret;
     }
 }
