@@ -18,6 +18,10 @@ public class FactoryFloor extends Factory{
     public boolean hasOneTile() {
         return hasOneTile;
     }
+    
+    public boolean isEmpty() {
+        return super.isEmpty();
+    }
 
     
     // Everything else is inherited from the Factory class, and works the same
