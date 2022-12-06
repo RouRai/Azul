@@ -6,7 +6,7 @@ import datastructures.LinkedList;
 import panels.PlayerPanel;
 import java.util.*;
 // Author: Rounak Rai (WIP)
-public class Player implements Comparable<Player>{
+public class PlayerTemp implements Comparable<Player>{
 
     private int currentScore; // The player's current score
     private boolean hasOneTile; // If they are the holder of the Player 1 Tile
@@ -14,15 +14,11 @@ public class Player implements Comparable<Player>{
     private PatternLine patternLine; // Their PatternLine
     private FloorLine floorLine; // Their Floor
     private String name; // The players name
-    private PlayerPanel playerPanel;
-    public Player(String name, LinkedList<TileObject> lid, PlayerPanel p) {
+    public PlayerTemp(String name, LinkedList<TileObject> lid, PlayerPanel p) {
         try {
             floorLine = new FloorLine(lid);
             patternLine = new PatternLine(floorLine);
-            wall = new Wall(this, floorLine);
             this.name = name;
-            playerPanel = p;
-            playerPanel.setPlayer(this);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -30,6 +26,9 @@ public class Player implements Comparable<Player>{
 
     public String getName() {
         return name;
+    }
+    public void setScoreOR(int currentScore) {
+        this.currentScore = currentScore;
     }
 
     public int getScore() {
@@ -79,20 +78,17 @@ public class Player implements Comparable<Player>{
         if(getScore() > o.getScore()) return 1;
         return 0;
     }
-    public PlayerPanel getPanel(){
-        return playerPanel;
-    }
-    public String toString() {
+    public String toString(){
         String ret = "";
         HashMap<String, LinkedList<TileObject>> thing = floorLine.getHashMap();
         ret += thing;
-        Row[] idk = null;
-        try {
-            idk = new Row[]{patternLine.getRow(1), patternLine.getRow(2), patternLine.getRow(3), patternLine.getRow(4), patternLine.getRow(5), patternLine.getRow(6)};
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        Row[] idk = new Row[5];
+            try {
+                idk = new Row[]{patternLine.getRow(1), patternLine.getRow(2), patternLine.getRow(3), patternLine.getRow(4), patternLine.getRow(5), patternLine.getRow(6)};
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         ret += "\n";
         ret += "\n";
         for (int i = 0; i < idk.length; i++) {
