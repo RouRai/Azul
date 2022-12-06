@@ -25,7 +25,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private boolean placeTile, chooseFactory, chooseTile, scoring1, scoring2;
     private Player player;
     private Factory pFactory;
-    private int stW, tW, tH, stH, numTiles;
+    private int tW, tH, numTiles;
     private String continuePlay, choosePieces, chooseAction;
     private Coordinates chooseBlackTile, chooseRedTile, chooseBlueTile, chooseWhiteTile, chooseYellowTile;
     public PlayerPanel(CardLayout cl) {
@@ -37,10 +37,10 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         setUpButtons();
         setUpImages();
         //setUpCoordinates();
-        endTurn = true;
+        //endTurn = true;
         chooseTile = false;
-        choseTile = false;
-        placedTiles = false;
+        //choseTile = false;
+        //placedTiles = false;
         continuePlay = "Click on the Continue Button to Proceed";
         choosePieces = "Click on a Tile Color on the Right to Choose, then Press Continue";
         chooseAction = "Select a Pattern Line to Place Your Tiles";
@@ -52,8 +52,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     private void setWidthHeight()
     {
-    	stW = (int)((getWidth() / 3) / 21.25);
-        stH = (int)(((getHeight() / 1.6) / 21.25));
         tW = (int)((getWidth() / 3) / 11.35);
         tH = (int)((getHeight() / 1.6) / 11.35);
     }
@@ -91,13 +89,14 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             drawPrompt(choosePieces, g2);
             g2.setFont(new Font("Italics", Font.ITALIC, 30));
         }
-        else if(placeTile)
+        else if(chooseTile)
         {
         	drawPrompt(chooseAction, g2);
         }
-        else if(endTurn)
+        else{
             drawPrompt(continuePlay, g2);
-        if(choseTile)
+        }
+        if(chooseTile)
         {
         	drawHighlight(selected, g2);
         }
@@ -157,10 +156,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	case "Blue": h = chooseBlueTile.getY();break;
     	case "White": h = chooseWhiteTile.getY();break;
     	case "Yellow": h = chooseYellowTile.getY();break;
-    	default: h = chooseBlackTile.getY();
+    	case "Black" : h = chooseBlackTile.getY();break;
+        default: h = 99999;
     	}
-    	g.drawRect(chooseBlackTile.getX(), h, tW, tH);
-    }
+        if(!(h == 99999))
+    	    g.drawRect(chooseBlackTile.getX(), h, tW, tH);
+        }
     public void drawPrompt(String s, Graphics2D g)
     {
     	g.drawString(s, getWidth()/6, getHeight()/10);
@@ -329,8 +330,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         } 
         else if(e.getSource().equals(expandButton)){
             cl.show(Constants.PANEL_CONT, Constants.MAIN_PANEL);
+            MainPanel.setPlayerCameFrom(player);
         }
-        else if(placeTile)
+        else if(!placeTile && chooseTile)
         {
         	if(e.getSource().equals(row1))
         	{
@@ -393,6 +395,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                 }
             } else if(e.getSource().equals(penalty)){
                 placeTiles(penalty);
+                
             }
             }
         repaint();
@@ -416,8 +419,8 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     	{
     		player.getPatternLine().setRowType(row, "AzulTile"+selected);
     		player.getPatternLine().addToRow(numTiles, row);
-            if(!pFactory.equals(GamePanel.getFactoryFloor())){
-            	GamePanel.getFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
+            if(!pFactory.equals(GamePanel.geFactoryFloor())){
+            	GamePanel.geFactoryFloor().addTiles(pFactory.getRemaning("AzulTile" + selected));
                 Iterator<TileObject> iter = pFactory.getTiles().iterator();
                 while(iter.hasNext()){
                     pFactory.getTiles().remove(iter.next());
@@ -434,8 +437,10 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                 }
                 GamePanel.geFactoryFloor().getRemaning("AzulTile" + selected);
             }
+            pFactory = null;
             numTiles = 0;
             selected = "";
+            placeTile = true;
     	}
     	catch(Exception e1)
     	{
@@ -475,12 +480,13 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     }
     }
     public void chose(){
-        choseTile =! choseTile;
+        chooseTile =! chooseTile;
     }
     public void reset(){
-        choseTile = false;
+        chooseFactory = false;
+        chooseTile = false;
         placeTile = false;
-        endTurn = true;
+        //endTurn = true;
         chooseTile = false;
     }
     private void checkScoring(){
@@ -508,26 +514,27 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     public void changeScoring1(){
         scoring1 = !scoring1;
     }
+    public void changeChooseFactory(){
+        chooseFactory = !chooseFactory;
+    }
     private void checkState(){
         if(scoring1){
             checkScoring();
         } else if(!chooseFactory){
             cl.show(Constants.PANEL_CONT, Constants.GAME_PANEL);
             GamePanel.setPlayerCameFrom(player);
-            endTurn = !endTurn;
-            chooseTile = !chooseTile;
         }
-        else if(chooseTile && choseTile){
-            chooseTile = !chooseTile;
-            choseTile = !choseTile;
-            placeTile = !placeTile;
+        /*else if(chooseTile && placeTile){
+            //chooseTile = !chooseTile;
+            //chooseTile = !chooseTile;
+            //placeTile = !placeTile;
             //pFactory.removeType("AzulTile"+selected);
-        }
+        }*/
         else if(!chooseTile){
             return;
         }
-        else if(placeTile){
-            placeTile = !placeTile;
+        else if(!placeTile){
+            return;
         }
         else{
             TestFrame.nextPlayer();
@@ -535,7 +542,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         }
     }
     public void changeChoseTile(){
-        choseTile = true;
+        chooseTile = true;
     }
 
     @Override
@@ -545,32 +552,32 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         int y = e.getY();
         if(e.getButton() == e.BUTTON1 )
         {
-        	if(chooseTile){
+        	if(!chooseTile){
         		if(x > chooseBlackTile.getX() && x < chooseBlackTile.getX() + tW){
         			if(y > chooseBlackTile.getY() && y < chooseBlackTile.getY() + tH && pFactory.getNumTiles(Constants.BLACK_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.BLACK_TILE);
         				selected = "Black";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseRedTile.getY() && y < chooseRedTile.getY() + tH && pFactory.getNumTiles(Constants.RED_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.RED_TILE);
         				selected = "Red";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseBlueTile.getY() && y < chooseBlueTile.getY() + tH && pFactory.getNumTiles(Constants.BLUE_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.BLUE_TILE);
         				selected = "Blue";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseWhiteTile.getY() && y < chooseWhiteTile.getY() + tH && pFactory.getNumTiles(Constants.WHITE_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.WHITE_TILE); 
         				selected = "White";
-        				choseTile = true;
+        				chooseTile = true;
         			} 
         			else if(y > chooseYellowTile.getY() && y < chooseYellowTile.getY() + tH && pFactory.getNumTiles(Constants.YELLOW_TILE) != 0){
         				numTiles = pFactory.getNumTiles(Constants.YELLOW_TILE);
         				selected = "Yellow";
-        				choseTile = true;
+        				chooseTile = true;
         			}
         			
         		}

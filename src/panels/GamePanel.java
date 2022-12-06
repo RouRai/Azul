@@ -249,29 +249,29 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
             Factory chosen = null;
             if(x < factoryWidth)
             {
-                if(y > 0 && y<factoryHeight && factoryMap.get((byte)0).getTiles().getFirst().getItem()  != null)
+                if(y > 0 && y<factoryHeight && factoryMap.get((byte)0).getTiles().getFirst()  != null)
                     chosen = factoryMap.get((byte)0);//factory1;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)1).getTiles().getFirst().getItem()  != null)
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)1).getTiles().getFirst()  != null)
             	    chosen = factoryMap.get((byte)1);//factory2;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)2).getTiles().getFirst().getItem()  != null)
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)2).getTiles().getFirst()  != null)
             	    chosen = factoryMap.get((byte)2);//factory3;
             }
             else if (x>getWidth()-factoryWidth)
             {
-        	    if(y > 0 && y<factoryHeight && factoryMap.get((byte)8).getTiles().getFirst().getItem() != null)
+        	    if(y > 0 && y<factoryHeight && factoryMap.get((byte)8).getTiles().getFirst() != null)
                     chosen = factoryMap.get((byte)8);//factory9;
-                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)7).getTiles().getFirst().getItem() != null)
+                else if (y > factoryTwo.getY() && y<factoryTwo.getY()+factoryHeight && factoryMap.get((byte)7).getTiles().getFirst() != null)
             	    chosen = factoryMap.get((byte)7);//factory8;
-                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)6).getTiles().getFirst().getItem()  != null)
+                else if(y > factoryThree.getY()&& y < factoryThree.getY()+factoryHeight && factoryMap.get((byte)6).getTiles().getFirst()  != null)
             	    chosen = factoryMap.get((byte)6);//factory7;
             }
             else if(y > factoryThree.getY())
             {
-        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3).getTiles().getFirst().getItem() != null)
+        	    if(x>factoryFour.getX() && x<factoryFour.getX()+factoryWidth && factoryMap.get((byte)3).getTiles().getFirst() != null)
         		    chosen = factoryMap.get((byte)3);//factory4;
-        	    else if(x>factoryFive.getX() && x<factoryFive.getX()+factoryWidth && factoryMap.get((byte)4).getTiles().getFirst().getItem() != null)
+        	    else if(x>factoryFive.getX() && x<factoryFive.getX()+factoryWidth && factoryMap.get((byte)4).getTiles().getFirst() != null)
         		    chosen = factoryMap.get((byte)4);//factory5;
-        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5).getTiles().getFirst().getItem() != null)
+        	    else if(x>factorySix.getX() && x<factorySix.getX()+factoryWidth && factoryMap.get((byte)5).getTiles().getFirst() != null)
         		    chosen = factoryMap.get((byte)5); //factory6;
             } 
             //needs coordinates
@@ -301,7 +301,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                     }
                 }
                 temp.getPanel().addFactory(chosen);
-                temp.getPanel().changeChoseFactory();
+                temp.getPanel().changeChooseFactory();
                 if(temp.getName().equals("Player 1")){
                     cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
                 } else if(temp.getName().equals("Player 2")){
