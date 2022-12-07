@@ -158,7 +158,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     }
 
     // Sets up both of the maps
-    private void setFactoryMap() {
+    public static void setFactoryMap() {
         factoryMap = new HashMap<>();
         floor = new FactoryFloor();
         // Adds each of the factories to the map
@@ -171,13 +171,13 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
         factoryMap.put((byte)6, new Factory(4));
         factoryMap.put((byte)7, new Factory(4));
         factoryMap.put((byte)8, new Factory(4));
-
         setFactoryTiles();
+        
     }
 
     // Sets up the tiles in the factories
     public static void setFactoryTiles() {
-        bag = new bagClass();
+    	bag = new bagClass();
         bag.fillBag();
         floor.addTile(new TileObject(Constants.ONE_TILE));
         floor.setHasOneTile(true);
