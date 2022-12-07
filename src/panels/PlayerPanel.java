@@ -173,7 +173,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             for(int c = 0; c < mat.length; c++){
                 if(mat[r][c] != null){
                     try {
-                        g2.drawImage(Constants.getImage(wall.getIndicatedTile(r, c)), (int)((getWidth() / 5.85) + (tW * c)), (int)((getHeight() / 4.55) + (r * tH)), tW, tH, null);
+                        g2.drawImage(Constants.getImage(wall.getIndicatedTile(r, c)), (int)((getWidth() / 5.75) + (tW * c)), (int)((getHeight() / 4.55) + (r * tH)), tW, tH, null);
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -226,7 +226,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
  	    		while(i < j)
  	    		{
                      System.out.println(line.getType() + " : row " + rows);
- 					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)- tW*i, (int)(getHeight() / 4.55)+ tH* (rows - 1), tW, tH, null);
+ 					g.drawImage(Constants.getImage(line.getType()), (int)(getWidth() / 7.75)- tW*i, (int)(getHeight() / 4.45)+ tH* (rows - 1), tW, tH, null);
                      //g.drawImage(oneT, (int)(getWidth() / 7.75) - tW * (j), (int)(getHeight() / 4.55)+tH * (i - 1), tW, tH, null);
  					i++;
  	    		}
