@@ -222,8 +222,10 @@ public class Wall {
     }
     public boolean contains(int r, String tile){
         for(int i = 0; i < 5; i++){
-            if(board[r][i].equals(tile)){
-                return true;
+            if(!(board[r][i] == null)){
+                if(board[r][i].equals(tile)){
+                    return true;
+                }
             }
         }
         return false;

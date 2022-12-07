@@ -21,7 +21,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
 
     private CardLayout cl;
     private String selected;
-    private JButton continueButton, expandButton, logs, row1, row2, row3, row4, row5, penalty;
+    private JButton continueButton, expandButton, row1, row2, row3, row4, row5, penalty;
     private BufferedImage background, gameBoard, factory, blackT, blueT, oneT, redT, yellowT, whiteT;
     private boolean placeTile, chooseFactory, chooseTile, scoring1, scoring2;
     private Player player;
@@ -54,7 +54,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void setWidthHeight()
     {
         tW = (int)((getWidth() / 3) / 11.35);
-        tH = (int)((getHeight() / 1.6) / 11.35*1.03);
+        tH = (int)((getHeight() / 1.6) / 11.35);
     }
     private void setUpCoordinates()
     {
@@ -115,7 +115,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         g2.drawImage(gameBoard, 0, (int)(getHeight() / 4.8), (int)(getWidth() / 3), (int)(getHeight() / 2.4), null);
         continueButton.setBounds(getWidth()/22, (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         expandButton.setBounds(getWidth()/22, (int)(getHeight() / 1.3), getWidth() / 8, getHeight() / 15);
-        //logs.setBounds((int)(getWidth() / 1.3), (int)(getHeight() / 1.155), getWidth() / 8, getHeight() / 15);
         row1.setBounds((int)(getWidth() / 3), (int)(getHeight() / 4.65), (int)(getWidth() / 10), (int)(getHeight() / 20));
         row2.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.7), (int)(getWidth() / 10), (int)(getHeight() / 20));
         row3.setBounds((int)(getWidth() / 3), (int)(getHeight() / 3.05), (int)(getWidth() / 10), (int)(getHeight() / 20));
@@ -292,7 +291,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void setUpButtons() {
         // Instantiates JButtons
         continueButton = new JButton("Continue");
-        logs = new JButton("Logs");
         row1 = new JButton("Select Row 1");
         row2 = new JButton("Select Row 2");
         row3 = new JButton("Select Row 3");
@@ -302,7 +300,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         expandButton = new JButton("See All 4 Boards");
         // Adds JButtons to the panels
         super.add(continueButton);
-        super.add(logs);
         super.add(row1);
         super.add(row2);
         super.add(row3);
@@ -313,7 +310,6 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         // Adds action listeners to the JButtons
 
         continueButton.addActionListener(this);
-        logs.addActionListener(this);
         row1.addActionListener(this);
         row2.addActionListener(this);
         row3.addActionListener(this);
@@ -338,7 +334,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	if(e.getSource().equals(row1))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(1).getTiles().size() > 0) || player.getPatternLine().getRow(1).getType().equals("AzulTile" + selected)){
+                    if((!(player.getPatternLine().getRow(1).getTiles().size() > 0) || player.getPatternLine().getRow(1).getType().equals("AzulTile" + selected)) && !player.getWall().contains(0, "AzulTile" + selected)){
                         placeTiles(row1);
                         System.out.println("Added to row 1");
                     }
@@ -350,7 +346,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row2))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(2).getTiles().size() > 0) || player.getPatternLine().getRow(2).getType().equals("AzulTile" + selected)){
+                    if((!(player.getPatternLine().getRow(2).getTiles().size() > 0) || player.getPatternLine().getRow(2).getType().equals("AzulTile" + selected)) && !player.getWall().contains(1, "AzulTile" + selected)){
                         placeTiles(row2);
                         System.out.println("Added to row 2");
                     }
@@ -362,7 +358,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row3))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(3).getTiles().size() > 0) || player.getPatternLine().getRow(3).getType().equals("AzulTile" + selected)){
+                    if((!(player.getPatternLine().getRow(3).getTiles().size() > 0) || player.getPatternLine().getRow(3).getType().equals("AzulTile" + selected)) && !player.getWall().contains(2, "AzulTile" + selected)){
                         placeTiles(row3);
                         System.out.println("Added to row 3");
                     }
@@ -374,7 +370,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row4))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(4).getTiles().size() > 0) || player.getPatternLine().getRow(4).getType().equals("AzulTile" + selected)){
+                    if((!(player.getPatternLine().getRow(4).getTiles().size() > 0) || player.getPatternLine().getRow(4).getType().equals("AzulTile" + selected)) && !player.getWall().contains(3, "AzulTile" + selected)){
                         placeTiles(row4);
                         System.out.println("Added to row 4");
                     }
@@ -386,7 +382,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         	else if(e.getSource().equals(row5))
         	{
         		try {
-                    if(!(player.getPatternLine().getRow(5).getTiles().size() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)){
+                    if((!(player.getPatternLine().getRow(5).getTiles().size() > 0) || player.getPatternLine().getRow(5).getType().equals("AzulTile" + selected)) && !player.getWall().contains(4, "AzulTile" + selected)){
                         placeTiles(row5);
                         System.out.println("Added to row 5");
                     }
