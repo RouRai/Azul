@@ -562,12 +562,12 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
                 if(!player.getPatternLine().getRow(3).isFull()){
                     if(!player.getPatternLine().getRow(4).isFull()){
                         if(!player.getPatternLine().getRow(5).isFull()){
-                            if(!(player.getFloorLine().getHashMap().get(Constants.PENALTY_ONE).size() > 0 && showpen)){
+                            if(player.getFloorLine().getHashMap().get(Constants.PENALTY_ONE).size() == 0 || showpen){
                                 //changeScoring1();
                                 //TestFrame.checkFillBag();
                                 if(TestFrame.checkFillBag()){
                                     TestFrame.nextOnePlayer();
-                                    TestFrame.checkFillBag();
+                                    //TestFrame.checkFillBag();
                                     TestFrame.getP1().getPanel().reset();
                                     TestFrame.getP2().getPanel().reset();
                                     TestFrame.getP3().getPanel().reset();

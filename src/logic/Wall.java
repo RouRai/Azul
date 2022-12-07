@@ -180,10 +180,12 @@ public class Wall {
         int count = 0;
         for(int r = 0; r < board.length; r++) {
             for(int c = 0; c < board[r].length; c++){
+                if(!(board[r][c] == null)){
                 if(board[r][c].equals(type)) {
                     count++;
                 }
             }
+        }
         }
         return count == 5;
     }
@@ -191,20 +193,24 @@ public class Wall {
     // Returns if a column is complete
     private boolean columnCompleted(int col) {
         for(int r = 0; r < board[0].length; r++) {
+            if(!(board[r][col] == null)){
             if(board[r][col] == null) {
                 return false;
             }
         }
+    }
         return true;
     }
 
     // Returns if a row is complete
     private boolean rowCompleted(int row) {
         for(int i = 0; i < board[row].length; i++) {
+            if(!(board[row][i] == null)){
             if(board[row][i] == null) {
                 return false;
             }
         }
+    }
         return true;
     }
 

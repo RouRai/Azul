@@ -95,7 +95,7 @@ public class TestFrame extends JFrame{
         panels.put(Constants.PLAYER_4_PANEL, p4.getPanel());
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
-        panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
+        panels.put(Constants.END_PANEL, new WinnerPanel(cl));
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);
 
@@ -154,7 +154,7 @@ public class TestFrame extends JFrame{
         }while (!temp.hasOneTile());*/
         while(!temp.hasOneTile()){
             temp = playerQueue.dequeue();
-        playerQueue.enqueue(temp);
+            playerQueue.enqueue(temp);
         }
         if(temp.getName().equals("Player 1")){
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);

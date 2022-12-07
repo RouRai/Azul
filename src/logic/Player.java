@@ -22,6 +22,7 @@ public class Player implements Comparable<Player>{
             this.name = name;
             playerPanel = p;
             playerPanel.setPlayer(this);
+            currentScore = 0;
         } catch (Exception e) {
             System.out.println(e);
         }
