@@ -54,7 +54,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
     private void setWidthHeight()
     {
         tW = (int)((getWidth() / 3) / 11.35);
-        tH = (int)((getHeight() / 1.6) / 11.35);
+        tH = (int)((getHeight() / 1.6) / 11.35*1.03);
     }
     private void setUpCoordinates()
     {
@@ -299,7 +299,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         row4 = new JButton("Select Row 4");
         row5 = new JButton("Select Row 5");
         penalty = new JButton("Select Penalty");
-        expandButton = new JButton("Expand");
+        expandButton = new JButton("See All 4 Boards");
         // Adds JButtons to the panels
         super.add(continueButton);
         super.add(logs);
