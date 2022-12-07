@@ -17,9 +17,9 @@ public class WinnerPanel extends JPanel implements ActionListener{
 
     private BufferedImage background, trophy;
     private JButton returnStart;
-    private LinkedList<Player> players; // Will be used when we effectively implement players in our game
+    private ArrayList<Player> players; // Will be used when we effectively implement players in our game
     private CardLayout cl;
-    public WinnerPanel(CardLayout c, LinkedList<Player> players) {
+    public WinnerPanel(CardLayout c, ArrayList<Player> players) {
         cl = c;
         returnStart = new JButton("Return to Start");
         super.add(returnStart);
@@ -84,7 +84,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
 
         return top.getName();
     }
-    private ArrayList<Player> getPlacement(LinkedList<Player> players) {
+    private ArrayList<Player> getPlacement(ArrayList<Player> players) {
         ArrayList<Player> ret = new ArrayList<>();
         for (Player p: players) {
             if (ret.size() == 0) {

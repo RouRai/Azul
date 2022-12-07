@@ -24,7 +24,6 @@ public class Constants {
     public static final String PLAYER_2_PANEL = "player2Panel";
     public static final String PLAYER_3_PANEL = "player3Panel";
     public static final String PLAYER_4_PANEL = "player4Panel";
-    
     // Tile Integer Constants
     public static final int BLACK_TILE_ID = 2;
     public static final int BLUE_TILE_ID = 3;

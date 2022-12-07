@@ -174,7 +174,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             for(int c = 0; c < mat.length; c++){
                 if(mat[r][c] != null){
                     try {
-                        g2.drawImage(Constants.getImage(wall.getIndicatedTile(r, c)), (int)((getWidth() / 5.85) + (tW * c)), (int)((getHeight() / 4.55) + (r * tH)), null);
+                        g2.drawImage(Constants.getImage(wall.getIndicatedTile(r, c)), (int)((getWidth() / 5.85) + (tW * c)), (int)((getHeight() / 4.55) + (r * tH)), tW, tH, null);
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -533,6 +533,7 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
         try {
             if(player.getPatternLine().getRow(1).isFull()){
                 player.getWall().addToRow(player.getPatternLine().getRow(1).getType(), 0);
+
                 player.getPatternLine().getRow(1).discardTiles();
             } else if(player.getPatternLine().getRow(2).isFull()){
                 player.getWall().addToRow(player.getPatternLine().getRow(2).getType(), 1);
@@ -546,11 +547,44 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             } else if(player.getPatternLine().getRow(5).isFull()){
                 player.getWall().addToRow(player.getPatternLine().getRow(5).getType(), 4);
                 player.getPatternLine().getRow(5).discardTiles();
+                
+    } else if(player.getFloorLine().getHashMap().get(Constants.PENALTY_ONE).size() > 0){
+        int s = player.getFloorLine().getPenalty();
+        player.setScore(player.getScore() - s);
+        player.getFloorLine().setUpHashMap();
     } } catch (Exception e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
     }
-    changeScoring1();
+    try {
+        if(!player.getPatternLine().getRow(1).isFull()){
+            if(!player.getPatternLine().getRow(2).isFull()){
+                if(!player.getPatternLine().getRow(3).isFull()){
+                    if(!player.getPatternLine().getRow(4).isFull()){
+                        if(!player.getPatternLine().getRow(5).isFull()){
+                            if(!(player.getFloorLine().getHashMap().get(Constants.PENALTY_ONE).size() > 0)){
+                                //changeScoring1();
+                                //TestFrame.checkFillBag();
+                                if(TestFrame.checkFillBag()){
+                                    TestFrame.nextOnePlayer();
+                                } else{
+                                    TestFrame.getNextPlayer();
+                                }
+                                TestFrame.getCurrentPlayer().getPanel().changeScoring1();
+                                cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
+                                if(TestFrame.getP1().getWall().completedRows() + TestFrame.getP2().getWall().completedRows()+ TestFrame.getP3().getWall().completedRows() + TestFrame.getP4().getWall().completedRows() > 0){
+                                    cl.show(Constants.PANEL_CONT, Constants.END_PANEL);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
 }
     public void changeScoring1(){
         scoring1 = !scoring1;
@@ -582,9 +616,9 @@ public class PlayerPanel extends JPanel implements ActionListener, MouseListener
             cl.show(Constants.PANEL_CONT, TestFrame.getPlayerName());
             if(GamePanel.isEmpty()){
                 TestFrame.getCurrentPlayer().getPanel().changeScoring1();
-            } else {
-                reset();
-            }
+            } //else {
+            reset();
+            //}
         }
     }
     public void changeChoseTile(){

@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     private static FactoryFloor floor;
     private ImageIcon factoryIcon;
     private static Player temp;
-    private bagClass bag;
+    private static bagClass bag;
 
     public GamePanel(CardLayout cl) {
         this.cl = cl;
@@ -176,7 +176,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
     }
 
     // Sets up the tiles in the factories
-    private void setFactoryTiles() {
+    public static void setFactoryTiles() {
         bag = new bagClass();
         bag.fillBag();
         floor.addTile(new TileObject(Constants.ONE_TILE));
@@ -290,6 +290,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                 if(floor.hasOneTile()){
                     if(floor.getTiles().size() > 1){
                         chosen = floor;
+                        //temp.setHasOneTile(true);
                     }
                 } else{
                     if(floor.getTiles().size() > 0){
@@ -303,6 +304,7 @@ public class GamePanel extends JPanel implements ActionListener, MouseListener{
                 if(chosen.equals(floor)){
                     if(floor.hasOneTile()){
                         floor.setHasOneTile(false);
+                        temp.setHasOneTile(true);
                         //Iterator<TileObject> iter = floor.getTiles().iterator();
                         TileObject t = floor.getTiles().get(0);
                         /*while(!t.getType().equals(Constants.ONE_TILE)){

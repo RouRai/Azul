@@ -63,12 +63,12 @@ public class Wall {
     // Adds points to the score given a row and a column
     private void addToScore(int row, int col) {
         if(getRowScore(row) == 1 && getColScore(col) == 1) { // Executed if there are no adjacent tiles
-            player.setScore(player.getScore() + 2 - floorLine.getPenalty());
-            floorLine.discardFloor();
+            player.setScore(player.getScore() + 1);
+            //floorLine.discardFloor();
             return;
         }
-        player.setScore(player.getScore() + 1 + getRowScore(row) + getColScore(col)  - floorLine.getPenalty()); // Immediate +1 score for moving tile to wall
-        floorLine.discardFloor();
+        player.setScore(player.getScore() + 1 + getRowScore(row) + getColScore(col)); // Immediate +1 score for moving tile to wall
+        //floorLine.discardFloor();
     }
 
     // Gets the score of a consecutive row from a given row
@@ -129,7 +129,7 @@ public class Wall {
         {Constants.WHITE_TILE, Constants.BLUE_TILE, Constants.YELLOW_TILE, Constants.RED_TILE, Constants.BLACK_TILE},
         {Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE, Constants.YELLOW_TILE, Constants.RED_TILE},
         {Constants.RED_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE, Constants.YELLOW_TILE},
-        {Constants.RED_TILE, Constants.BLUE_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE}};
+        {Constants.YELLOW_TILE, Constants.RED_TILE, Constants.BLACK_TILE, Constants.WHITE_TILE, Constants.BLUE_TILE}};
     }
 
     // Returns the amount of completed rows in the wall
@@ -172,7 +172,7 @@ public class Wall {
             }
         }
 
-        return addScore - floorLine.getPenalty();
+        return addScore;
     }
 
     // Returns if the board has all 5 tiles of one type
@@ -219,5 +219,13 @@ public class Wall {
         types.add(Constants.WHITE_TILE);
         
         return types;
+    }
+    public boolean contains(int r, String tile){
+        for(int i = 0; i < 5; i++){
+            if(board[r][i].equals(tile)){
+                return true;
+            }
+        }
+        return false;
     }
 }

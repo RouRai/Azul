@@ -12,6 +12,7 @@ import logic.TileObject;
 import logic.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 
 public class TestFrame extends JFrame{
@@ -95,7 +96,6 @@ public class TestFrame extends JFrame{
         panels.put(Constants.INSTRUCTIONS_PANEL, new InstructionsPanel(cl));
         panels.put(Constants.MAIN_PANEL, new MainPanel(cl));
         panels.put(Constants.END_PANEL, new WinnerPanel(cl, null));
-
         // Set up layout 
         Constants.PANEL_CONT.setLayout(cl);
 
@@ -132,5 +132,33 @@ public class TestFrame extends JFrame{
         }
         playerQueue.enqueue(temp);
     }
-
+    public static boolean checkFillBag() throws Exception{
+        boolean boo = true;
+        for(int i = 1; i < 6; i++){
+            if(p1.getPatternLine().getRow(i).isFull() || p2.getPatternLine().getRow(i).isFull() || p3.getPatternLine().getRow(i).isFull() || p4.getPatternLine().getRow(i).isFull()){
+                boo = false;
+            }
+        }
+        if(boo){
+            GamePanel.setFactoryTiles();
+        }
+        return boo;
+    }
+    public static void nextOnePlayer(){
+        Player temp;
+        do{
+            temp = playerQueue.dequeue();
+            playerQueue.enqueue(temp);
+        }while (!temp.hasOneTile());
+        if(temp.getName().equals("Player 1")){
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
+        } else if(temp.getName().equals("Player 2")){
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_2_PANEL);
+        } else if(temp.getName().equals("Player 3")){
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_3_PANEL);
+        } else if(temp.getName().equals("Player 4")){
+            cl.show(Constants.PANEL_CONT, Constants.PLAYER_4_PANEL);
+        }
+        temp.setHasOneTile(false);
+    }
 }
