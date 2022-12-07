@@ -38,9 +38,9 @@ public class MainPanel extends JPanel implements ActionListener{
     }
     public void paintComponent(Graphics g){
         bW = (int)(getWidth() / 4);
-        tW = (int)(bW / 11.35);
+        tW = (int)(bW / 11.35*1.1);
         bH = (int)(getHeight() / 4);
-        tH = (int)(bH / 8.7);
+        tH = (int)(bH / 8.7*1.2);
         //stW = (int)(bW / (573 / 25));
         super.paintComponent(g);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
@@ -62,46 +62,135 @@ public class MainPanel extends JPanel implements ActionListener{
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //drawPenaltyP1(g);
+        drawPenaltyP1(g);
+        drawPenaltyP2(g);
+        drawPenaltyP3(g);
+        drawPenaltyP4(g);
     }
     public void drawPenaltyP1(Graphics g) {
         HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP1().getFloorLine().getHashMap();
         BufferedImage tem;
         Iterator<TileObject> iter;
         if(temp.get(Constants.PENALTY_ONE).size() > 0){
-            iter = temp.get(Constants.PENALTY_ONE).iterator();
-            tem = Constants.getImage(iter.next().getType());
-            g.drawImage(tem, (int)(getWidth() / 85) , (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_ONE).size() > 1){
-                tem = Constants.getImage(iter.next().getType());
-                g.drawImage(tem, (int)(getWidth() / 85) + tW + (getWidth() / 200), (int)(getHeight() / 3), tW, tH, null);
+            for(int i = 0; i<temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_ONE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5), tW, tH, null);
             }
         }
         if(temp.get(Constants.PENALTY_TWO).size() > 0){
-            iter = temp.get(Constants.PENALTY_TWO).iterator();
-            tem = Constants.getImage(iter.next().getType());
-            g.drawImage(tem, (int)(getWidth() / 85) + tW * 2 + (getWidth() / 150), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_TWO).size() > 1){
-                tem = Constants.getImage(iter.next().getType());
-                g.drawImage(tem, (int)(getWidth() / 85) + tW * 3 + (getWidth() / 100), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                if(temp.get(Constants.PENALTY_TWO).size() > 2){
-                    tem = Constants.getImage(iter.next().getType());
-                    g.drawImage(tem, (int)(getWidth() / 85) + tW * 4 + (getWidth() / 95), (int)(getHeight() / 1.87567879789), tW, tH, null);
-                }
+        	int cnt = 0;
+            for(int i = temp.get(Constants.PENALTY_ONE).size(); i<temp.get(Constants.PENALTY_TWO).size()+temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_TWO).get(cnt).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5), tW, tH, null);
+            	cnt++;
             }
         }
         if(temp.get(Constants.PENALTY_THREE).size() > 0){
-            iter = temp.get(Constants.PENALTY_THREE).iterator();
-            tem = Constants.getImage(iter.next().getType());
-            g.drawImage(tem, (int)(getWidth() / 85) + tW * 5 + (getWidth() / 80), (int)(getHeight() / 1.87567879789), tW, tH, null);
-            if(temp.get(Constants.PENALTY_THREE).size() > 1){
-                tem = Constants.getImage(iter.next().getType());
-                g.drawImage(tem, (int)(getWidth() / 85) + tW * 6 + (getWidth() / 50), (int)(getHeight() / 1.87567879789), tW, tH, null);
+        	for(int i = temp.get(Constants.PENALTY_TWO).size(); i<temp.get(Constants.PENALTY_THREE).size()+temp.get(Constants.PENALTY_TWO).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_THREE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5), tW, tH, null);
             }
         }
-        g.drawImage(blueTile, (int)(getWidth() / 105), (int)(getHeight() / 5), tW, tH, null);
-        g.drawImage(blueTile, (int)(getWidth() / 100) + tW , (int)(getHeight() / 5), tW, tH, null);
-        g.drawImage(blueTile, (int)(getWidth() / 100) + 2 * tW + getWidth() / 300 , (int)(getHeight() / 5), tW, tH, null);
+        //g.drawImage(blueTile, (int)(getWidth() / 106)+tW*6, (int)(getHeight() / 5), tW, tH, null);
+        //g.drawImage(blueTile, (int)(getWidth() / 100) + tW , (int)(getHeight() / 5), tW, tH, null);
+        //g.drawImage(blueTile, (int)(getWidth() / 100) + 2 * tW + getWidth() / 300 , (int)(getHeight() / 5), tW, tH, null);
+    }
+    public void drawPenaltyP2(Graphics g) {
+    	HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP2().getFloorLine().getHashMap();
+        BufferedImage tem;
+        Iterator<TileObject> iter;
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
+            for(int i = 0; i<temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_ONE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5), tW, tH, null);
+            }
+        }
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
+        	int cnt = 0;
+            for(int i = temp.get(Constants.PENALTY_ONE).size(); i<temp.get(Constants.PENALTY_TWO).size()+temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_TWO).get(cnt).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5), tW, tH, null);
+            	cnt++;
+            }
+        }
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
+        	for(int i = temp.get(Constants.PENALTY_TWO).size(); i<temp.get(Constants.PENALTY_THREE).size()+temp.get(Constants.PENALTY_TWO).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_THREE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5), tW, tH, null);
+            }
+        }
+        //g.drawImage(blueTile, (int)(getWidth() / 106+getWidth()-bW)+tW*6, (int)(getHeight() / 5), tW, tH, null);
+        //getWidth() - bW
+    }
+    public void drawPenaltyP3(Graphics g) {
+    	HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP3().getFloorLine().getHashMap();
+        BufferedImage tem;
+        Iterator<TileObject> iter;
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
+            for(int i = 0; i<temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_ONE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            }
+        }
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
+        	int cnt = 0;
+            for(int i = temp.get(Constants.PENALTY_ONE).size(); i<temp.get(Constants.PENALTY_TWO).size()+temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_TWO).get(cnt).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            	cnt++;
+            }
+        }
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
+        	for(int i = temp.get(Constants.PENALTY_TWO).size(); i<temp.get(Constants.PENALTY_THREE).size()+temp.get(Constants.PENALTY_TWO).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_THREE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106+getWidth() - bW)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            }
+        }
+        //g.drawImage(blueTile, (int)(getWidth() / 106+getWidth()-bW)+tW*6, (int)(getHeight() / 5+getHeight()-bH), tW, tH, null);
+        //getWidth() - bW
+    }
+    public void drawPenaltyP4(Graphics g) {
+    	HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP4().getFloorLine().getHashMap();
+        BufferedImage tem;
+        Iterator<TileObject> iter;
+        if(temp.get(Constants.PENALTY_ONE).size() > 0){
+            for(int i = 0; i<temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_ONE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            }
+        }
+        if(temp.get(Constants.PENALTY_TWO).size() > 0){
+        	int cnt = 0;
+            for(int i = temp.get(Constants.PENALTY_ONE).size(); i<temp.get(Constants.PENALTY_TWO).size()+temp.get(Constants.PENALTY_ONE).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_TWO).get(cnt).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            	cnt++;
+            }
+        }
+        if(temp.get(Constants.PENALTY_THREE).size() > 0){
+        	for(int i = temp.get(Constants.PENALTY_TWO).size(); i<temp.get(Constants.PENALTY_THREE).size()+temp.get(Constants.PENALTY_TWO).size(); i++) {
+            	tem = Constants.getImage(temp.get(Constants.PENALTY_THREE).get(i).getType());
+            	g.drawImage(tem, (int)(getWidth() / 106)+tW*i, (int)(getHeight() / 5+getHeight() - bH), tW, tH, null);
+            }
+        }
+        //g.drawImage(blueTile, (int)(getWidth() / 106)+tW*6, (int)(getHeight() / 5+getHeight()-bH), tW, tH, null);
+        //getWidth() - bW
+    }
+    public void drawWallP1(Graphics g)
+    {
+    	
+    }
+    public void drawWallP2(Graphics g)
+    {
+    	
+    }
+    public void drawWallP3(Graphics g)
+    {
+    	
+    }
+    public void drawWallP4(Graphics g)
+    {
+    	
     }
     private void drawPyramidP4(Graphics g) throws Exception {
         Row line;
@@ -235,8 +324,8 @@ public class MainPanel extends JPanel implements ActionListener{
     private void drawNames(Graphics g){
         g.setColor(Color.WHITE);
         g.drawString("Player 1", (int)(getWidth() / 3.8), getHeight() / 20);
-        g.drawString("Player 2", (int)(getWidth() / 1.55), getHeight() / 20);
-        g.drawString("Player 3", (int)(getWidth() / 1.55), (int)(getHeight() / 1.05));
+        g.drawString("Player 2", (int)(getWidth() / 1.6), getHeight() / 20);
+        g.drawString("Player 3", (int)(getWidth() / 1.6), (int)(getHeight() / 1.05));
         g.drawString("Player 4", (int)(getWidth() / 3.8), (int)(getHeight() / 1.05));
     }
     private void drawBoard(Graphics g){
