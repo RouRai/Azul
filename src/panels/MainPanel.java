@@ -66,6 +66,11 @@ public class MainPanel extends JPanel implements ActionListener{
         drawPenaltyP2(g);
         drawPenaltyP3(g);
         drawPenaltyP4(g);
+        drawWallP1(g);
+        drawWallP2(g);
+        drawWallP3(g);
+        drawWallP4(g);
+        
     }
     public void drawPenaltyP1(Graphics g) {
         HashMap<String, ArrayList<TileObject>> temp = TestFrame.getP1().getFloorLine().getHashMap();
@@ -178,19 +183,37 @@ public class MainPanel extends JPanel implements ActionListener{
     }
     public void drawWallP1(Graphics g)
     {
-    	
+    	String[][] temp = TestFrame.getP1().getWall().getBoard();
+    	BufferedImage tem;
+    	for(int i = 0; i<temp.length; i++)
+    		for(int j = 0; j<temp[i].length; j++)
+    			g.drawImage(Constants.getImage(temp[i][j]),(int)(getWidth() / 7.83+tW/1.1*j), (int)(getHeight() / 100)+tH*i, tW, tH, null);
+    	//g.drawImage(blueTile,(int)(getWidth() / 7.83+tW/1.1*4), (int)(getHeight() / 100)+tH*4, tW, tH, null);
+    	//g.drawImage(blueTile,(int)(getWidth() / 7.83), (int)(getHeight() / 100), tW, tH, null);
     }
     public void drawWallP2(Graphics g)
     {
-    	
+    	String[][] temp = TestFrame.getP2().getWall().getBoard();
+    	BufferedImage tem;
+    	for(int i = 0; i<temp.length; i++)
+    		for(int j = 0; j<temp[i].length; j++)
+    			g.drawImage(Constants.getImage(temp[i][j]),(int)(getWidth() / 7.83+tW/1.1*j+getWidth() - bW), (int)(getHeight() / 100+getHeight() - bH)+tH*i, tW, tH, null);
     }
     public void drawWallP3(Graphics g)
     {
-    	
+    	String[][] temp = TestFrame.getP3().getWall().getBoard();
+    	BufferedImage tem;
+    	for(int i = 0; i<temp.length; i++)
+    		for(int j = 0; j<temp[i].length; j++)
+    			g.drawImage(Constants.getImage(temp[i][j]),(int)(getWidth() / 7.83+tW/1.1*j+getWidth() - bW), (int)(getHeight() / 100+getHeight() - bH)+tH*i, tW, tH, null);
     }
     public void drawWallP4(Graphics g)
     {
-    	
+    	String[][] temp = TestFrame.getP4().getWall().getBoard();
+    	BufferedImage tem;
+    	for(int i = 0; i<temp.length; i++)
+    		for(int j = 0; j<temp[i].length; j++)
+    			g.drawImage(Constants.getImage(temp[i][j]),(int)(getWidth() / 7.83+tW/1.1*j), (int)(getHeight() / 100+getHeight() - bH)+tH*i, tW, tH, null);
     }
     private void drawPyramidP4(Graphics g) throws Exception {
         Row line;
