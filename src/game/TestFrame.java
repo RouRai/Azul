@@ -146,10 +146,16 @@ public class TestFrame extends JFrame{
     }
     public static void nextOnePlayer(){
         Player temp;
-        do{
+        temp = playerQueue.dequeue();
+        playerQueue.enqueue(temp);
+        /*do{
             temp = playerQueue.dequeue();
             playerQueue.enqueue(temp);
-        }while (!temp.hasOneTile());
+        }while (!temp.hasOneTile());*/
+        while(!temp.hasOneTile()){
+            temp = playerQueue.dequeue();
+        playerQueue.enqueue(temp);
+        }
         if(temp.getName().equals("Player 1")){
             cl.show(Constants.PANEL_CONT, Constants.PLAYER_1_PANEL);
         } else if(temp.getName().equals("Player 2")){
