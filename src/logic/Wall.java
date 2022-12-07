@@ -62,12 +62,12 @@ public class Wall {
 
     // Adds points to the score given a row and a column
     private void addToScore(int row, int col) {
-        if(getRowScore(row) == 1 && getColScore(col) == 1) { // Executed if there are no adjacent tiles
-            player.setScore(player.getScore() + 1);
-            //floorLine.discardFloor();
-            return;
-        }
-        player.setScore(player.getScore() + 1 + getRowScore(row) + getColScore(col)); // Immediate +1 score for moving tile to wall
+        // if(getRowScore(row) == 1 && getColScore(col) == 1) { // Executed if there are no adjacent tiles
+        //     player.setScore(player.getScore() + 1);
+        //     //floorLine.discardFloor();
+        //     return;
+        // }
+        player.setScore(player.getScore() + getRowScore(row) + getColScore(col) - 1); // Immediate +1 score for moving tile to wall
         //floorLine.discardFloor();
     }
 
